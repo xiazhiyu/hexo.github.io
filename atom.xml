@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.com/"/>
-  <updated>2014-03-30T07:41:46.142Z</updated>
+  <updated>2014-03-30T08:00:16.291Z</updated>
   <id>http://fyg.xyjp.com/</id>
   
   <author>
@@ -19,8 +19,13 @@
     <link href="http://fyg.xyjp.com/2014/03/29/blog-move/"/>
     <id>http://fyg.xyjp.com/2014/03/29/blog-move/</id>
     <published>2014-03-29T01:58:33.000Z</published>
-    <updated>2014-03-30T02:31:05.000Z</updated>
-    <content type="html"><![CDATA[<p>终于决定要停止使用Wordpress了。使用hexo，迁移至Github。</p>
+    <updated>2014-03-30T07:59:47.000Z</updated>
+    <content type="html"><![CDATA[<p>终于决定要使用Github了。使用的hexo。<br>做下记录：</p>
+<ol>
+<li>wordpress 迁移至 hexo 可以使用插件 hexo-migrator-wordpress</li>
+<li>有时明明已经安装hexo会出现无法识别hexo命令的问题，往往出在 nodejs 版本原因上，在nvm上指定版本即可</li>
+<li>Github上新建Respository时，名称应为:「账户名称.github.io」。自己起初只输入账户名，没有输入后缀，折腾了好久。</li>
+</ol>
 ]]></content>
     
     
