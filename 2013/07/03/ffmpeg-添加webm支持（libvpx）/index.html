@@ -143,13 +143,18 @@ must be &gt;=0.9.1于是去下载源码编译：链接
 
 </nav>
 
-	
-<section id="comments" style="padding:35px;">
+	<% if (config.disqus_shortname){ %>
+<section id="comments">
   <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
-
+<% } %>
+<% if (theme.duoshuo.enable && page.comments){ %>
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+<% } %>
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 

@@ -116,10 +116,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2013/06/05/撮影課題6-3/" title="撮影課題6.3">
+ <a href="/2013/06/05/摄影作业1（6-3）/" title="摄影作业1（6.3）">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  撮影課題6.3</span>
+  摄影作业1（6.3）</span>
 </a>
 </div>
 
@@ -134,13 +134,18 @@
 
 </nav>
 
-	
-<section id="comments" style="padding:35px;">
+	<% if (config.disqus_shortname){ %>
+<section id="comments">
   <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
-
+<% } %>
+<% if (theme.duoshuo.enable && page.comments){ %>
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+<% } %>
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
