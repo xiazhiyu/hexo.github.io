@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Cheney Fan's Blog]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2014-03-30T02:43:31.543Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[Cheney Fan]]></name>
+    
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[将博客迁移至Github]]></title>
+    <link href="http://yoursite.com/2014/03/29/blog-move/"/>
+    <id>http://yoursite.com/2014/03/29/blog-move/</id>
+    <published>2014-03-29T01:58:33.000Z</published>
+    <updated>2014-03-30T02:31:05.000Z</updated>
+    <content type="html"><![CDATA[<p>终于决定要停止使用Wordpress了。使用hexo，迁移至Github。</p>
+]]></content>
+    
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[sap 定价技术]]></title>
+    <link href="http://yoursite.com/2013/12/26/sap-%E5%AE%9A%E4%BB%B7%E6%8A%80%E6%9C%AF/"/>
+    <id>http://yoursite.com/2013/12/26/sap-定价技术/</id>
+    <published>2013-12-25T15:32:33.000Z</published>
+    <updated>2014-03-30T02:10:07.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="SAP定价技术">SAP定价技术</h1>
+<p>计算类型：<br>A 百分数：定价值KWERT=条件基值KAWRT×金额%KBETR；<br>B 固定金额：定价值KWERT=金额KBETR；条件基值KAWRT不参与计算；<br>C 数量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单数量；<br>D 毛重量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单毛重；<br>E        净重：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单净重；<br>F        体积：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为体积；<br>I 百分数(旅行费用)：定价值KWERT=条件基值KAWRT÷（1－金额%KBETR）×金额%KBETR；<br>H 包括手续费：定价值KWERT=条件基值KAWRT÷（1＋金额%KBETR）×金额%KBETR；<br>G 公式：主要用于自定义定价，金额KBETR一般由手工维护或VK11进行维护，定价值KWERT=条件基值KAWRT×金额KBETR，条件基值KAWRT只能通过例程“基础类型”进行维护；<br>K-U未深入研究，基本上A-G已经够用了，特殊需求可以通过例程进行赋值，后面我会继续介绍定价例程。</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SD 相关表]]></title>
+    <link href="http://yoursite.com/2013/12/23/sd-%E7%9B%B8%E5%85%B3%E8%A1%A8/"/>
+    <id>http://yoursite.com/2013/12/23/sd-相关表/</id>
+    <published>2013-12-22T16:44:42.000Z</published>
+    <updated>2014-03-30T02:10:43.000Z</updated>
+    <content type="html"><![CDATA[<p>KNA1  客户主数据（一般数据层）<br>KNB1  客户主数据（公司代码层）<br>KNMT  Customer-Material Info Record Data Table<br>KNMTK Customer-Material Info Record Header Table<br>KNVA  Customer 主数据 Loading Points<br>KNVD  Customer 主数据 record sales request form<br>KNVI  Customer 主数据 Tax Indicator<br>KNVK  Customer 主数据 Contact Partner<br>KNVL  Customer 主数据 Licenses<br>KNVP  Customer 主数据 Partner Functions<br>KNVS  Customer 主数据 Shipping Data<br>KNVT  Customer 主数据 Record Texts for Sales<br>KNVV  Customer 主数据 Sales Data<br>KONA  Rebate Agreements<br>KOND  Conditions (Data)<br>KONH  Conditions (Header)<br>KONM  Conditions (1 Dimensional Quantity Scales)<br>KONP  Conditions (Item) field LIKP-WADAT_IST - Actual Goods Issue Date - is populated only after Post Goods Issue<br>KONV  Conditions (Procedure Data)<br>KONW  Conditions (1 Dimensional Value Scales)<br>LIKP  SD Document: Delivery Header Data<br>LIPS  SD document: Delivery: Item data<br>LIPSPO  LIPS Reference Data Purchase Order<br>LIPSRF  LIPS Reference Data<br>NACH  Detailed output data<br>NAST  Message status<br>T179  Materials: Product Heirarchies<br>T179T Materials: Product Heirarchies: Texts<br>VAKGU Sales Index: Quotation Validity<br>VAKPA Sales Index: Orders by Partner Function<br>VAPMA Sales Index: Order Items by Material<br>VBAG  Sales Document: Release Data by Schedule Line in Sch.Agrmt.<br>VBAK  销售订单表头-Sales Document: Header Data<br>VBAP  销售订单明细-Sales Document: Item Data<br>VBBE  Sales Requirements: Individual Records<br>VBBS  Sales Requirement Totals Record<br>VBEP  Sales Document: Schedule Line Data<br>VBFA  Sales Document Flow<br>VBFS  Error Log for Collective Processing<br>VBKA  Sales activities<br>VBKD  Sales Document: Business Data<br>VBKOF SD index: Open sales activities by partner function<br>VBKPA SD index: Sales activities by partner function<br>VBLK  SD Document: Delivery Note Header<br>VBLS  Delivery Notes for Collective Processing<br>VBPA  Sales Document: Partner<br>VBRK  销售发票：抬头表Billing: Header Data<br>VBRP  销售发票：行项目表Billing: Item Data<br>VBSK  Collective Processing for a Sales Document Header<br>VBSS  Collective Processing: Sales Documents<br>VBUK  Sales Document: Header Status and Administrative Data<br>VBUP  Sales Document: Item Status<br>VBUV  Sales Document: Incompletion Log<br>VEPVG Delivery Due Index<br>VETVG Delivery Due Index for Stock Transfer<br>VKAOF Sales Index: Open Sales Activities<br>VKDFS SD Index: Billing Initiator<br>VLKPA SD Index: Deliveries by Partner Functions<br>VLPMA SD Index: Delivery Items by Material<br>VRKPA Sales Index: Bills by Partner Functions<br>VRPMA SD Index: Billing Items per Material<br>VTFA  Shipment Document Flow<br>VTRDI Shipment Planning Index</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[VOFM Routine]]></title>
+    <link href="http://yoursite.com/2013/12/22/vofm-routine/"/>
+    <id>http://yoursite.com/2013/12/22/vofm-routine/</id>
+    <published>2013-12-22T02:06:18.000Z</published>
+    <updated>2014-03-30T02:10:56.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://saptechsolutions.com/pdf/VOFMFormulaRoutines.pdf" target="_blank">http://saptechsolutions.com/pdf/VOFMFormulaRoutines.pdf</a></p>
+<p><strong>scale base</strong></p>
+<p>A scale base formula can be used to alter the value that the system uses to read the scales in a condition record during pricing. In standard pricing, the system will read the scale in a pricing condition record using the quantity, value, weight, etc. of the document depending on the type of scale that has been defined.</p>
+<p><strong>Condition base value </strong></p>
+<p>Condition base value formulas can be used to influence the condition basis to which the pricing condition rate will be applied. In standard pricing, the system will apply the condition rate to the quantity in the sales document. For example, the price determined by the system is $45 per case for Product A. 100 cases of Product A have been ordered. The system would then multiply $45 times<br>the number of cases of Product A ordered. Using a condition base value formula, it is possible to alter the condition base, in our example 100, prior to the calculation taking place. A condition base value formula is commonly used to determine the base for distributing header discounts / surcharges to the sales document line items. A condition base value formula is assigned to a condition type in the pricing procedure.</p>
+<p><strong>Condition value formulas</strong></p>
+<p>Condition value formulas are available to influence the condition value that is displayed for a particular condition type or value line in the pricing procedure. In standard pricing, the system will calculate the condition value by multiplying the condition rate by the quantity. For example, 100 cases times $45 per case equals $4,500. Using a condition value formula, it is possible to alter the<br>condition value, in our example $4,500. Condition value formulas can also be used to compute values that should appear as value lines in the pricing procedure. As an example, standard delivered condition value formulas can be used to compute profit margin and item net value. A condition value formula is assigned to a condition type in the pricing procedure.</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于价格条件中的小计]]></title>
+    <link href="http://yoursite.com/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1/"/>
+    <id>http://yoursite.com/2013/12/22/关于价格条件中的小计/</id>
+    <published>2013-12-22T01:13:32.000Z</published>
+    <updated>2014-03-30T02:11:52.000Z</updated>
+    <content type="html"><![CDATA[<p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank">http://scn.sap.com/thread/1735194</a></p>
+<p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
+<p>Symptom</p>
+<p>Content overview:<br>1. What effect does an entry in the ‘Subto’ column<br>(KZWIW field) have?<br>2. Which settings are possible?<br>3. Which condition/subtotal line is taken into account?<br>4. In which cases is cumulation performed/not performed?<br>5. Which program contains the corresponding logic?<br>6. Are the cumulative values stored in the database?<br>7. Can inactive conditions also be taken into account?<br>8. Examples of how KZWIW is used<br>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient?<br>10. What you can do if the number of internal auxiliary variables<br>(XWORKD -XWORKM) is insufficient?</p>
+<p>1. What effect does an entry in the ‘Subto’ column (KZWIW field) have?</p>
+<p>You can make certain entries in the ‘Subto’ column (KZWIW field) in the Customizing settings for the pricing procedure. These determine that the condition value or the condition rate of the condition or subtotal line is copied into a certain field of the KOMP structure or into certain internal auxiliary variables (XWORKD - XWORKM). For more details, see Point 2 below.</p>
+<p>2. Which settings are possible?</p>
+<p>The following options are provided in R/3 standard pricing:</p>
+<p>1 Value transfer to KOMP-KZWI1<br>2 Value transfer to KOMP-KZWI2<br>3 Value transfer to KOMP-KZWI3<br>4 Value transfer to KOMP-KZWI4<br>5 Value transfer to KOMP-KZWI5<br>6 Value transfer to KOMP-KZWI6<br>7 Value transfer to KOMP-BONBA (Rebate basis)<br>8 Value transfer to KOMP-PREVA (Preference value)<br>9 Value transfer to KOMP-BRTWR (Gross value)<br>A Price transfer to KOMP-CMPRE (Credit price)<br>B Price transfer to KOMP-WAVWR (Cost)<br>C Value transfer to KOMP-GRWRT (Statistical value)<br>D Value transfer to XWORKD<br>E Value transfer to XWORKE<br>F Value transfer to XWORKF<br>G Value transfer to XWORKG<br>H Value transfer to XWORKH<br>I Value transfer to XWORKI<br>J Value transfer to XWORKJ<br>K Price transfer to XWORKK<br>L Price transfer to XWORKL<br>M Price transfer to XWORKM<br>S Value transfer to KOMP-EFFWR (Effective value)<br>Y Value transfer to KOMP-OIIDC (IS-OIL/only JVA CRP Pricing)<br>Z Value transfer to KOMP-OIEBC (IS-OIL/only JVA CRP Pricing)</p>
+<p>The following points apply in this case:<br>Value transfer = transfer of the condition value XKOMV-KWERT<br>Price transfer = transfer of the condition rate XKOMV-KBETR</p>
+<p>3. Which condition/subtotal line is taken into account?</p>
+<p>A condition is only taken into account if it is not inactive with one of the inactive indicators ‘AKLMXZ’.<br>For the settings ‘B’ (Cost), ‘C’ (Statistical value) and ‘9’ (Gross value), inactive conditions are not taken into account, even with ‘Y’.<br>It is of no consequence whether the condition is statistical or not.<br>Subtotal lines are always taken into account in the standard R/3 system because they never have an inactive indicator in R/3 standard pricing.</p>
+<p>4. In which cases is cumulation performed/not performed?</p>
+<p>a) With the ‘A’ setting (credit price), only the last line in the pricing result that has the setting ‘A’ and the satisfies the conditions specified in Point 3 below is taken into account (because multiple use of ‘A’ is permitted).<br>The credit price is always determined in the sales unit (VRKME). The condition price unit is always 1 in this case.</p>
+<p>Example: If the sales unit is KG, the credit price is determined “per 1 KG”.</p>
+<p>b) With all other settings, all lines that satisfy the conditions specified in Point 3 and have the relevant setting are taken into account, that is, the condition values of these lines are cumulated.</p>
+<p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
+<p>5. Which program contains the corresponding logic?</p>
+<p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
+<p>L O O P<br>LOOP AT xkomv.<br>…</p>
+<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
+<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
+<p>L O O P<br>ENDLOOP.</p>
+<p>6. Are the cumulative values stored in the database?</p>
+<p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
+<p>7. Can inactive conditions also be taken into account?</p>
+<p>This is possible if you use a corresponding condition value formula.</p>
+<p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
+<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
+<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
+<p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
+<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
+<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
+<p>8. Examples of how KZWIW is used:</p>
+<p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
+<p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
+<p>use the content of xworkl as condition basis<br>xkwert = xworkl.</p>
+<p>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For more details, see Note 155012.</p>
+<p>Note:<br>With 155012, the imported fields (for example, KOMP-ZZWI11) must be filled in each case using a condition value formula. However, to maintain a corresponding setting for the field name in the ‘Subto’ column of the pricing procedure (‘11’), the modifications in this note are insufficient.<br>Why are further modifications not recommended?</p>
+<p>a) Firstly, the value range of the R/3 standard data element KZWIW would have to be extended with the value ‘11’ (transaction SE11). However, the KZWIW data element has only one character. Therefore, the two-digit value ‘11’ is not possible.<br>You can only assign a vaule other than the values listed under Point 2 above (for example, N, O, P).</p>
+<p>b) In addition, the source code of the R/3 standard routine FORM XKOMV_BEWERTEN (Include LV61AA55) would have to be modified by including a relevant branch in the CASE statement from Question 5, for example:</p>
+<p>WHEN ‘N’. “ modification: ‘N’<br>ADD xkomv-kwert TO komp-zzwi11. “ cumulates in field zzwi11</p>
+<p>10. What you can do if the number of internal auxiliary variables (XWORKD -XWORKM) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For this purpose, a corresponding data declaration must be made in the LV61ATOP Top Include of the SAPLV61A program, for example:</p>
+<p>additional work field for xkomv_bewerten<br>DATA: zwork1 LIKE komv-kwert,</p>
+<p>You must then also fill the zwwork1 auxiliary variable using a condition value formula (see Question 9).</p>
+<p>Other terms</p>
+<p>KZWIW<br>Reason and Prerequisites</p>
+<p>These problems are due to the design of R/3 pricing.<br>Solution</p>
+<p>This is a consulting note. Other inquiries relating to the functions described above do not fall within the scope of ‘Support’, and are instead processed as part of consulting, which is subject to a separate charge.</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[sap 定价条件]]></title>
+    <link href="http://yoursite.com/2013/12/20/sap-%E5%AE%9A%E4%BB%B7%E6%9D%A1%E4%BB%B6/"/>
+    <id>http://yoursite.com/2013/12/20/sap-定价条件/</id>
+    <published>2013-12-20T12:23:08.000Z</published>
+    <updated>2014-03-30T02:12:15.000Z</updated>
+    <content type="html"><![CDATA[<p>这里简要解释一下:</p>
+<p>Counter：系统用它来显示计算方案中一个阶段内的存取编号。例如，你可以把所有运输附加费分配给步骤100，然而，可能有三个条件类型，每一个代表一个不同的运输附加费，因此你可以把步骤100分配一个运输条件类型，计数1；另一个分配给步骤100，计数2，另一个分配给步骤100，计数3。</p>
+<p>小计：是计算求和的字段，这些小计字段可以在订单/开票的用户出口中使用，其中小计1到小计6将更新VBAP和VBRP，以及SIS，所以经常用于各种报表。</p>
+<ul>
+<li>系统中小计 短文本</li>
+<li>没有独立的小计 *</li>
+<li>1值转到 KOMP-KZWI1 *</li>
+<li>2值转到 KOMP-KZWI2 *</li>
+<li>3值转到 KOMP-KZWI3 *</li>
+<li>4值转到 KOMP-KZWI4 *</li>
+<li>5值转到 KOMP-KZWI5 *</li>
+<li>6值转到 KOMP-KZWI6 *</li>
+<li>7 值转到KOMP_BONBA(回扣基础1 )</li>
+<li>8 依据 KOMP-PREVA（优先值）复制值</li>
+<li>9 将值复制到 KOMP-BRTWR( 毛值 )</li>
+<li>A 价格转到 KOMP-CMPRE ( 贷方价格 ) *</li>
+<li>B 值转到 KOMP-WAVWR（成本）*</li>
+<li>C 值转到 KOMP-GKWRT（统计值）</li>
+<li>D 将值复制到 XWORKD</li>
+<li>E 将值复制到 XWORKE</li>
+<li>F 将值复制到 XWORKF</li>
+<li>G 将值复制到 XWORKG</li>
+<li>H 将值复制到 XWORKH</li>
+<li>I Wert黚ernahme nach XWORKI</li>
+<li>J 将值复制到 XWORKJ</li>
+<li>K 将价格复制到 XWORKK</li>
+<li>L 将价格复制到 XWORKL</li>
+<li>M 将价格复制到 XWORKM</li>
+<li>Q 保留的 (IS-OIL)</li>
+<li>S 将值复制到 KOMP-EFFWR (有效值)</li>
+<li>Y 保留的 (IS-OIL)</li>
+<li>Z 保留的 (IS-OIL)</li>
+<li>1-6是把某些小计值存储到sap数据库中的默写位置，没什么特别意思，可以按要求使用。</li>
+<li>对于成本和贷方两项。成本会作为物料的成本抛转到copa中，而贷方是作为信用核算的基础。<br>需求：（系统）用于判断是否执行该条件类型（取值）的Routine，在VOFM中可自定义，需要申请</li>
+</ul>
+<p>Asscess Key。</p>
+<p>计算类：用于计算该条件类型的值的Routine，在VOFM中可自定义，需要申请Asscess Key。</p>
+<p>条件基：用于计算该条件类型的基值的Routine，在VOFM中可自定义，需要申请Asscess Key。</p>
+<p>帐码：又称“记帐码”，用于确定销售收入科目，“状态”字段未勾上的条件类型都必须有记帐码，否</p>
+<p>则开票时无法生成会计凭证。</p>
+<p>应计项：用于确定返利预提”accruals”科目（的“记帐码”）.</p>
+<p><img src="http://erphome.net/wdb/upload/forum5_f_2127.jpg" alt="pic"></p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SAP操作（SD）]]></title>
+    <link href="http://yoursite.com/2013/11/28/sap%E6%93%8D%E4%BD%9C%EF%BC%88sd%EF%BC%89/"/>
+    <id>http://yoursite.com/2013/11/28/sap操作（sd）/</id>
+    <published>2013-11-27T18:05:12.000Z</published>
+    <updated>2014-03-30T02:12:39.000Z</updated>
+    <content type="html"><![CDATA[<p>1 定义销售组织：<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：販売組織</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at205423_zps68cc79b9.png" alt="salse setting"><br>输入销售<em>组织代码：FYG1 名称： FYG販売組織 货币：JPY</em> 保存。<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at210758_zps5b9c511e.png" alt="salse2"><br>2 定义分销渠道<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：流通チャンネル</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at211343_zps96a89d88.png" alt="salse chanel"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at230004_zpsc25ffaab.png" alt="２"><br>３　定义产品组<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at231725_zpsfcd942a9.png" alt="3"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at232918_zps3192e2c6.png" alt="32"><br>4 将销售组织分配至公司<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234630_zpsad7320e8.png" alt="33"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234610_zps25f22eee.png" alt="333"><br>４　将分销渠道分配至销售组织<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at235923_zps0e9f0035.png" alt="sss"></p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://yoursite.com/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://yoursite.com/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Rails 添加，删除字段]]></title>
+    <link href="http://yoursite.com/2013/11/16/rails-%E6%B7%BB%E5%8A%A0%EF%BC%8C%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5/"/>
+    <id>http://yoursite.com/2013/11/16/rails-添加，删除字段/</id>
+    <published>2013-11-16T00:11:15.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p><pre><br>rails g migration remove_column_from_user permission:string<br>rails g migration add_column_to_accountBook create_user:int<br>rake db:migrate<br></pre><br>其他<br>rename_column  :更改字段的名称<br>change_column  :修改字段的类型</p>
+]]></content>
+    
+    
+      <category term="rails" scheme="http://yoursite.com/tags/rails/"/>
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[JDBC]]></title>
+    <link href="http://yoursite.com/2013/09/28/jdbc/"/>
+    <id>http://yoursite.com/2013/09/28/jdbc/</id>
+    <published>2013-09-28T01:38:06.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>最近开始找工作。好久没用java，都快给忘了。<br>一点点复习吧。</p>
+<pre>
+package util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBConnect {
+
+    private static DBConnect instance = null;
+
+    // 该url为缺省方式（省略主机跟端口）
+    // 完整为：jdbc:mysql//localhost:3306/test
+    static String url = "jdbc:mysql:///acc"; 
+
+    static String name = "root";
+
+    static String password = "root";
+
+    static Connection conn = null;
+
+    private DBConnect(){
+    }
+
+    public static DBConnect getInitDBConnect(){
+        if(instance==null){
+            synchronized(DBConnect.class){
+                if(instance==null){
+                    instance=new DBConnect();
+                }
+            }
+        }
+        return instance;
+    }
+
+    static{
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }    
+    }
+
+    public Connection getConnection(){
+        try{
+            conn = DriverManager.getConnection(url,name,password);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    public void closeConnectino(ResultSet rs, Statement statement, Connection con){
+        try{
+            if(rs!=null){
+                rs.close();
+            }        
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(statement !=null){
+                    statement.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                try{
+                    if(con != null){
+                        con.close();
+                    }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+</pre>]]></content>
+    
+    
+      <category term="JAVA" scheme="http://yoursite.com/tags/JAVA/"/>
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[可汗学院公开课：三角学]]></title>
+    <link href="http://yoursite.com/2013/07/26/%E5%8F%AF%E6%B1%97%E5%AD%A6%E9%99%A2%E5%85%AC%E5%BC%80%E8%AF%BE%EF%BC%9A%E4%B8%89%E8%A7%92%E5%AD%A6/"/>
+    <id>http://yoursite.com/2013/07/26/可汗学院公开课：三角学/</id>
+    <published>2013-07-26T12:04:08.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>最近学习动画，发现自己数学都忘光了。<br>好多中学数学里的知识都想了半天。</p>
+<p>网易链接：<br><a href="http://v.163.com/special/Khan/trigonometry.html" title="http://v.163.com/special/Khan/trigonometry.html" target="_blank">http://v.163.com/special/Khan/trigonometry.html</a></p>
+]]></content>
+    
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[最近看的一些电影]]></title>
+    <link href="http://yoursite.com/2013/07/26/%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%B5%E5%BD%B1/"/>
+    <id>http://yoursite.com/2013/07/26/最近看的一些电影/</id>
+    <published>2013-07-26T08:58:53.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>最近看的电影，做一下总结：<br><strong>1 . 超脱 Detachment</strong><br><a href="http://movie.douban.com/subject/5322596/" title="Detachment" target="_blank">豆瓣链接</a><br>片子很文艺，台词很动人。<br>其中提到了《1984》的“双重思想”（Doublethink）：</p>
+<blockquote>
+<p>This is a marketing holocaust.24 hours a day,</p>
+<p>for the rest of our lives,the powers that be are hard at work,dumbing us to death.</p>
+<p>So, to defend ourselves and fight against assimilating this dullness into our thought processes,</p>
+<p>we must learn to read to stimulate our own imagination,</p>
+<p>to cultivate our own consciousness,our own belief system.</p>
+<p>We all need these skills to defend to preserve our own minds.<br>这是一种营销大屠杀 在我们余下的生命里，一天24小时都会驱使我们努力工作，让我们在沉默中灭亡</p>
+<p>所以 为了保护我们自己防止苦闷无聊渗入我们的思想 我们必须学会通过阅读 来激发自己的想象力</p>
+<p>来培养我们自己的意识，我们自己的信仰</p>
+<p>我们都需要这些技能来保卫我们自己的思想<br>刘玉玲的台词：<br>it is so easy to be careless. it takes couse and courage to take cares.none of you have any of these qualities.</p>
+</blockquote>
+<p><strong>2 Passion</strong><br><a href="http://movie.douban.com/subject/7046937/" title="Passion" target="_blank">豆瓣链接</a><br>似乎豆瓣上评分不怎么高，不过觉得还是不错的。前半部分看时尚，后半部分看悬念。</p>
+<p><strong>3 怪兽在巴黎 Un monstre à Paris</strong><br><a href="http://movie.douban.com/subject/3005387/" title="Un monstre à Paris" target="_blank">豆瓣链接</a><br>非常好的动画片。音乐很赞，很有节奏感。</p>
+<p><strong>4 朴赞郁的复仇三部曲</strong><br>比较喜欢第一部。<br><a href="http://movie.douban.com/subject/1304026/" title="我要复仇" target="_blank">豆瓣链接</a></p>
+<p><strong>5 新世界 New World</strong><br>韩国版的无间道<br>觉得开头和结尾男主角的沉默的样子很不错，很好刻画了他的内心。话说有那么点《教父》的感觉。</p>
+<p><strong>6 人烟之岛 Обитаемый остров</strong><br><a href="http://movie.douban.com/subject/3091271/" title="人烟之岛" target="_blank">豆瓣链接</a><br>嗯，坦率地纯粹是因为女主角的身材才去看的。不过豆瓣上尽是说男角帅的……<br>男女主角初次相逢的画面挺美。</p>
+]]></content>
+    
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于moov atom]]></title>
+    <link href="http://yoursite.com/2013/07/21/%E5%85%B3%E4%BA%8Emoov-atom/"/>
+    <id>http://yoursite.com/2013/07/21/关于moov-atom/</id>
+    <published>2013-07-20T23:04:46.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>moov atom是mp4中索引文件。ffmpeg在转化完成后，默认是放在末尾的。<br>这样上传到网站时播放时会出现问题。<br>flash在播放时，必须将文件下载完毕才能进行播放。<br>要想实现类似流播放的边下载边播放的效果，需要将moov atom调到文件前面。<br>ffmpeg中自带的qt-faststart可进行此操作。<br>安装办法，进入ffmpeg文件夹。</p>
+<pre>
+make tools/qt-faststart
+cp -a tools/qt-faststart /usr/bin/
+</pre>
+转换命令：
+<pre>
+qt-faststart append.mp4 out.mp4
+</pre>
+
+<p>参考链接：<a href="http://blog.eryue.me/?p=138" title="http://blog.eryue.me/?p=138" target="_blank">http://blog.eryue.me/?p=138</a></p>
+<p>不过话说回来，chrome的html5播放的话，不用转换也没问题。应该时chrome内部已经进行了相关处理了吧。</p>
+]]></content>
+    
+    
+      <category term="ffmpeg" scheme="http://yoursite.com/tags/ffmpeg/"/>
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[朝日新闻微博被和谐]]></title>
+    <link href="http://yoursite.com/2013/07/19/%E6%9C%9D%E6%97%A5%E6%96%B0%E9%97%BB%E5%BE%AE%E5%8D%9A%E8%A2%AB%E5%92%8C%E8%B0%90/"/>
+    <id>http://yoursite.com/2013/07/19/朝日新闻微博被和谐/</id>
+    <published>2013-07-18T15:05:25.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>朝日新闻微博帐号被和谐。<br>微博评论：<br>@那个野和尚 ：@朝日新闻中文网 已被和谐，这是我D在抗日战争正面战场的首次大捷。</p>
+<p>朝日新闻其实一直以来被称为日本媒体中的“亲中派”。甚至被称为“反日”媒体。<br>下面是朝日新闻网站上的截屏：<br><img src="/images/asahi.png" alt="asahi"></p>
+]]></content>
+    
+    
+      <category term="社会" scheme="http://yoursite.com/categories/%E7%A4%BE%E4%BC%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[其实是我自己不愿见家属]]></title>
+    <link href="http://yoursite.com/2013/07/17/%E5%85%B6%E5%AE%9E%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%84%BF%E8%A7%81%E5%AE%B6%E5%B1%9E/"/>
+    <id>http://yoursite.com/2013/07/17/其实是我自己不愿见家属/</id>
+    <published>2013-07-16T15:21:05.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/images/7o2zI.jpg" alt="我自己不愿见家属"><br>注：本画作者是“胸是小”，微博链接：<a href="http://weibo.com/u/1002282395" title="http://weibo.com/u/1002282395" target="_blank">http://weibo.com/u/1002282395</a></p>
+]]></content>
+    
+    
+      <category term="社会" scheme="http://yoursite.com/categories/%E7%A4%BE%E4%BC%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[素描一幅]]></title>
+    <link href="http://yoursite.com/2013/07/16/%E7%B4%A0%E6%8F%8F%E4%B8%80%E5%B9%85/"/>
+    <id>http://yoursite.com/2013/07/16/素描一幅/</id>
+    <published>2013-07-16T00:52:18.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg" alt="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg"></p>
+]]></content>
+    
+    
+      <category term="素描" scheme="http://yoursite.com/tags/%E7%B4%A0%E6%8F%8F/"/>
+    
+      <category term="练习作业" scheme="http://yoursite.com/categories/%E7%BB%83%E4%B9%A0%E4%BD%9C%E4%B8%9A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[mac 显示隐藏文件]]></title>
+    <link href="http://yoursite.com/2013/07/15/mac-%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2013/07/15/mac-显示隐藏文件/</id>
+    <published>2013-07-15T09:42:51.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>输入以下命令后，重启finder后可显示隐藏文件：</p>
+<p><pre><br>defaults write com.apple.finder AppleShowAllFiles -bool true<br></pre><br>将文件重新隐藏则将后面参数改为false即可。</p>
+]]></content>
+    
+    
+      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[艾特熊和赛娜鼠]]></title>
+    <link href="http://yoursite.com/2013/07/15/%E8%89%BE%E7%89%B9%E7%86%8A%E5%92%8C%E8%B5%9B%E5%A8%9C%E9%BC%A0/"/>
+    <id>http://yoursite.com/2013/07/15/艾特熊和赛娜鼠/</id>
+    <published>2013-07-15T05:51:12.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://24.media.tumblr.com/2f8ee02abffaf1ea60d36de9896fadde/tumblr_mpyqodNeso1rcvtp3o1_500.png" alt="Ernest.ET.Celestine"><br>最近看的动画片。超有意思。<br>豆瓣链接：<a href="http://movie.douban.com/subject/6518638/" title="http://movie.douban.com/subject/6518638/" target="_blank">http://movie.douban.com/subject/6518638/</a></p>
+]]></content>
+    
+    
+      <category term="动画" scheme="http://yoursite.com/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[秋夢　ーー二胡演奏]]></title>
+    <link href="http://yoursite.com/2013/07/08/%E7%A7%8B%E5%A4%A2%E3%80%80%E3%83%BC%E3%83%BC%E4%BA%8C%E8%83%A1%E6%BC%94%E5%A5%8F/"/>
+    <id>http://yoursite.com/2013/07/08/秋夢　ーー二胡演奏/</id>
+    <published>2013-07-08T09:37:58.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<iframe width="420" height="315" src="//www.youtube.com/embed/zDGAGE-hl44" frameborder="0" allowfullscreen></iframe>]]></content>
+    
+    
+      <category term="音楽" scheme="http://yoursite.com/tags/%E9%9F%B3%E6%A5%BD/"/>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[linux 時間を設定]]></title>
+    <link href="http://yoursite.com/2013/07/05/linux-%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A/"/>
+    <id>http://yoursite.com/2013/07/05/linux-時間を設定/</id>
+    <published>2013-07-05T00:02:56.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p>よく使っていますので、メモしておく。</p>
+<pre>
+ntpdate -s ntp.nc.u-tokyo.ac.jp //システム時間を更新する
+hwclock --systohc　//システムの時間をbiosに書き込む
+</pre>]]></content>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="Develop" scheme="http://yoursite.com/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Melancholia]]></title>
+    <link href="http://yoursite.com/2013/07/04/melancholia/"/>
+    <id>http://yoursite.com/2013/07/04/melancholia/</id>
+    <published>2013-07-04T00:42:20.000Z</published>
+    <updated>2014-03-30T01:06:10.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/fdbfe43139ea6b246092e221fcaa8745/tumblr_mpdz23KX7R1rcvtp3o1_1280.png" alt="Melancholia"><br>话说这个电影以前看过一看过点点，感觉太过“深奥”，就放弃了。<br>最近被老师推荐，就仔细看了一下。<br>总算好象看懂了一些。<br>女主对着夜空裸体的画面，美得让人震撼。</p>
+]]></content>
+    
+    
+      <category term="Melancholia" scheme="http://yoursite.com/tags/Melancholia/"/>
+    
+      <category term="电影" scheme="http://yoursite.com/tags/%E7%94%B5%E5%BD%B1/"/>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+</feed>
