@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-03-30T10:22:07.787Z</updated>
+  <updated>2014-03-30T10:24:18.427Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -15,16 +15,12 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/03/30/blog-move/"/>
-    <id>http://fyg.xyjp.net/about/2014/03/30/blog-move/</id>
-    <published>2014-03-30T10:21:32.000Z</published>
-    <updated>2014-03-30T10:21:32.000Z</updated>
-    <content type="html"><![CDATA[<p>title: 将博客迁移至Github<br>date: 2014-03-29 10:58:33<br>tags:<br>-<br>categories: </p>
-<ul>
-<li>Develop</li>
-</ul>
-<p>终于决定要使用Github pages了。使用的hexo。<br>做下记录：</p>
+    <title><![CDATA[将博客迁移至Github]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/03/29/blog-move/"/>
+    <id>http://fyg.xyjp.net/about/2014/03/29/blog-move/</id>
+    <published>2014-03-29T01:58:33.000Z</published>
+    <updated>2014-03-30T10:24:14.000Z</updated>
+    <content type="html"><![CDATA[<p>终于决定要使用Github pages了。使用的hexo。<br>做下记录：</p>
 <ol>
 <li>wordpress 迁移至 hexo 可以使用插件 hexo-migrator-wordpress</li>
 <li>有时明明已经安装hexo会出现无法识别hexo命令的问题，往往出在 nodejs 版本原因上，在nvm上指定版本即可</li>
@@ -32,6 +28,10 @@
 </ol>
 ]]></content>
     
+    
+      <category term="博客日志" scheme="http://fyg.xyjp.net/about/tags/%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%BF%97/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
