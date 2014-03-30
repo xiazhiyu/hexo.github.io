@@ -3,9 +3,9 @@
   <title><![CDATA[Cheney Fan's Blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://fyg.xyjp.net/"/>
-  <updated>2014-03-30T09:00:36.308Z</updated>
-  <id>http://fyg.xyjp.net/</id>
+  <link href="http://fyg.xyjp.net/about/"/>
+  <updated>2014-03-30T09:05:30.755Z</updated>
+  <id>http://fyg.xyjp.net/about/</id>
   
   <author>
     <name><![CDATA[Cheney Fan]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[将博客迁移至Github]]></title>
-    <link href="http://fyg.xyjp.net/2014/03/29/blog-move/"/>
-    <id>http://fyg.xyjp.net/2014/03/29/blog-move/</id>
+    <link href="http://fyg.xyjp.net/about/2014/03/29/blog-move/"/>
+    <id>http://fyg.xyjp.net/about/2014/03/29/blog-move/</id>
     <published>2014-03-29T01:58:33.000Z</published>
     <updated>2014-03-30T08:02:12.000Z</updated>
     <content type="html"><![CDATA[<p>终于决定要使用Github pages了。使用的hexo。<br>做下记录：</p>
@@ -33,8 +33,8 @@
   
   <entry>
     <title><![CDATA[sap 定价技术]]></title>
-    <link href="http://fyg.xyjp.net/2013/12/26/sap-%E5%AE%9A%E4%BB%B7%E6%8A%80%E6%9C%AF/"/>
-    <id>http://fyg.xyjp.net/2013/12/26/sap-定价技术/</id>
+    <link href="http://fyg.xyjp.net/about/2013/12/26/sap-%E5%AE%9A%E4%BB%B7%E6%8A%80%E6%9C%AF/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/26/sap-定价技术/</id>
     <published>2013-12-25T15:32:33.000Z</published>
     <updated>2014-03-30T02:10:07.000Z</updated>
     <content type="html"><![CDATA[<h1 id="SAP定价技术">SAP定价技术</h1>
@@ -42,32 +42,32 @@
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[SD 相关表]]></title>
-    <link href="http://fyg.xyjp.net/2013/12/23/sd-%E7%9B%B8%E5%85%B3%E8%A1%A8/"/>
-    <id>http://fyg.xyjp.net/2013/12/23/sd-相关表/</id>
+    <link href="http://fyg.xyjp.net/about/2013/12/23/sd-%E7%9B%B8%E5%85%B3%E8%A1%A8/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/23/sd-相关表/</id>
     <published>2013-12-22T16:44:42.000Z</published>
     <updated>2014-03-30T02:10:43.000Z</updated>
     <content type="html"><![CDATA[<p>KNA1  客户主数据（一般数据层）<br>KNB1  客户主数据（公司代码层）<br>KNMT  Customer-Material Info Record Data Table<br>KNMTK Customer-Material Info Record Header Table<br>KNVA  Customer 主数据 Loading Points<br>KNVD  Customer 主数据 record sales request form<br>KNVI  Customer 主数据 Tax Indicator<br>KNVK  Customer 主数据 Contact Partner<br>KNVL  Customer 主数据 Licenses<br>KNVP  Customer 主数据 Partner Functions<br>KNVS  Customer 主数据 Shipping Data<br>KNVT  Customer 主数据 Record Texts for Sales<br>KNVV  Customer 主数据 Sales Data<br>KONA  Rebate Agreements<br>KOND  Conditions (Data)<br>KONH  Conditions (Header)<br>KONM  Conditions (1 Dimensional Quantity Scales)<br>KONP  Conditions (Item) field LIKP-WADAT_IST - Actual Goods Issue Date - is populated only after Post Goods Issue<br>KONV  Conditions (Procedure Data)<br>KONW  Conditions (1 Dimensional Value Scales)<br>LIKP  SD Document: Delivery Header Data<br>LIPS  SD document: Delivery: Item data<br>LIPSPO  LIPS Reference Data Purchase Order<br>LIPSRF  LIPS Reference Data<br>NACH  Detailed output data<br>NAST  Message status<br>T179  Materials: Product Heirarchies<br>T179T Materials: Product Heirarchies: Texts<br>VAKGU Sales Index: Quotation Validity<br>VAKPA Sales Index: Orders by Partner Function<br>VAPMA Sales Index: Order Items by Material<br>VBAG  Sales Document: Release Data by Schedule Line in Sch.Agrmt.<br>VBAK  销售订单表头-Sales Document: Header Data<br>VBAP  销售订单明细-Sales Document: Item Data<br>VBBE  Sales Requirements: Individual Records<br>VBBS  Sales Requirement Totals Record<br>VBEP  Sales Document: Schedule Line Data<br>VBFA  Sales Document Flow<br>VBFS  Error Log for Collective Processing<br>VBKA  Sales activities<br>VBKD  Sales Document: Business Data<br>VBKOF SD index: Open sales activities by partner function<br>VBKPA SD index: Sales activities by partner function<br>VBLK  SD Document: Delivery Note Header<br>VBLS  Delivery Notes for Collective Processing<br>VBPA  Sales Document: Partner<br>VBRK  销售发票：抬头表Billing: Header Data<br>VBRP  销售发票：行项目表Billing: Item Data<br>VBSK  Collective Processing for a Sales Document Header<br>VBSS  Collective Processing: Sales Documents<br>VBUK  Sales Document: Header Status and Administrative Data<br>VBUP  Sales Document: Item Status<br>VBUV  Sales Document: Incompletion Log<br>VEPVG Delivery Due Index<br>VETVG Delivery Due Index for Stock Transfer<br>VKAOF Sales Index: Open Sales Activities<br>VKDFS SD Index: Billing Initiator<br>VLKPA SD Index: Deliveries by Partner Functions<br>VLPMA SD Index: Delivery Items by Material<br>VRKPA Sales Index: Bills by Partner Functions<br>VRPMA SD Index: Billing Items per Material<br>VTFA  Shipment Document Flow<br>VTRDI Shipment Planning Index</p>
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[VOFM Routine]]></title>
-    <link href="http://fyg.xyjp.net/2013/12/22/vofm-routine/"/>
-    <id>http://fyg.xyjp.net/2013/12/22/vofm-routine/</id>
+    <link href="http://fyg.xyjp.net/about/2013/12/22/vofm-routine/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/22/vofm-routine/</id>
     <published>2013-12-22T02:06:18.000Z</published>
     <updated>2014-03-30T02:10:56.000Z</updated>
     <content type="html"><![CDATA[<p><a href="http://saptechsolutions.com/pdf/VOFMFormulaRoutines.pdf" target="_blank">http://saptechsolutions.com/pdf/VOFMFormulaRoutines.pdf</a></p>
@@ -80,16 +80,16 @@
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[关于价格条件中的小计]]></title>
-    <link href="http://fyg.xyjp.net/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1/"/>
-    <id>http://fyg.xyjp.net/2013/12/22/关于价格条件中的小计/</id>
+    <link href="http://fyg.xyjp.net/about/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/</id>
     <published>2013-12-22T01:13:32.000Z</published>
     <updated>2014-03-30T02:11:52.000Z</updated>
     <content type="html"><![CDATA[<p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank">http://scn.sap.com/thread/1735194</a></p>
@@ -146,16 +146,16 @@
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[sap 定价条件]]></title>
-    <link href="http://fyg.xyjp.net/2013/12/20/sap-%E5%AE%9A%E4%BB%B7%E6%9D%A1%E4%BB%B6/"/>
-    <id>http://fyg.xyjp.net/2013/12/20/sap-定价条件/</id>
+    <link href="http://fyg.xyjp.net/about/2013/12/20/sap-%E5%AE%9A%E4%BB%B7%E6%9D%A1%E4%BB%B6/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/20/sap-定价条件/</id>
     <published>2013-12-20T12:23:08.000Z</published>
     <updated>2014-03-30T02:12:15.000Z</updated>
     <content type="html"><![CDATA[<p>这里简要解释一下:</p>
@@ -203,48 +203,48 @@
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[SAP操作（SD）]]></title>
-    <link href="http://fyg.xyjp.net/2013/11/28/sap%E6%93%8D%E4%BD%9C%EF%BC%88sd%EF%BC%89/"/>
-    <id>http://fyg.xyjp.net/2013/11/28/sap操作（sd）/</id>
+    <link href="http://fyg.xyjp.net/about/2013/11/28/sap%E6%93%8D%E4%BD%9C%EF%BC%88sd%EF%BC%89/"/>
+    <id>http://fyg.xyjp.net/about/2013/11/28/sap操作（sd）/</id>
     <published>2013-11-27T18:05:12.000Z</published>
     <updated>2014-03-30T02:12:39.000Z</updated>
     <content type="html"><![CDATA[<p>1 定义销售组织：<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：販売組織</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at205423_zps68cc79b9.png" alt="salse setting"><br>输入销售<em>组织代码：FYG1 名称： FYG販売組織 货币：JPY</em> 保存。<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at210758_zps5b9c511e.png" alt="salse2"><br>2 定义分销渠道<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：流通チャンネル</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at211343_zps96a89d88.png" alt="salse chanel"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at230004_zpsc25ffaab.png" alt="２"><br>３　定义产品组<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at231725_zpsfcd942a9.png" alt="3"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at232918_zps3192e2c6.png" alt="32"><br>4 将销售组织分配至公司<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234630_zpsad7320e8.png" alt="33"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234610_zps25f22eee.png" alt="333"><br>４　将分销渠道分配至销售组织<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at235923_zps0e9f0035.png" alt="sss"></p>
 ]]></content>
     
     
-      <category term="sap" scheme="http://fyg.xyjp.net/tags/sap/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="SAP" scheme="http://fyg.xyjp.net/categories/SAP/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Rails 添加，删除字段]]></title>
-    <link href="http://fyg.xyjp.net/2013/11/16/rails-%E6%B7%BB%E5%8A%A0%EF%BC%8C%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5/"/>
-    <id>http://fyg.xyjp.net/2013/11/16/rails-添加，删除字段/</id>
+    <link href="http://fyg.xyjp.net/about/2013/11/16/rails-%E6%B7%BB%E5%8A%A0%EF%BC%8C%E5%88%A0%E9%99%A4%E5%AD%97%E6%AE%B5/"/>
+    <id>http://fyg.xyjp.net/about/2013/11/16/rails-添加，删除字段/</id>
     <published>2013-11-16T00:11:15.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p><pre><br>rails g migration remove_column_from_user permission:string<br>rails g migration add_column_to_accountBook create_user:int<br>rake db:migrate<br></pre><br>其他<br>rename_column  :更改字段的名称<br>change_column  :修改字段的类型</p>
 ]]></content>
     
     
-      <category term="rails" scheme="http://fyg.xyjp.net/tags/rails/"/>
+      <category term="rails" scheme="http://fyg.xyjp.net/about/tags/rails/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[JDBC]]></title>
-    <link href="http://fyg.xyjp.net/2013/09/28/jdbc/"/>
-    <id>http://fyg.xyjp.net/2013/09/28/jdbc/</id>
+    <link href="http://fyg.xyjp.net/about/2013/09/28/jdbc/"/>
+    <id>http://fyg.xyjp.net/about/2013/09/28/jdbc/</id>
     <published>2013-09-28T01:38:06.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>最近开始找工作。好久没用java，都快给忘了。<br>一点点复习吧。</p>
@@ -332,16 +332,16 @@ public class DBConnect {
 </pre>]]></content>
     
     
-      <category term="JAVA" scheme="http://fyg.xyjp.net/tags/JAVA/"/>
+      <category term="JAVA" scheme="http://fyg.xyjp.net/about/tags/JAVA/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[可汗学院公开课：三角学]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/26/%E5%8F%AF%E6%B1%97%E5%AD%A6%E9%99%A2%E5%85%AC%E5%BC%80%E8%AF%BE%EF%BC%9A%E4%B8%89%E8%A7%92%E5%AD%A6/"/>
-    <id>http://fyg.xyjp.net/2013/07/26/可汗学院公开课：三角学/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/26/%E5%8F%AF%E6%B1%97%E5%AD%A6%E9%99%A2%E5%85%AC%E5%BC%80%E8%AF%BE%EF%BC%9A%E4%B8%89%E8%A7%92%E5%AD%A6/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/26/可汗学院公开课：三角学/</id>
     <published>2013-07-26T12:04:08.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>最近学习动画，发现自己数学都忘光了。<br>好多中学数学里的知识都想了半天。</p>
@@ -349,14 +349,14 @@ public class DBConnect {
 ]]></content>
     
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[最近看的一些电影]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/26/%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%B5%E5%BD%B1/"/>
-    <id>http://fyg.xyjp.net/2013/07/26/最近看的一些电影/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/26/%E6%9C%80%E8%BF%91%E7%9C%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%B5%E5%BD%B1/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/26/最近看的一些电影/</id>
     <published>2013-07-26T08:58:53.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>最近看的电影，做一下总结：<br><strong>1 . 超脱 Detachment</strong><br><a href="http://movie.douban.com/subject/5322596/" title="Detachment" target="_blank">豆瓣链接</a><br>片子很文艺，台词很动人。<br>其中提到了《1984》的“双重思想”（Doublethink）：</p>
@@ -379,14 +379,14 @@ public class DBConnect {
 ]]></content>
     
     
-      <category term="生活" scheme="http://fyg.xyjp.net/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[关于moov atom]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/21/%E5%85%B3%E4%BA%8Emoov-atom/"/>
-    <id>http://fyg.xyjp.net/2013/07/21/关于moov-atom/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/21/%E5%85%B3%E4%BA%8Emoov-atom/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/21/关于moov-atom/</id>
     <published>2013-07-20T23:04:46.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>moov atom是mp4中索引文件。ffmpeg在转化完成后，默认是放在末尾的。<br>这样上传到网站时播放时会出现问题。<br>flash在播放时，必须将文件下载完毕才能进行播放。<br>要想实现类似流播放的边下载边播放的效果，需要将moov atom调到文件前面。<br>ffmpeg中自带的qt-faststart可进行此操作。<br>安装办法，进入ffmpeg文件夹。</p>
@@ -404,16 +404,16 @@ qt-faststart append.mp4 out.mp4
 ]]></content>
     
     
-      <category term="ffmpeg" scheme="http://fyg.xyjp.net/tags/ffmpeg/"/>
+      <category term="ffmpeg" scheme="http://fyg.xyjp.net/about/tags/ffmpeg/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[朝日新闻微博被和谐]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/19/%E6%9C%9D%E6%97%A5%E6%96%B0%E9%97%BB%E5%BE%AE%E5%8D%9A%E8%A2%AB%E5%92%8C%E8%B0%90/"/>
-    <id>http://fyg.xyjp.net/2013/07/19/朝日新闻微博被和谐/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/19/%E6%9C%9D%E6%97%A5%E6%96%B0%E9%97%BB%E5%BE%AE%E5%8D%9A%E8%A2%AB%E5%92%8C%E8%B0%90/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/19/朝日新闻微博被和谐/</id>
     <published>2013-07-18T15:05:25.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>朝日新闻微博帐号被和谐。<br>微博评论：<br>@那个野和尚 ：@朝日新闻中文网 已被和谐，这是我D在抗日战争正面战场的首次大捷。</p>
@@ -421,44 +421,44 @@ qt-faststart append.mp4 out.mp4
 ]]></content>
     
     
-      <category term="社会" scheme="http://fyg.xyjp.net/categories/%E7%A4%BE%E4%BC%9A/"/>
+      <category term="社会" scheme="http://fyg.xyjp.net/about/categories/%E7%A4%BE%E4%BC%9A/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[其实是我自己不愿见家属]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/17/%E5%85%B6%E5%AE%9E%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%84%BF%E8%A7%81%E5%AE%B6%E5%B1%9E/"/>
-    <id>http://fyg.xyjp.net/2013/07/17/其实是我自己不愿见家属/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/17/%E5%85%B6%E5%AE%9E%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%84%BF%E8%A7%81%E5%AE%B6%E5%B1%9E/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/17/其实是我自己不愿见家属/</id>
     <published>2013-07-16T15:21:05.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/images/7o2zI.jpg" alt="我自己不愿见家属"><br>注：本画作者是“胸是小”，微博链接：<a href="http://weibo.com/u/1002282395" title="http://weibo.com/u/1002282395" target="_blank">http://weibo.com/u/1002282395</a></p>
 ]]></content>
     
     
-      <category term="社会" scheme="http://fyg.xyjp.net/categories/%E7%A4%BE%E4%BC%9A/"/>
+      <category term="社会" scheme="http://fyg.xyjp.net/about/categories/%E7%A4%BE%E4%BC%9A/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[素描一幅]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/16/%E7%B4%A0%E6%8F%8F%E4%B8%80%E5%B9%85/"/>
-    <id>http://fyg.xyjp.net/2013/07/16/素描一幅/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/16/%E7%B4%A0%E6%8F%8F%E4%B8%80%E5%B9%85/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/16/素描一幅/</id>
     <published>2013-07-16T00:52:18.000Z</published>
     <updated>2014-03-30T08:58:32.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg" alt="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg"></p>
 ]]></content>
     
     
-      <category term="素描" scheme="http://fyg.xyjp.net/tags/%E7%B4%A0%E6%8F%8F/"/>
+      <category term="素描" scheme="http://fyg.xyjp.net/about/tags/%E7%B4%A0%E6%8F%8F/"/>
     
-      <category term="设计" scheme="http://fyg.xyjp.net/categories/%E8%AE%BE%E8%AE%A1/"/>
+      <category term="设计" scheme="http://fyg.xyjp.net/about/categories/%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[mac 显示隐藏文件]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/15/mac-%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/"/>
-    <id>http://fyg.xyjp.net/2013/07/15/mac-显示隐藏文件/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/15/mac-%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/15/mac-显示隐藏文件/</id>
     <published>2013-07-15T09:42:51.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>输入以下命令后，重启finder后可显示隐藏文件：</p>
@@ -466,47 +466,47 @@ qt-faststart append.mp4 out.mp4
 ]]></content>
     
     
-      <category term="mac" scheme="http://fyg.xyjp.net/tags/mac/"/>
+      <category term="mac" scheme="http://fyg.xyjp.net/about/tags/mac/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[艾特熊和赛娜鼠]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/15/%E8%89%BE%E7%89%B9%E7%86%8A%E5%92%8C%E8%B5%9B%E5%A8%9C%E9%BC%A0/"/>
-    <id>http://fyg.xyjp.net/2013/07/15/艾特熊和赛娜鼠/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/15/%E8%89%BE%E7%89%B9%E7%86%8A%E5%92%8C%E8%B5%9B%E5%A8%9C%E9%BC%A0/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/15/艾特熊和赛娜鼠/</id>
     <published>2013-07-15T05:51:12.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://24.media.tumblr.com/2f8ee02abffaf1ea60d36de9896fadde/tumblr_mpyqodNeso1rcvtp3o1_500.png" alt="Ernest.ET.Celestine"><br>最近看的动画片。超有意思。<br>豆瓣链接：<a href="http://movie.douban.com/subject/6518638/" title="http://movie.douban.com/subject/6518638/" target="_blank">http://movie.douban.com/subject/6518638/</a></p>
 ]]></content>
     
     
-      <category term="动画" scheme="http://fyg.xyjp.net/tags/%E5%8A%A8%E7%94%BB/"/>
+      <category term="动画" scheme="http://fyg.xyjp.net/about/tags/%E5%8A%A8%E7%94%BB/"/>
     
-      <category term="生活" scheme="http://fyg.xyjp.net/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[秋夢　ーー二胡演奏]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/08/%E7%A7%8B%E5%A4%A2%E3%80%80%E3%83%BC%E3%83%BC%E4%BA%8C%E8%83%A1%E6%BC%94%E5%A5%8F/"/>
-    <id>http://fyg.xyjp.net/2013/07/08/秋夢　ーー二胡演奏/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/08/%E7%A7%8B%E5%A4%A2%E3%80%80%E3%83%BC%E3%83%BC%E4%BA%8C%E8%83%A1%E6%BC%94%E5%A5%8F/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/08/秋夢　ーー二胡演奏/</id>
     <published>2013-07-08T09:37:58.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<iframe width="420" height="315" src="//www.youtube.com/embed/zDGAGE-hl44" frameborder="0" allowfullscreen></iframe>]]></content>
     
     
-      <category term="音楽" scheme="http://fyg.xyjp.net/tags/%E9%9F%B3%E6%A5%BD/"/>
+      <category term="音楽" scheme="http://fyg.xyjp.net/about/tags/%E9%9F%B3%E6%A5%BD/"/>
     
-      <category term="生活" scheme="http://fyg.xyjp.net/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[linux 時間を設定]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/05/linux-%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/2013/07/05/linux-時間を設定/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/05/linux-%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/05/linux-時間を設定/</id>
     <published>2013-07-05T00:02:56.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>よく使っていますので、メモしておく。</p>
@@ -516,27 +516,27 @@ hwclock --systohc　//システムの時間をbiosに書き込む
 </pre>]]></content>
     
     
-      <category term="linux" scheme="http://fyg.xyjp.net/tags/linux/"/>
+      <category term="linux" scheme="http://fyg.xyjp.net/about/tags/linux/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/categories/Develop/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Melancholia]]></title>
-    <link href="http://fyg.xyjp.net/2013/07/04/melancholia/"/>
-    <id>http://fyg.xyjp.net/2013/07/04/melancholia/</id>
+    <link href="http://fyg.xyjp.net/about/2013/07/04/melancholia/"/>
+    <id>http://fyg.xyjp.net/about/2013/07/04/melancholia/</id>
     <published>2013-07-04T00:42:20.000Z</published>
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/fdbfe43139ea6b246092e221fcaa8745/tumblr_mpdz23KX7R1rcvtp3o1_1280.png" alt="Melancholia"><br>话说这个电影以前看过一看过点点，感觉太过“深奥”，就放弃了。<br>最近被老师推荐，就仔细看了一下。<br>总算好象看懂了一些。<br>女主对着夜空裸体的画面，美得让人震撼。</p>
 ]]></content>
     
     
-      <category term="Melancholia" scheme="http://fyg.xyjp.net/tags/Melancholia/"/>
+      <category term="Melancholia" scheme="http://fyg.xyjp.net/about/tags/Melancholia/"/>
     
-      <category term="电影" scheme="http://fyg.xyjp.net/tags/%E7%94%B5%E5%BD%B1/"/>
+      <category term="电影" scheme="http://fyg.xyjp.net/about/tags/%E7%94%B5%E5%BD%B1/"/>
     
-      <category term="生活" scheme="http://fyg.xyjp.net/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
