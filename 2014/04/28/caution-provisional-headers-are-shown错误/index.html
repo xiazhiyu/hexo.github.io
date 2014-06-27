@@ -9,10 +9,10 @@
     
     <meta name="author" content="Cheney Fan">
     
-    <meta name="description" content="以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。
-function getIEVersion() {
-      var rv = -1;
-      if (navigator.appName == &#39;Mi">
+    <meta name="description" content="后端的REST服务前端无法访问，在本地mac机器上测试一切正常，换在另一个widows机器，从局域网访问就发生错误。看上去似乎请求没有发生。可能是angularjs里$http配置的问题吧，自己在header里面加了一些参数。下面是图片：
+
+太累了。暂时不管了。
+4-29.更新原因明白了。其实很简单">
     
     
     
@@ -69,15 +69,15 @@ function getIEVersion() {
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/04/29/caution-provisional-headers-are-shown错误/" title="Caution provisional headers are shown错误" itemprop="url">Caution provisional headers are shown错误</a>
+      <a href="/2014/04/28/caution-provisional-headers-are-shown错误/" title="Caution provisional headers are shown错误" itemprop="url">Caution provisional headers are shown错误</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-04-29T14:12:33.000Z" itemprop="datePublished">4月 29 2014</time>
-    更新日期:<time datetime="2014-06-27T14:18:30.000Z" itemprop="dateModified">6月 27 2014</time>
+    <time datetime="2014-04-28T14:12:33.000Z" itemprop="datePublished">4月 28 2014</time>
+    更新日期:<time datetime="2014-06-27T14:22:00.000Z" itemprop="dateModified">6月 27 2014</time>
     
   </p>
 </header>
@@ -89,43 +89,17 @@ function getIEVersion() {
 		
 		</div>
 		
-		<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
-      <span class="keyword">var</span> rv = -<span class="number">1</span>;
-      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">return</span> rv;
-  }
-  IEV = getIEVersion();
-  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
-      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
-  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
-      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
-  }
-</code></pre><p>接着在css里面进行设置：</p>
-<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
-    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
-    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
-<span class="rule">}</span></span>
-</code></pre>  
+		<p>后端的REST服务前端无法访问，在本地mac机器上测试一切正常，换在另一个widows机器，从局域网访问就发生错误。<br>看上去似乎请求没有发生。可能是angularjs里$http配置的问题吧，自己在header里面加了一些参数。下面是图片：</p>
+<p><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/30AD30E330D730C130E3_zpsab7aabf8.png" alt="图片"></p>
+<p>太累了。暂时不管了。</p>
+<p>4-29.更新<br>原因明白了。其实很简单，代码里使用的localhost.<br>而局域网里是通过ip访问的，造成跨域问题。而REST服务默认无法跨域访问，因此出错。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/CSS/">CSS</a>
+  <span></span> <a href="/tags/angularjs/">angularjs</a>
   </div>
 
 
@@ -138,7 +112,7 @@ function getIEVersion() {
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown错误/" data-title="Caution provisional headers are shown错误 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2014/04/28/caution-provisional-headers-are-shown错误/" data-title="Caution provisional headers are shown错误 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -148,7 +122,7 @@ function getIEVersion() {
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/06/27/css针对ie浏览器设定/" title="css针对IE浏览器设定">
+ <a href="/2014/04/29/css针对ie浏览器设定/" title="css针对IE浏览器设定">
   <strong>PREVIOUS:</strong><br/>
   <span>
   css针对IE浏览器设定</span>
@@ -190,13 +164,13 @@ function getIEVersion() {
 	<p class="asidetitle">分類</p>
 		<ul>
 		
-			<li><a href="/categories/Develop/" title="Develop">Develop<sup>17</sup></a></li>
+			<li><a href="/categories/Develop/" title="Develop">Develop<sup>18</sup></a></li>
 		
 			<li><a href="/categories/SAP/" title="SAP">SAP<sup>6</sup></a></li>
 		
 			<li><a href="/categories/Tips/" title="Tips">Tips<sup>1</sup></a></li>
 		
-			<li><a href="/categories/生活/" title="生活">生活<sup>10</sup></a></li>
+			<li><a href="/categories/生活/" title="生活">生活<sup>11</sup></a></li>
 		
 			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
 		
@@ -229,7 +203,7 @@ function getIEVersion() {
 		
 			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
 		
-			<li><a href="/tags/javascript/" title="javascript">javascript<sup>3</sup></a></li>
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
 		
 			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 		
@@ -247,9 +221,9 @@ function getIEVersion() {
 		
 			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
 		
-			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
+			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
 		
-			<li><a href="/tags/撮影/" title="撮影">撮影<sup>1</sup></a></li>
+			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
 		
 		</ul>
 </div>
@@ -288,7 +262,7 @@ function getIEVersion() {
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown错误/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/04/28/caution-provisional-headers-are-shown错误/';
   
   (function(){
     var dsq = document.createElement('script');

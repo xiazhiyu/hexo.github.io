@@ -4,10 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>css针对IE浏览器设定 | Cheney Fan&#39;s Blog</title>
+    <title>javascript导出csv文件 | Cheney Fan&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Cheney Fan">
+    
+    <meta name="description" content="CSV输出通常做法是后台输出文件，再通过浏览器下载。但是其实也可以通过javascript直接在前端完成，减轻服务器负担。只是浏览器兼容让人头疼。目前方案，chrome，firefox，IE10+通过。代码如下：
+var json2csv = function (objArray, target, ">
     
     
     
@@ -64,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/27/css针对ie浏览器设定/" title="css针对IE浏览器设定" itemprop="url">css针对IE浏览器设定</a>
+      <a href="/2014/04/29/javascript导出csv文件/" title="javascript导出csv文件" itemprop="url">javascript导出csv文件</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-06-27T14:16:12.000Z" itemprop="datePublished">6月 27 2014</time>
-    更新日期:<time datetime="2014-06-27T14:16:12.000Z" itemprop="dateModified">6月 27 2014</time>
+    <time datetime="2014-04-29T14:16:12.000Z" itemprop="datePublished">4月 29 2014</time>
+    更新日期:<time datetime="2014-06-27T14:32:28.000Z" itemprop="dateModified">6月 27 2014</time>
     
   </p>
 </header>
@@ -84,16 +87,83 @@
 		
 		</div>
 		
-		  
+		<p>CSV输出通常做法是后台输出文件，再通过浏览器下载。但是其实也可以通过javascript直接在前端完成，减轻服务器负担。<br>只是浏览器兼容让人头疼。<br>目前方案，chrome，firefox，IE10+通过。代码如下：</p>
+<pre><code><span class="keyword">var</span> json2csv = <span class="function"><span class="keyword">function</span> <span class="params">(objArray, target, fileName)</span> {</span>
+   <span class="comment">// var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;</span>
+    <span class="comment">//var array =</span>
+    <span class="keyword">var</span> array = <span class="keyword">typeof</span> objArray != <span class="string">'object'</span> ? angular.toJson(objArray) : objArray;  <span class="comment">//这里有段angularjs代码，请酌情修改</span>
+    <span class="keyword">var</span> str = <span class="string">'\ufeff'</span>;  <span class="comment">//对应含bom的utf8文件</span>
+    <span class="keyword">var</span> line = <span class="string">''</span>;
+    <span class="keyword">var</span> changeLine = <span class="string">'\r\n'</span>;
+    <span class="keyword">if</span>(IEV==-<span class="number">1</span>)changeLine= <span class="built_in">escape</span>(changeLine);   <span class="comment">//IEV是这里IE版本号，－1表示非IE浏览器。因为换行符在两个处理方法上存在差异。</span>
+    <span class="keyword">if</span> ($(<span class="string">"#labels"</span>).is(<span class="string">':checked'</span>)) {
+        <span class="keyword">var</span> head = array[<span class="number">0</span>];
+        <span class="keyword">if</span> ($(<span class="string">"#quote"</span>).is(<span class="string">':checked'</span>)) {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[<span class="number">0</span>]) {
+                <span class="keyword">var</span> value = index + <span class="string">""</span>;
+                line += <span class="string">'"'</span> + value.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>) + <span class="string">'",'</span>;
+            }
+        }
+
+         <span class="keyword">else</span> {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[<span class="number">0</span>]) {
+                line += index + <span class="string">','</span>;
+            }
+        }
+
+        line = line.slice(<span class="number">0</span>, -<span class="number">1</span>);
+        str += line + changeLine;
+    }
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) {
+        <span class="keyword">var</span> line = <span class="string">''</span>;
+
+        <span class="keyword">if</span> ($(<span class="string">"#quote"</span>).is(<span class="string">':checked'</span>)) {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[i]) {
+                <span class="keyword">var</span> value = array[i][index] + <span class="string">""</span>;
+                line += <span class="string">'"'</span> + value.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>) + <span class="string">'",'</span>;
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[i]) {
+                line += array[i][index] + <span class="string">','</span>;
+            }
+        }
+
+        line = line.slice(<span class="number">0</span>, -<span class="number">1</span>);
+        str += line + changeLine;
+    }
+    $(target).attr(<span class="string">'href'</span>,<span class="string">"data:text/csv;charset=utf-8,"</span> + str);
+    $(target).attr(<span class="string">'download'</span>,fileName);
+    <span class="keyword">if</span>(IEV&gt;<span class="number">9</span>){            <span class="comment">//IE10+ 处理方案</span>
+        <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([str], {
+                <span class="string">"type"</span>: <span class="string">"text/csv;charset=utf-8;"</span>
+        });
+        navigator.msSaveBlob(blob, fileName);
+    }
+    <span class="keyword">return</span>;  
+} ; 
+</code></pre><p>然而，怎么都觉得IE9还是必须对应才行。目前先做到这吧。<br><a href="http://blog.eliacontini.info/post/79860720828/export-to-csv-using-javascript-the-download-attribute" target="_blank">参考链接</a></p>
+<p>顺便记录下csv的格式问题。csv在用excel打开时有时会出现乱码。原因在微软对ut8编码时，要求放置bom。（真够扯淡的，不放bom才是标准好不好）<br>为了对应可以在string前加上\ufeff字符。但是奇怪的是，加上后windows上打开没问题，mac上excel却打开乱码了，懒得管了。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Develop/">Develop</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2014/06/27/css针对ie浏览器设定/" data-title="css针对IE浏览器设定 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/" data-title="javascript导出csv文件 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,9 +174,9 @@
  
 
 <div class="next">
-<a href="/2014/04/29/caution-provisional-headers-are-shown错误/"  title="Caution provisional headers are shown错误">
+<a href="/2014/04/29/css针对ie浏览器设定/"  title="css针对IE浏览器设定">
  <strong>NEXT:</strong><br/> 
- <span>Caution provisional headers are shown错误
+ <span>css针对IE浏览器设定
 </span>
 </a>
 </div>
@@ -137,13 +207,13 @@
 	<p class="asidetitle">分類</p>
 		<ul>
 		
-			<li><a href="/categories/Develop/" title="Develop">Develop<sup>17</sup></a></li>
+			<li><a href="/categories/Develop/" title="Develop">Develop<sup>18</sup></a></li>
 		
 			<li><a href="/categories/SAP/" title="SAP">SAP<sup>6</sup></a></li>
 		
 			<li><a href="/categories/Tips/" title="Tips">Tips<sup>1</sup></a></li>
 		
-			<li><a href="/categories/生活/" title="生活">生活<sup>10</sup></a></li>
+			<li><a href="/categories/生活/" title="生活">生活<sup>11</sup></a></li>
 		
 			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
 		
@@ -176,7 +246,7 @@
 		
 			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
 		
-			<li><a href="/tags/javascript/" title="javascript">javascript<sup>3</sup></a></li>
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
 		
 			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 		
@@ -194,9 +264,9 @@
 		
 			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
 		
-			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
+			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
 		
-			<li><a href="/tags/撮影/" title="撮影">撮影<sup>1</sup></a></li>
+			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
 		
 		</ul>
 </div>
@@ -235,7 +305,7 @@
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2014/06/27/css针对ie浏览器设定/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/';
   
   (function(){
     var dsq = document.createElement('script');

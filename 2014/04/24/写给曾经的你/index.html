@@ -9,7 +9,10 @@
     
     <meta name="author" content="Cheney Fan">
     
-    <meta name="description" content="之前在angular里花了很多时间的，好久没整又给忘记了。做一下记录。主要有两个难点：1.在directive里面使用$http发出请求。2.将directive的scope里面的参数传入外部。即和外部scope通信。代码：angular.module(&amp;#39;myApp.directives&amp;#">
+    <meta name="description" content="“我们已经找到自己的幸福了。”末后底人这么说，并且眨眼。－－－－尼采
+
+十年前，当我遇见你时，你已有男朋友。毕业时，我写信告诉你，我喜欢你，可不能因为自己的幸福而毁掉他人的幸福，于是选择放弃。我从未想到过，自己会为此纠葛这么多年，嘴里说放弃，心里却不舍。
+一个人到上海时，我在公车上和你打电话。不爱说">
     
     
     
@@ -74,7 +77,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-04-24T13:52:34.000Z" itemprop="datePublished">4月 24 2014</time>
-    更新日期:<time datetime="2014-06-27T14:02:54.000Z" itemprop="dateModified">6月 27 2014</time>
+    更新日期:<time datetime="2014-06-27T14:34:00.000Z" itemprop="dateModified">6月 27 2014</time>
     
   </p>
 </header>
@@ -86,35 +89,35 @@
 		
 		</div>
 		
-		<p>之前在angular里花了很多时间的，好久没整又给忘记了。<br>做一下记录。<br>主要有两个难点：<br>1.在directive里面使用$http发出请求。<br>2.将directive的scope里面的参数传入外部。即和外部scope通信。<br>代码：<br><code>angular.module(&#39;myApp.directives&#39;, []).directive(&#39;listPref&#39;,[&#39;$http&#39;, function($http){
-        return {
-            restrict : &#39;E&#39;,
-            scope: {selectModel: &#39;=&#39;},
-            template: &#39;&lt;select class=&quot;form-control&quot; ng-model=&quot;selectModel&quot; ng-options=&quot;item.name for item in list&quot;&gt;&lt;/select&gt;&#39;,
-            replace : true,
-            link : function(scope, elem, attrs){
-                $http.get(&#39;http://localhost:8080/CSONE_dev/api/pref&#39;).success(function(list){ 
-                  scope.list=list;
-                  scope.selectModel = list[12];
-                }).error(function(msg){
-                 console.log(&quot;failed:&quot;+msg);
-               });  
-            }
-        };
-}])；</code></p>
+		<blockquote>
+<p>“我们已经找到自己的幸福了。”<br>末后底人这么说，并且眨眼。<br>－－－－尼采</p>
+</blockquote>
+<p>十年前，当我遇见你时，你已有男朋友。毕业时，我写信告诉你，我喜欢你，可不能因为自己的幸福而毁掉他人的幸福，于是选择放弃。<br>我从未想到过，自己会为此纠葛这么多年，嘴里说放弃，心里却不舍。</p>
+<p>一个人到上海时，我在公车上和你打电话。不爱说话的我不知不觉和你聊了一个钟头，直到售票阿姨不耐烦地问我下不下车时，才意识到已经是终点站，车里只剩我一个人。<br>我在电话里告诉你，我觉得自己很无能，没办法给人幸福。－－也许这才是我放弃的真正原因吧。</p>
+<p>十年里，经历了太多。我们无意中到了同一个城市，5年里却只见了3次。你问我要找什么样的人。我脱口而出要找一个跟你一样的。<br>－－然而，我们都知道： 有些事，早已经回不去了。</p>
+<p>你一直跟着你的男朋友，不离不弃。我很后悔跟你写那封信，说什么‘不能为自己的幸福而毁掉他人的幸福’。其实你应该追寻自己的幸福，即使不跟我在一起。</p>
+<p>你和他结了婚。从一家有名的IT公司离职回老家开了个火锅店，当起了老板娘。我知道你过的不容易，可什么也帮不了你。</p>
+<p>当我在网上看到你嗮的女儿的照片，我真心地点了赞。我开玩笑问为什么结婚不通知我，怕我来砸场子吗？你只是笑。</p>
+<p>我一个人来到了这个陌生的国度。身边的每个人对我都很好，只是依然觉得很寂寞，很多时候一句话也不说。</p>
+<p>我小心翼翼地工作，当对面的日本人在玩着line和twitter时，我忙着干不完的活。我知道中国人在他们印象中不是很好，所以他们说公司不招中国人时，我也没问为什么要招我。</p>
+<p>直到最近喝酒时，同事对我说，遇见你后，对中国人印象完全改变了。在这个中国人犯罪率居高不下的地方，受到这样的评价让自己都有点措手不及。</p>
+<p>然而，这对我而言又有什么意义呢。夜晚回家的电车，永远是那么寂寞。</p>
+<p>我多么希望，能和你一起看上野的樱花，台场的夜景，还有京都的红叶…………</p>
+<p>再过几天，自己就要满30岁了。30岁还未谈过恋爱的男人终究是不正常吧。</p>
+<p>我不是因为你才一直单身的。但如果有时间机器，我想回到十年前，我不会给你写那封信，我只想告诉你，希望你能追寻自己的幸福。…………</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/angularjs/">angularjs</a>
+  <span></span> <a href="/tags/情感/">情感</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  <a class="article-category-link" href="/categories/生活/">生活</a>
 </div>
 
 
@@ -173,13 +176,13 @@
 	<p class="asidetitle">分類</p>
 		<ul>
 		
-			<li><a href="/categories/Develop/" title="Develop">Develop<sup>17</sup></a></li>
+			<li><a href="/categories/Develop/" title="Develop">Develop<sup>18</sup></a></li>
 		
 			<li><a href="/categories/SAP/" title="SAP">SAP<sup>6</sup></a></li>
 		
 			<li><a href="/categories/Tips/" title="Tips">Tips<sup>1</sup></a></li>
 		
-			<li><a href="/categories/生活/" title="生活">生活<sup>10</sup></a></li>
+			<li><a href="/categories/生活/" title="生活">生活<sup>11</sup></a></li>
 		
 			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
 		
@@ -212,7 +215,7 @@
 		
 			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
 		
-			<li><a href="/tags/javascript/" title="javascript">javascript<sup>3</sup></a></li>
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
 		
 			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
 		
@@ -230,9 +233,9 @@
 		
 			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
 		
-			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
+			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
 		
-			<li><a href="/tags/撮影/" title="撮影">撮影<sup>1</sup></a></li>
+			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
 		
 		</ul>
 </div>

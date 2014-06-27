@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-06-27T14:19:52.348Z</updated>
+  <updated>2014-06-27T14:54:05.773Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -15,22 +15,83 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[css针对IE浏览器设定]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/06/27/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2014/06/27/css针对ie浏览器设定/</id>
-    <published>2014-06-27T14:16:12.000Z</published>
-    <updated>2014-06-27T14:16:12.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
+    <title><![CDATA[javascript导出csv文件]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/javascript%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:32:28.000Z</updated>
+    <content type="html"><![CDATA[<p>CSV输出通常做法是后台输出文件，再通过浏览器下载。但是其实也可以通过javascript直接在前端完成，减轻服务器负担。<br>只是浏览器兼容让人头疼。<br>目前方案，chrome，firefox，IE10+通过。代码如下：</p>
+<pre><code><span class="keyword">var</span> json2csv = <span class="function"><span class="keyword">function</span> <span class="params">(objArray, target, fileName)</span> {</span>
+   <span class="comment">// var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;</span>
+    <span class="comment">//var array =</span>
+    <span class="keyword">var</span> array = <span class="keyword">typeof</span> objArray != <span class="string">'object'</span> ? angular.toJson(objArray) : objArray;  <span class="comment">//这里有段angularjs代码，请酌情修改</span>
+    <span class="keyword">var</span> str = <span class="string">'\ufeff'</span>;  <span class="comment">//对应含bom的utf8文件</span>
+    <span class="keyword">var</span> line = <span class="string">''</span>;
+    <span class="keyword">var</span> changeLine = <span class="string">'\r\n'</span>;
+    <span class="keyword">if</span>(IEV==-<span class="number">1</span>)changeLine= <span class="built_in">escape</span>(changeLine);   <span class="comment">//IEV是这里IE版本号，－1表示非IE浏览器。因为换行符在两个处理方法上存在差异。</span>
+    <span class="keyword">if</span> ($(<span class="string">"#labels"</span>).is(<span class="string">':checked'</span>)) {
+        <span class="keyword">var</span> head = array[<span class="number">0</span>];
+        <span class="keyword">if</span> ($(<span class="string">"#quote"</span>).is(<span class="string">':checked'</span>)) {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[<span class="number">0</span>]) {
+                <span class="keyword">var</span> value = index + <span class="string">""</span>;
+                line += <span class="string">'"'</span> + value.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>) + <span class="string">'",'</span>;
+            }
+        }
+
+         <span class="keyword">else</span> {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[<span class="number">0</span>]) {
+                line += index + <span class="string">','</span>;
+            }
+        }
+
+        line = line.slice(<span class="number">0</span>, -<span class="number">1</span>);
+        str += line + changeLine;
+    }
+
+    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) {
+        <span class="keyword">var</span> line = <span class="string">''</span>;
+
+        <span class="keyword">if</span> ($(<span class="string">"#quote"</span>).is(<span class="string">':checked'</span>)) {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[i]) {
+                <span class="keyword">var</span> value = array[i][index] + <span class="string">""</span>;
+                line += <span class="string">'"'</span> + value.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>) + <span class="string">'",'</span>;
+            }
+        } <span class="keyword">else</span> {
+            <span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> array[i]) {
+                line += array[i][index] + <span class="string">','</span>;
+            }
+        }
+
+        line = line.slice(<span class="number">0</span>, -<span class="number">1</span>);
+        str += line + changeLine;
+    }
+    $(target).attr(<span class="string">'href'</span>,<span class="string">"data:text/csv;charset=utf-8,"</span> + str);
+    $(target).attr(<span class="string">'download'</span>,fileName);
+    <span class="keyword">if</span>(IEV&gt;<span class="number">9</span>){            <span class="comment">//IE10+ 处理方案</span>
+        <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([str], {
+                <span class="string">"type"</span>: <span class="string">"text/csv;charset=utf-8;"</span>
+        });
+        navigator.msSaveBlob(blob, fileName);
+    }
+    <span class="keyword">return</span>;  
+} ; 
+</code></pre><p>然而，怎么都觉得IE9还是必须对应才行。目前先做到这吧。<br><a href="http://blog.eliacontini.info/post/79860720828/export-to-csv-using-javascript-the-download-attribute" target="_blank">参考链接</a></p>
+<p>顺便记录下csv的格式问题。csv在用excel打开时有时会出现乱码。原因在微软对ut8编码时，要求放置bom。（真够扯淡的，不放bom才是标准好不好）<br>为了对应可以在string前加上\ufeff字符。但是奇怪的是，加上后windows上打开没问题，mac上excel却打开乱码了，懒得管了。</p>
+]]></content>
     
+    
+      <category term="javascript" scheme="http://fyg.xyjp.net/about/tags/javascript/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[Caution provisional headers are shown错误]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown%E9%94%99%E8%AF%AF/"/>
-    <id>http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown错误/</id>
-    <published>2014-04-29T14:12:33.000Z</published>
-    <updated>2014-06-27T14:18:30.000Z</updated>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:22:32.000Z</updated>
     <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
 <pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
       <span class="keyword">var</span> rv = -<span class="number">1</span>;
@@ -71,11 +132,30 @@
   </entry>
   
   <entry>
+    <title><![CDATA[Caution provisional headers are shown错误]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/28/caution-provisional-headers-are-shown%E9%94%99%E8%AF%AF/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/28/caution-provisional-headers-are-shown错误/</id>
+    <published>2014-04-28T14:12:33.000Z</published>
+    <updated>2014-06-27T14:22:00.000Z</updated>
+    <content type="html"><![CDATA[<p>后端的REST服务前端无法访问，在本地mac机器上测试一切正常，换在另一个widows机器，从局域网访问就发生错误。<br>看上去似乎请求没有发生。可能是angularjs里$http配置的问题吧，自己在header里面加了一些参数。下面是图片：</p>
+<p><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/30AD30E330D730C130E3_zpsab7aabf8.png" alt="图片"></p>
+<p>太累了。暂时不管了。</p>
+<p>4-29.更新<br>原因明白了。其实很简单，代码里使用的localhost.<br>而局域网里是通过ip访问的，造成跨域问题。而REST服务默认无法跨域访问，因此出错。</p>
+]]></content>
+    
+    
+      <category term="angularjs" scheme="http://fyg.xyjp.net/about/tags/angularjs/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[angular里指令（directive）的用法]]></title>
     <link href="http://fyg.xyjp.net/about/2014/04/27/angular%E9%87%8C%E6%8C%87%E4%BB%A4%EF%BC%88directive%EF%BC%89%E7%9A%84%E7%94%A8%E6%B3%95/"/>
     <id>http://fyg.xyjp.net/about/2014/04/27/angular里指令（directive）的用法/</id>
     <published>2014-04-27T13:58:49.000Z</published>
-    <updated>2014-06-27T14:11:27.000Z</updated>
+    <updated>2014-06-27T14:11:26.000Z</updated>
     <content type="html"><![CDATA[<p>之前在angular里花了很多时间的，好久没整又给忘记了。<br>做一下记录。<br>主要有两个难点：<br>1.在directive里面使用$http发出请求。<br>2.将directive的scope里面的参数传入外部。即和外部scope通信。<br>代码：</p>
 <pre><code>angular.module(<span class="string">'myApp.directives'</span>, []).directive(<span class="string">'listPref'</span>,[<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$http</span>)</span>{</span>
         <span class="keyword">return</span> {
@@ -107,29 +187,29 @@
     <link href="http://fyg.xyjp.net/about/2014/04/24/%E5%86%99%E7%BB%99%E6%9B%BE%E7%BB%8F%E7%9A%84%E4%BD%A0/"/>
     <id>http://fyg.xyjp.net/about/2014/04/24/写给曾经的你/</id>
     <published>2014-04-24T13:52:34.000Z</published>
-    <updated>2014-06-27T14:02:54.000Z</updated>
-    <content type="html"><![CDATA[<p>之前在angular里花了很多时间的，好久没整又给忘记了。<br>做一下记录。<br>主要有两个难点：<br>1.在directive里面使用$http发出请求。<br>2.将directive的scope里面的参数传入外部。即和外部scope通信。<br>代码：<br><code>angular.module(&#39;myApp.directives&#39;, []).directive(&#39;listPref&#39;,[&#39;$http&#39;, function($http){
-        return {
-            restrict : &#39;E&#39;,
-            scope: {selectModel: &#39;=&#39;},
-            template: &#39;&lt;select class=&quot;form-control&quot; ng-model=&quot;selectModel&quot; ng-options=&quot;item.name for item in list&quot;&gt;&lt;/select&gt;&#39;,
-            replace : true,
-            link : function(scope, elem, attrs){
-                $http.get(&#39;http://localhost:8080/CSONE_dev/api/pref&#39;).success(function(list){ 
-                  scope.list=list;
-                  scope.selectModel = list[12];
-                }).error(function(msg){
-                 console.log(&quot;failed:&quot;+msg);
-               });  
-            }
-        };
-}])；</code></p>
+    <updated>2014-06-27T14:34:00.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>“我们已经找到自己的幸福了。”<br>末后底人这么说，并且眨眼。<br>－－－－尼采</p>
+</blockquote>
+<p>十年前，当我遇见你时，你已有男朋友。毕业时，我写信告诉你，我喜欢你，可不能因为自己的幸福而毁掉他人的幸福，于是选择放弃。<br>我从未想到过，自己会为此纠葛这么多年，嘴里说放弃，心里却不舍。</p>
+<p>一个人到上海时，我在公车上和你打电话。不爱说话的我不知不觉和你聊了一个钟头，直到售票阿姨不耐烦地问我下不下车时，才意识到已经是终点站，车里只剩我一个人。<br>我在电话里告诉你，我觉得自己很无能，没办法给人幸福。－－也许这才是我放弃的真正原因吧。</p>
+<p>十年里，经历了太多。我们无意中到了同一个城市，5年里却只见了3次。你问我要找什么样的人。我脱口而出要找一个跟你一样的。<br>－－然而，我们都知道： 有些事，早已经回不去了。</p>
+<p>你一直跟着你的男朋友，不离不弃。我很后悔跟你写那封信，说什么‘不能为自己的幸福而毁掉他人的幸福’。其实你应该追寻自己的幸福，即使不跟我在一起。</p>
+<p>你和他结了婚。从一家有名的IT公司离职回老家开了个火锅店，当起了老板娘。我知道你过的不容易，可什么也帮不了你。</p>
+<p>当我在网上看到你嗮的女儿的照片，我真心地点了赞。我开玩笑问为什么结婚不通知我，怕我来砸场子吗？你只是笑。</p>
+<p>我一个人来到了这个陌生的国度。身边的每个人对我都很好，只是依然觉得很寂寞，很多时候一句话也不说。</p>
+<p>我小心翼翼地工作，当对面的日本人在玩着line和twitter时，我忙着干不完的活。我知道中国人在他们印象中不是很好，所以他们说公司不招中国人时，我也没问为什么要招我。</p>
+<p>直到最近喝酒时，同事对我说，遇见你后，对中国人印象完全改变了。在这个中国人犯罪率居高不下的地方，受到这样的评价让自己都有点措手不及。</p>
+<p>然而，这对我而言又有什么意义呢。夜晚回家的电车，永远是那么寂寞。</p>
+<p>我多么希望，能和你一起看上野的樱花，台场的夜景，还有京都的红叶…………</p>
+<p>再过几天，自己就要满30岁了。30岁还未谈过恋爱的男人终究是不正常吧。</p>
+<p>我不是因为你才一直单身的。但如果有时间机器，我想回到十年前，我不会给你写那封信，我只想告诉你，希望你能追寻自己的幸福。…………</p>
 ]]></content>
     
     
-      <category term="angularjs" scheme="http://fyg.xyjp.net/about/tags/angularjs/"/>
+      <category term="情感" scheme="http://fyg.xyjp.net/about/tags/%E6%83%85%E6%84%9F/"/>
     
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
@@ -159,7 +239,7 @@
     <link href="http://fyg.xyjp.net/about/2013/12/26/sap-%E5%AE%9A%E4%BB%B7%E6%8A%80%E6%9C%AF/"/>
     <id>http://fyg.xyjp.net/about/2013/12/26/sap-定价技术/</id>
     <published>2013-12-25T15:32:33.000Z</published>
-    <updated>2014-03-30T02:10:07.000Z</updated>
+    <updated>2014-03-30T02:10:06.000Z</updated>
     <content type="html"><![CDATA[<h1 id="SAP定价技术">SAP定价技术</h1>
 <p>计算类型：<br>A 百分数：定价值KWERT=条件基值KAWRT×金额%KBETR；<br>B 固定金额：定价值KWERT=金额KBETR；条件基值KAWRT不参与计算；<br>C 数量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单数量；<br>D 毛重量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单毛重；<br>E        净重：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单净重；<br>F        体积：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为体积；<br>I 百分数(旅行费用)：定价值KWERT=条件基值KAWRT÷（1－金额%KBETR）×金额%KBETR；<br>H 包括手续费：定价值KWERT=条件基值KAWRT÷（1＋金额%KBETR）×金额%KBETR；<br>G 公式：主要用于自定义定价，金额KBETR一般由手工维护或VK11进行维护，定价值KWERT=条件基值KAWRT×金额KBETR，条件基值KAWRT只能通过例程“基础类型”进行维护；<br>K-U未深入研究，基本上A-G已经够用了，特殊需求可以通过例程进行赋值，后面我会继续介绍定价例程。</p>
 ]]></content>
@@ -176,7 +256,7 @@
     <link href="http://fyg.xyjp.net/about/2013/12/23/sd-%E7%9B%B8%E5%85%B3%E8%A1%A8/"/>
     <id>http://fyg.xyjp.net/about/2013/12/23/sd-相关表/</id>
     <published>2013-12-22T16:44:42.000Z</published>
-    <updated>2014-03-30T02:10:43.000Z</updated>
+    <updated>2014-03-30T02:10:42.000Z</updated>
     <content type="html"><![CDATA[<p>KNA1  客户主数据（一般数据层）<br>KNB1  客户主数据（公司代码层）<br>KNMT  Customer-Material Info Record Data Table<br>KNMTK Customer-Material Info Record Header Table<br>KNVA  Customer 主数据 Loading Points<br>KNVD  Customer 主数据 record sales request form<br>KNVI  Customer 主数据 Tax Indicator<br>KNVK  Customer 主数据 Contact Partner<br>KNVL  Customer 主数据 Licenses<br>KNVP  Customer 主数据 Partner Functions<br>KNVS  Customer 主数据 Shipping Data<br>KNVT  Customer 主数据 Record Texts for Sales<br>KNVV  Customer 主数据 Sales Data<br>KONA  Rebate Agreements<br>KOND  Conditions (Data)<br>KONH  Conditions (Header)<br>KONM  Conditions (1 Dimensional Quantity Scales)<br>KONP  Conditions (Item) field LIKP-WADAT_IST - Actual Goods Issue Date - is populated only after Post Goods Issue<br>KONV  Conditions (Procedure Data)<br>KONW  Conditions (1 Dimensional Value Scales)<br>LIKP  SD Document: Delivery Header Data<br>LIPS  SD document: Delivery: Item data<br>LIPSPO  LIPS Reference Data Purchase Order<br>LIPSRF  LIPS Reference Data<br>NACH  Detailed output data<br>NAST  Message status<br>T179  Materials: Product Heirarchies<br>T179T Materials: Product Heirarchies: Texts<br>VAKGU Sales Index: Quotation Validity<br>VAKPA Sales Index: Orders by Partner Function<br>VAPMA Sales Index: Order Items by Material<br>VBAG  Sales Document: Release Data by Schedule Line in Sch.Agrmt.<br>VBAK  销售订单表头-Sales Document: Header Data<br>VBAP  销售订单明细-Sales Document: Item Data<br>VBBE  Sales Requirements: Individual Records<br>VBBS  Sales Requirement Totals Record<br>VBEP  Sales Document: Schedule Line Data<br>VBFA  Sales Document Flow<br>VBFS  Error Log for Collective Processing<br>VBKA  Sales activities<br>VBKD  Sales Document: Business Data<br>VBKOF SD index: Open sales activities by partner function<br>VBKPA SD index: Sales activities by partner function<br>VBLK  SD Document: Delivery Note Header<br>VBLS  Delivery Notes for Collective Processing<br>VBPA  Sales Document: Partner<br>VBRK  销售发票：抬头表Billing: Header Data<br>VBRP  销售发票：行项目表Billing: Item Data<br>VBSK  Collective Processing for a Sales Document Header<br>VBSS  Collective Processing: Sales Documents<br>VBUK  Sales Document: Header Status and Administrative Data<br>VBUP  Sales Document: Item Status<br>VBUV  Sales Document: Incompletion Log<br>VEPVG Delivery Due Index<br>VETVG Delivery Due Index for Stock Transfer<br>VKAOF Sales Index: Open Sales Activities<br>VKDFS SD Index: Billing Initiator<br>VLKPA SD Index: Deliveries by Partner Functions<br>VLPMA SD Index: Delivery Items by Material<br>VRKPA Sales Index: Bills by Partner Functions<br>VRPMA SD Index: Billing Items per Material<br>VTFA  Shipment Document Flow<br>VTRDI Shipment Planning Index</p>
 ]]></content>
     
@@ -214,7 +294,7 @@
     <link href="http://fyg.xyjp.net/about/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1/"/>
     <id>http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/</id>
     <published>2013-12-22T01:13:32.000Z</published>
-    <updated>2014-03-30T02:11:52.000Z</updated>
+    <updated>2014-06-27T14:48:14.000Z</updated>
     <content type="html"><![CDATA[<p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank">http://scn.sap.com/thread/1735194</a></p>
 <p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
 <p>Symptom</p>
@@ -234,20 +314,45 @@
 <p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
 <p>5. Which program contains the corresponding logic?</p>
 <p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
-<p>L O O P<br>LOOP AT xkomv.<br>…</p>
-<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
-<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
-<p>L O O P<br>ENDLOOP.</p>
-<p>6. Are the cumulative values stored in the database?</p>
+<pre><code>L O O P
+LOOP AT xkomv.
+<span class="keyword">...</span>
+
+calculate subtotals <span class="keyword">in</span> KOMP
+IF xkomv-kinak <span class="literal">NA</span> <span class="string">'AKLMXZ'</span>.
+<span class="keyword">...</span>
+
+fill subtotal work fields
+CASE xkomv-kzwiw. &amp;lt;== The setting <span class="keyword">for</span> KZWIW
+WHEN <span class="string">' '</span>. is checked <span class="keyword">in</span> this
+WHEN <span class="string">'A'</span>. CASE statement.
+<span class="keyword">...</span>
+WHEN <span class="string">'B'</span>.
+<span class="keyword">...</span>
+WHEN <span class="keyword">...</span>
+<span class="keyword">...</span>
+ENDCASE.
+<span class="keyword">...</span>
+ENDIF.
+<span class="keyword">...</span>
+
+L O O P
+ENDLOOP.
+</code></pre><p>6. Are the cumulative values stored in the database?</p>
 <p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
 <p>7. Can inactive conditions also be taken into account?</p>
 <p>This is possible if you use a corresponding condition value formula.</p>
 <p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
-<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
-<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
+<pre><code><span class="keyword">if</span> condition is active <span class="literal">or</span> inactive <span class="keyword">with</span> <span class="string">'M'</span>
+<span class="keyword">IF</span> xkomv<span class="attribute">-kinak</span> NA <span class="string">'AKLXZ'</span><span class="built_in">.</span>
+xworkj <span class="subst">=</span> xworkj <span class="subst">+</span> xkwert<span class="built_in">.</span> <span class="string">"cumulate condition value in xworkj
+ENDIF.</span>
+</code></pre><p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
 <p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
-<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
-<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
+<pre><code><span class="keyword">IF</span> xkomv<span class="attribute">-kinak</span> <span class="subst">=</span> <span class="string">'M'</span><span class="built_in">.</span> <span class="string">"if condition is inactive with 'M'
+xworkj = xworkj + xkwert."</span>cumulate condition value <span class="keyword">in</span> xworkj
+ENDIF<span class="built_in">.</span>
+</code></pre><p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
 <p>8. Examples of how KZWIW is used:</p>
 <p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
 <p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
@@ -280,7 +385,7 @@
     <link href="http://fyg.xyjp.net/about/2013/12/20/sap-%E5%AE%9A%E4%BB%B7%E6%9D%A1%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2013/12/20/sap-定价条件/</id>
     <published>2013-12-20T12:23:08.000Z</published>
-    <updated>2014-03-30T02:12:15.000Z</updated>
+    <updated>2014-03-30T02:12:14.000Z</updated>
     <content type="html"><![CDATA[<p>这里简要解释一下:</p>
 <p>Counter：系统用它来显示计算方案中一个阶段内的存取编号。例如，你可以把所有运输附加费分配给步骤100，然而，可能有三个条件类型，每一个代表一个不同的运输附加费，因此你可以把步骤100分配一个运输条件类型，计数1；另一个分配给步骤100，计数2，另一个分配给步骤100，计数3。</p>
 <p>小计：是计算求和的字段，这些小计字段可以在订单/开票的用户出口中使用，其中小计1到小计6将更新VBAP和VBRP，以及SIS，所以经常用于各种报表。</p>
@@ -337,7 +442,7 @@
     <link href="http://fyg.xyjp.net/about/2013/11/28/sap%E6%93%8D%E4%BD%9C%EF%BC%88sd%EF%BC%89/"/>
     <id>http://fyg.xyjp.net/about/2013/11/28/sap操作（sd）/</id>
     <published>2013-11-27T18:05:12.000Z</published>
-    <updated>2014-03-30T02:12:39.000Z</updated>
+    <updated>2014-03-30T02:12:38.000Z</updated>
     <content type="html"><![CDATA[<p>1 定义销售组织：<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：販売組織</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at205423_zps68cc79b9.png" alt="salse setting"><br>输入销售<em>组织代码：FYG1 名称： FYG販売組織 货币：JPY</em> 保存。<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at210758_zps5b9c511e.png" alt="salse2"><br>2 定义分销渠道<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：流通チャンネル</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at211343_zps96a89d88.png" alt="salse chanel"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at230004_zpsc25ffaab.png" alt="２"><br>３　定义产品组<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at231725_zpsfcd942a9.png" alt="3"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at232918_zps3192e2c6.png" alt="32"><br>4 将销售组织分配至公司<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234630_zpsad7320e8.png" alt="33"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234610_zps25f22eee.png" alt="333"><br>４　将分销渠道分配至销售组织<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at235923_zps0e9f0035.png" alt="sss"></p>
 ]]></content>
     
@@ -575,23 +680,6 @@ qt-faststart append.mp4 out.mp4
       <category term="素描" scheme="http://fyg.xyjp.net/about/tags/%E7%B4%A0%E6%8F%8F/"/>
     
       <category term="设计" scheme="http://fyg.xyjp.net/about/categories/%E8%AE%BE%E8%AE%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[mac 显示隐藏文件]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/15/mac-%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/15/mac-显示隐藏文件/</id>
-    <published>2013-07-15T09:42:51.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p>输入以下命令后，重启finder后可显示隐藏文件：</p>
-<p><pre><br>defaults write com.apple.finder AppleShowAllFiles -bool true<br></pre><br>将文件重新隐藏则将后面参数改为false即可。</p>
-]]></content>
-    
-    
-      <category term="mac" scheme="http://fyg.xyjp.net/about/tags/mac/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
