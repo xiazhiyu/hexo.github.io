@@ -1,0 +1,492 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2) | Cheney Fan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Cheney Fan">
+    
+    <meta name="description" content="1)概述
+对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。在LV61AA55单元会">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="Cheney Fan&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Cheney Fan&#39;s Blog">Cheney Fan&#39;s Blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:fyg.xyjp.net/about">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/06/28/condition-step/" title="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)" itemprop="url">SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-06-27T18:28:25.000Z" itemprop="datePublished">6月 28 2014</time>
+    更新日期:<time datetime="2014-06-27T18:42:28.000Z" itemprop="dateModified">6月 28 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+		</div>
+		
+		<p><em>1)概述</em></p>
+<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; </p>
+<pre><code><span class="subst">*</span><span class="keyword">LOOP</span>: 
+  <span class="keyword">loop</span> at xkomv<span class="built_in">.</span>
+<span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
+          perform konditionsbasis_ermitteln<span class="built_in">.</span>
+
+<span class="subst">*</span> scale basis changed <span class="literal">or</span> <span class="number">0</span>
+<span class="subst">*</span> KON<span class="attribute">-KBETR</span> should <span class="literal">not</span> be there <span class="keyword">if</span> scale basis is <span class="number">0</span>
+             ( ( xkstbs ne ykstbs ) <span class="literal">or</span> xkstbs <span class="literal">eq</span> <span class="number">0</span> ) <span class="literal">and</span>
+             xkomv<span class="attribute">-kmprs</span> is initial   <span class="literal">and</span>
+             xkomv<span class="attribute">-ksteu</span> <span class="literal">eq</span> <span class="string">'A'</span><span class="built_in">.</span>
+            perform xkomv_kbetr_aus_staffel<span class="built_in">.</span>
+          endif<span class="built_in">.</span>
+          <span class="keyword">if</span> xkomv<span class="attribute">-krech</span> na absolute <span class="literal">or</span> xkomv<span class="attribute">-kgrpe</span> ne <span class="string">'X'</span><span class="built_in">.</span>
+            perform xkomv_kwert_ermitteln<span class="built_in">.</span>
+          endif<span class="built_in">.</span>
+        endif<span class="built_in">.</span>
+      <span class="keyword">else</span><span class="built_in">.</span>
+        <span class="keyword">if</span> xkomv<span class="attribute">-kschl</span> <span class="literal">eq</span> space<span class="built_in">.</span>
+<span class="subst">*</span>(无条件类型的小计项目),调用xkomv_kwert_ermitteln子过程直接将汇总填写到小计项目的kwert字段
+          perform xkomv_kwert_ermitteln<span class="built_in">.</span>
+        endif<span class="built_in">.</span>
+      endif<span class="built_in">.</span>
+<span class="attribute">...</span><span class="built_in">..</span>
+endloop<span class="built_in">.</span>
+</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。</p>
+<pre><code>FORM xkomv_kwert_ermitteln<span class="built_in">.</span>
+  <span class="built_in">DATA</span>: xkbetr(<span class="number">16</span>) <span class="keyword">TYPE</span> p DECIMALS <span class="number">2.</span>
+  <span class="built_in">DATA</span>: cond_curr_is_euro, doc_curr_is_euro<span class="built_in">.</span>
+<span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
+  <span class="keyword">IF</span> xkomv<span class="attribute">-kschl</span> <span class="subst">=</span> space <span class="literal">AND</span> xkomv<span class="attribute">-stunb</span> NE <span class="number">0.</span>
+    CATCH SYSTEM<span class="attribute">-EXCEPTIONS</span> conversion_errors <span class="subst">=</span> <span class="number">1</span>
+                            arithmetic_errors <span class="subst">=</span> <span class="number">5.</span>
+      PERFORM xkomv_kawrt_ermitteln<span class="built_in">.</span>
+      xkomv<span class="attribute">-kwert</span> <span class="subst">=</span> xkawrt<span class="built_in">.</span>
+    ENDCATCH<span class="built_in">.</span>
+    <span class="keyword">IF</span> sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">1</span> <span class="literal">OR</span> sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">5.</span>
+      MESSAGE s802<span class="built_in">.</span>
+      xkomv<span class="attribute">-kinak</span> <span class="subst">=</span> <span class="string">'X'</span><span class="built_in">.</span>
+      xkomv<span class="attribute">-kwert</span> <span class="subst">=</span> <span class="number">0.</span>
+      xkomv<span class="attribute">-fxmsg</span> <span class="subst">=</span> <span class="string">'802'</span><span class="built_in">.</span>
+      komp<span class="attribute">-fxmsg</span>  <span class="subst">=</span> <span class="string">'802'</span><span class="built_in">.</span>
+    ENDIF<span class="built_in">.</span>
+<span class="subst">*</span> no calculation for KDUPL conditions because condition value is
+<span class="subst">*</span> calculated <span class="keyword">by</span> formula <span class="number">36.</span>
+  ELSEIF xkomv<span class="attribute">-kdupl</span> NE <span class="string">'B'</span><span class="built_in">.</span>
+</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。</p>
+<pre><code>form konditionsbasis_ermitteln<span class="built_in">.</span>
+  <span class="built_in">data</span>: da_xxmglme like komp<span class="attribute">-brgew</span>,
+        da_xxmeins like komp<span class="attribute">-gewei</span>,
+        da_fxmsg   like xkomv<span class="attribute">-fxmsg</span><span class="built_in">.</span>
+  <span class="built_in">data</span>: arbfeld_dec(<span class="number">16</span>) <span class="keyword">type</span> p decimals <span class="number">3.</span>
+  xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> <span class="number">0.</span>
+  <span class="keyword">if</span> xkomv<span class="attribute">-krech</span> ca prz_abs <span class="literal">and</span> <span class="literal">not</span> xkomv<span class="attribute">-krech</span> <span class="subst">=</span> <span class="string">'T'</span><span class="built_in">.</span>
+    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-stun2</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-koaid</span> <span class="subst">=</span> <span class="string">'D'</span><span class="built_in">.</span>
+      perform xkomv_kawrt_ermitteln<span class="built_in">.</span>
+      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> xkawrt<span class="built_in">.</span>
+    endif<span class="built_in">.</span>
+    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> <span class="subst">=</span> <span class="number">0</span> <span class="literal">and</span> xkomv<span class="attribute">-stun2</span> <span class="subst">=</span> <span class="number">0.</span>
+      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> zwisu<span class="built_in">.</span>
+    endif<span class="built_in">.</span>
+  endif<span class="built_in">.</span>
+</code></pre><p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
+<pre><code>form xkomv_kawrt_ermitteln<span class="built_in">.</span>
+
+  <span class="built_in">data</span>:  axkomv like komv<span class="built_in">.</span>
+
+<span class="subst">*</span> assign <span class="subst">&amp;</span> initialize
+  axkomv <span class="subst">=</span> xkomv<span class="built_in">.</span>
+  xkawrt <span class="subst">=</span> <span class="number">0.</span>
+
+<span class="subst">*</span> <span class="built_in">set</span> from <span class="subst">-</span> <span class="keyword">to</span> step number comming form pricing procedure<span class="subst">!</span>
+  xstunr <span class="subst">=</span> xkomv<span class="attribute">-stunb</span><span class="built_in">.</span>
+  xstun2 <span class="subst">=</span> xkomv<span class="attribute">-stun2</span><span class="built_in">.</span>
+  <span class="keyword">if</span> xstun2 <span class="literal">lt</span> xstunr<span class="built_in">.</span>
+    xstun2 <span class="subst">=</span> xstunr<span class="built_in">.</span>
+  endif<span class="built_in">.</span>
+  <span class="keyword">if</span> xstun2 <span class="subst">=</span> <span class="number">0.7</span>
+    xstun2 <span class="subst">=</span> xkomv<span class="attribute">-stunr</span><span class="built_in">.</span>
+  endif<span class="built_in">.</span>
+
+<span class="subst">*</span> build up key <span class="keyword">to</span> read XKOMV table
+  komv_key<span class="attribute">-mandt</span> <span class="subst">=</span> komk<span class="attribute">-mandt</span><span class="built_in">.</span>
+  komv_key<span class="attribute">-knumv</span> <span class="subst">=</span> komk<span class="attribute">-knumv</span><span class="built_in">.</span>
+  komv_key<span class="attribute">-kposn</span> <span class="subst">=</span> komp<span class="attribute">-kposn</span><span class="built_in">.</span>
+  komv_key<span class="attribute">-stunr</span> <span class="subst">=</span> xstunr<span class="built_in">.</span>
+  komv_key<span class="attribute">-zaehk</span> <span class="subst">=</span> <span class="number">0.</span>
+  read table xkomv <span class="keyword">with</span> key komv_key binary search<span class="built_in">.</span>
+  <span class="keyword">if</span> sy<span class="attribute">-subrc</span> <span class="literal">lt</span> <span class="number">8.</span>
+    read table xkomv index sy<span class="attribute">-tabix</span><span class="built_in">.</span>
+    <span class="keyword">if</span> xkomv<span class="attribute">-stunr</span> <span class="literal">gt</span> xstun2<span class="built_in">.</span>
+      read table xkomv index xkomv_tabix<span class="built_in">.</span>
+      xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
+      exit<span class="built_in">.</span>
+    <span class="keyword">else</span><span class="built_in">.</span>
+      <span class="keyword">loop</span> at xkomv<span class="built_in">.</span>
+        <span class="keyword">if</span> xkomv<span class="attribute">-stunr</span> <span class="literal">gt</span> xstun2 <span class="literal">or</span> sy<span class="attribute">-tabix</span> <span class="subst">=</span> xkomv_tabix<span class="built_in">.</span>
+          read table xkomv index xkomv_tabix<span class="built_in">.</span>
+          xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
+          exit<span class="built_in">.</span>
+        endif<span class="built_in">.</span>
+        <span class="keyword">if</span> ( xkomv<span class="attribute">-stunr</span> ge xstunr <span class="literal">and</span> xkomv<span class="attribute">-stunr</span> le xstun2 )  <span class="literal">and</span>
+             xkomv<span class="attribute">-kinak</span> na <span class="string">'AKLMX'</span><span class="built_in">.</span>
+          add xkomv<span class="attribute">-kwert</span> <span class="keyword">to</span> xkawrt<span class="built_in">.</span>
+        endif<span class="built_in">.</span>
+      endloop<span class="built_in">.</span>
+    endif<span class="built_in">.</span>
+  endif<span class="built_in">.</span>
+
+  <span class="keyword">if</span> xkomv_tabix ne <span class="number">0.</span>
+    read table xkomv index xkomv_tabix<span class="built_in">.</span>
+  endif<span class="built_in">.</span>
+  xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
+endform<span class="built_in">.</span>
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/sap/">sap</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/SAP/">SAP</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://fyg.xyjp.net/about/2014/06/28/condition-step/" data-title="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2) | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/04/29/css针对ie浏览器设定/"  title="css针对IE浏览器设定">
+ <strong>NEXT:</strong><br/> 
+ <span>css针对IE浏览器设定
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" style="padding:35px;">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+			<li><a href="/categories/Develop/" title="Develop">Develop<sup>18</sup></a></li>
+		
+			<li><a href="/categories/SAP/" title="SAP">SAP<sup>7</sup></a></li>
+		
+			<li><a href="/categories/Tips/" title="Tips">Tips<sup>1</sup></a></li>
+		
+			<li><a href="/categories/生活/" title="生活">生活<sup>11</sup></a></li>
+		
+			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
+		
+			<li><a href="/categories/设计/" title="设计">设计<sup>12</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Github/" title="Github">Github<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JAVA/" title="JAVA">JAVA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Melancholia/" title="Melancholia">Melancholia<sup>1</sup></a></li>
+		
+			<li><a href="/tags/angularjs/" title="angularjs">angularjs<sup>2</sup></a></li>
+		
+			<li><a href="/tags/chrome开发/" title="chrome开发">chrome开发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/designing/" title="designing">designing<sup>5</sup></a></li>
+		
+			<li><a href="/tags/ffmpeg/" title="ffmpeg">ffmpeg<sup>2</sup></a></li>
+		
+			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
+		
+			<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/livedoor/" title="livedoor">livedoor<sup>1</sup></a></li>
+		
+			<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
+		
+			<li><a href="/tags/rails/" title="rails">rails<sup>1</sup></a></li>
+		
+			<li><a href="/tags/sap/" title="sap">sap<sup>7</sup></a></li>
+		
+			<li><a href="/tags/wordpress/" title="wordpress">wordpress<sup>1</sup></a></li>
+		
+			<li><a href="/tags/デッサン/" title="デッサン">デッサン<sup>2</sup></a></li>
+		
+			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
+		
+			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
+		
+			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
+		
+		<a href="http://fyg.xyjp.net/about" target="_blank" title="Cheney Fan">Cheney Fan</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script>
+  var disqus_shortname = 'xyjp';
+  
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/06/28/condition-step/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
