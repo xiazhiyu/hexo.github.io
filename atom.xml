@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-03-30T10:25:42.034Z</updated>
+  <updated>2014-06-27T14:19:52.348Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -13,6 +13,125 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/06/27/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/06/27/css针对ie浏览器设定/</id>
+    <published>2014-06-27T14:16:12.000Z</published>
+    <updated>2014-06-27T14:16:12.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Caution provisional headers are shown错误]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown%E9%94%99%E8%AF%AF/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/caution-provisional-headers-are-shown错误/</id>
+    <published>2014-04-29T14:12:33.000Z</published>
+    <updated>2014-06-27T14:18:30.000Z</updated>
+    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
+      <span class="keyword">var</span> rv = -<span class="number">1</span>;
+      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">return</span> rv;
+  }
+  IEV = getIEVersion();
+  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
+      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
+  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
+      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
+  }
+</code></pre><p>接着在css里面进行设置：</p>
+<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
+    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
+    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
+<span class="rule">}</span></span>
+</code></pre>]]></content>
+    
+    
+      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[angular里指令（directive）的用法]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/27/angular%E9%87%8C%E6%8C%87%E4%BB%A4%EF%BC%88directive%EF%BC%89%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/27/angular里指令（directive）的用法/</id>
+    <published>2014-04-27T13:58:49.000Z</published>
+    <updated>2014-06-27T14:11:27.000Z</updated>
+    <content type="html"><![CDATA[<p>之前在angular里花了很多时间的，好久没整又给忘记了。<br>做一下记录。<br>主要有两个难点：<br>1.在directive里面使用$http发出请求。<br>2.将directive的scope里面的参数传入外部。即和外部scope通信。<br>代码：</p>
+<pre><code>angular.module(<span class="string">'myApp.directives'</span>, []).directive(<span class="string">'listPref'</span>,[<span class="string">'$http'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$http</span>)</span>{</span>
+        <span class="keyword">return</span> {
+            restrict : <span class="string">'E'</span>,
+            scope: {selectModel: <span class="string">'='</span>},
+            template: <span class="string">'&lt;select class="form-control" ng-model="selectModel" ng-options="item.name for item in list"&gt;&lt;/select&gt;'</span>,
+            replace : <span class="keyword">true</span>,
+            link : <span class="function"><span class="keyword">function</span><span class="params">(scope, elem, attrs)</span>{</span>
+                <span class="variable">$http</span>.get(<span class="string">'http://localhost:8080/CSONE_dev/api/pref'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(list)</span>{</span> 
+                  scope.<span class="keyword">list</span>=<span class="keyword">list</span>;
+                  scope.selectModel = <span class="keyword">list</span>[<span class="number">12</span>];
+                }).error(<span class="function"><span class="keyword">function</span><span class="params">(msg)</span>{</span>
+                 console.log(<span class="string">"failed:"</span>+msg);
+               });  
+            }
+        };
+}])；
+</code></pre>]]></content>
+    
+    
+      <category term="angularjs" scheme="http://fyg.xyjp.net/about/tags/angularjs/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[写给曾经的你]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/24/%E5%86%99%E7%BB%99%E6%9B%BE%E7%BB%8F%E7%9A%84%E4%BD%A0/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/24/写给曾经的你/</id>
+    <published>2014-04-24T13:52:34.000Z</published>
+    <updated>2014-06-27T14:02:54.000Z</updated>
+    <content type="html"><![CDATA[<p>之前在angular里花了很多时间的，好久没整又给忘记了。<br>做一下记录。<br>主要有两个难点：<br>1.在directive里面使用$http发出请求。<br>2.将directive的scope里面的参数传入外部。即和外部scope通信。<br>代码：<br><code>angular.module(&#39;myApp.directives&#39;, []).directive(&#39;listPref&#39;,[&#39;$http&#39;, function($http){
+        return {
+            restrict : &#39;E&#39;,
+            scope: {selectModel: &#39;=&#39;},
+            template: &#39;&lt;select class=&quot;form-control&quot; ng-model=&quot;selectModel&quot; ng-options=&quot;item.name for item in list&quot;&gt;&lt;/select&gt;&#39;,
+            replace : true,
+            link : function(scope, elem, attrs){
+                $http.get(&#39;http://localhost:8080/CSONE_dev/api/pref&#39;).success(function(list){ 
+                  scope.list=list;
+                  scope.selectModel = list[12];
+                }).error(function(msg){
+                 console.log(&quot;failed:&quot;+msg);
+               });  
+            }
+        };
+}])；</code></p>
+]]></content>
+    
+    
+      <category term="angularjs" scheme="http://fyg.xyjp.net/about/tags/angularjs/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[将博客迁移至Github]]></title>
@@ -473,74 +592,6 @@ qt-faststart append.mp4 out.mp4
       <category term="mac" scheme="http://fyg.xyjp.net/about/tags/mac/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[艾特熊和赛娜鼠]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/15/%E8%89%BE%E7%89%B9%E7%86%8A%E5%92%8C%E8%B5%9B%E5%A8%9C%E9%BC%A0/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/15/艾特熊和赛娜鼠/</id>
-    <published>2013-07-15T05:51:12.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://24.media.tumblr.com/2f8ee02abffaf1ea60d36de9896fadde/tumblr_mpyqodNeso1rcvtp3o1_500.png" alt="Ernest.ET.Celestine"><br>最近看的动画片。超有意思。<br>豆瓣链接：<a href="http://movie.douban.com/subject/6518638/" title="http://movie.douban.com/subject/6518638/" target="_blank">http://movie.douban.com/subject/6518638/</a></p>
-]]></content>
-    
-    
-      <category term="动画" scheme="http://fyg.xyjp.net/about/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[秋夢　ーー二胡演奏]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/08/%E7%A7%8B%E5%A4%A2%E3%80%80%E3%83%BC%E3%83%BC%E4%BA%8C%E8%83%A1%E6%BC%94%E5%A5%8F/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/08/秋夢　ーー二胡演奏/</id>
-    <published>2013-07-08T09:37:58.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<iframe width="420" height="315" src="//www.youtube.com/embed/zDGAGE-hl44" frameborder="0" allowfullscreen></iframe>]]></content>
-    
-    
-      <category term="音楽" scheme="http://fyg.xyjp.net/about/tags/%E9%9F%B3%E6%A5%BD/"/>
-    
-      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux 時間を設定]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/05/linux-%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/05/linux-時間を設定/</id>
-    <published>2013-07-05T00:02:56.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p>よく使っていますので、メモしておく。</p>
-<pre>
-ntpdate -s ntp.nc.u-tokyo.ac.jp //システム時間を更新する
-hwclock --systohc　//システムの時間をbiosに書き込む
-</pre>]]></content>
-    
-    
-      <category term="linux" scheme="http://fyg.xyjp.net/about/tags/linux/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Melancholia]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/04/melancholia/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/04/melancholia/</id>
-    <published>2013-07-04T00:42:20.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://25.media.tumblr.com/fdbfe43139ea6b246092e221fcaa8745/tumblr_mpdz23KX7R1rcvtp3o1_1280.png" alt="Melancholia"><br>话说这个电影以前看过一看过点点，感觉太过“深奥”，就放弃了。<br>最近被老师推荐，就仔细看了一下。<br>总算好象看懂了一些。<br>女主对着夜空裸体的画面，美得让人震撼。</p>
-]]></content>
-    
-    
-      <category term="Melancholia" scheme="http://fyg.xyjp.net/about/tags/Melancholia/"/>
-    
-      <category term="电影" scheme="http://fyg.xyjp.net/about/tags/%E7%94%B5%E5%BD%B1/"/>
-    
-      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
