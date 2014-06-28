@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-06-27T18:45:20.848Z</updated>
+  <updated>2014-06-28T06:04:44.271Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[sap订单(发票)复制时的价格拷贝类型]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/06/28/%E5%8F%91%E7%A5%A8%E5%A4%8D%E5%88%B6%E6%97%B6%E7%9A%84%E4%BB%B7%E6%A0%BC%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://fyg.xyjp.net/about/2014/06/28/发票复制时的价格类型/</id>
+    <published>2014-06-28T02:18:18.000Z</published>
+    <updated>2014-06-28T06:02:14.000Z</updated>
+    <content type="html"><![CDATA[<p>详细参考sap note 24832.<br>sap在根据出货单生成发票（或者其他订单复制）时，是直接复制金额，还是直接重新根据条件类型的金额重新计算，可以在拷贝规则里进行设置。</p>
+<p><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/65B03057304430D330C330C830DE30C330D730A430E130FC30B8_zpsd12a5fda.png" alt="priceType.sap"></p>
+<p>系统标准已存在A,B,C,…等类型，但你依然可以根据需要自己定制。</p>
+<p>首先需要RV61AFZA的用户出口USEREXIT_PRICING_RULE中类似代码，以扩展价格类型。</p>
+<pre><code>FORM USEREXIT_PRICING_RULE
+  STEU<span class="attribute">-KNPRS</span> <span class="subst">=</span> <span class="string">'X'</span><span class="built_in">.</span>
+  STEU<span class="attribute">-KNTYP</span> <span class="subst">=</span> <span class="string">'LRIE......'</span><span class="built_in">.</span>
+  <span class="keyword">IF</span> KOMK<span class="attribute">-KNUMA</span> IS INITIAL<span class="built_in">.</span>
+    STEU<span class="attribute">-KOAID</span> <span class="subst">=</span> <span class="string">'CD........'</span><span class="built_in">.</span>
+  <span class="keyword">ELSE</span><span class="built_in">.</span>
+    STEU<span class="attribute">-KOAID</span> <span class="subst">=</span> <span class="string">'D.........'</span><span class="built_in">.</span>
+  ENDIF<span class="built_in">.</span>  STEU<span class="attribute">-MAUEB</span> <span class="subst">=</span> <span class="string">' '</span><span class="built_in">.</span>
+  APPEND STEU<span class="built_in">.</span> 
+ENDFORM<span class="built_in">.</span>
+</code></pre><p>系统将会根据条件类型的codition  class, codition category 等判断是否重新计算。</p>
+<p><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/30AD30E330D730C130E3_zps0f6981a1.png" alt="priceType.sap"></p>
+<p>o KNPRS<br>表示给价格类型<br>o KNTYP<br>需要重新计算的codition category（最多添加10个）.<br>o KOAID<br>需要重新计算的codition class（最多添加10个）.<br>o MAUEB<br>是否拷贝手动修改的条件类型.<br>o STFKZ<br>This field contains a positive list of the scale indicators (最多添加5个）</p>
+<p>…</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)]]></title>
@@ -776,20 +809,6 @@ qt-faststart append.mp4 out.mp4
     <updated>2014-03-30T01:06:10.000Z</updated>
     <content type="html"><![CDATA[<p>朝日新闻微博帐号被和谐。<br>微博评论：<br>@那个野和尚 ：@朝日新闻中文网 已被和谐，这是我D在抗日战争正面战场的首次大捷。</p>
 <p>朝日新闻其实一直以来被称为日本媒体中的“亲中派”。甚至被称为“反日”媒体。<br>下面是朝日新闻网站上的截屏：<br><img src="/images/asahi.png" alt="asahi"></p>
-]]></content>
-    
-    
-      <category term="社会" scheme="http://fyg.xyjp.net/about/categories/%E7%A4%BE%E4%BC%9A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[其实是我自己不愿见家属]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/17/%E5%85%B6%E5%AE%9E%E6%98%AF%E6%88%91%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%84%BF%E8%A7%81%E5%AE%B6%E5%B1%9E/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/17/其实是我自己不愿见家属/</id>
-    <published>2013-07-16T15:21:05.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/images/7o2zI.jpg" alt="我自己不愿见家属"><br>注：本画作者是“胸是小”，微博链接：<a href="http://weibo.com/u/1002282395" title="http://weibo.com/u/1002282395" target="_blank">http://weibo.com/u/1002282395</a></p>
 ]]></content>
     
     
