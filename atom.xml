@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-06-29T08:11:59.006Z</updated>
+  <updated>2014-06-29T08:14:36.006Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://fyg.xyjp.net/about/2014/06/29/%E8%AF%BB%E5%8F%96%E6%9D%A1%E4%BB%B6%E8%AE%B0%E5%BD%95function(CONDITION_RECORD_READ)/"/>
     <id>http://fyg.xyjp.net/about/2014/06/29/读取条件记录function(CONDITION_RECORD_READ)/</id>
     <published>2014-06-29T07:56:03.000Z</published>
-    <updated>2014-06-29T08:11:42.000Z</updated>
-    <content type="html"><![CDATA[<p>碰到这样的用例：在SO价格计算过程中，当条件b中有条件记录的数据时，条件a无效并且不予显示。<br>原本可以简单些，直接使用排除条件，当b有数据时a设置为无效。但这样一个黄色的无效条件出现出现在价格表中总有点合适。<br>关键这样的话，对a进行必须设置，即当b中没有数据时a必须有数据；但如果b有数据时则a为非必须。</p>
+    <updated>2014-06-29T08:14:30.000Z</updated>
+    <content type="html"><![CDATA[<p>碰到这样的用例：在SO价格计算过程中，当条件b中有条件记录的数据时，条件a无效并且不予显示。原本可以简单些，直接使用排除条件，当b有数据时a设置为无效。但这样一个黄色的无效条件出现出现在价格表中总有点合适。关键这样的话，无法对a进行必须设置，即当b中没有数据时a必须有数据；但如果b有数据时则a为非必须。</p>
 <p>最好的方式是使用限定条件。在a的限定条件下设置一个routine，代码如下：</p>
 <pre><code>    <span class="built_in">DATA</span> PE_I_VAKE LIKE  VAKEKOND<span class="built_in">.</span>
     call function <span class="string">'CONDITION_RECORD_READ'</span>
