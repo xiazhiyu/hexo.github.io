@@ -4,15 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>最近看的一些电影 | Cheney Fan&#39;s Blog</title>
+    <title>读取条件记录 CONDITION_RECORD_READ | Cheney Fan&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Cheney Fan">
     
-    <meta name="description" content="最近看的电影，做一下总结：1 . 超脱 Detachment豆瓣链接片子很文艺，台词很动人。其中提到了《1984》的“双重思想”（Doublethink）：
-
-This is a marketing holocaust.24 hours a day,
-for the rest of our live">
+    <meta name="description" content="碰到这样的用例：在SO价格计算过程中，当条件b中有条件记录的数据时，条件a无效并且不予显示。原本可以简单些，直接使用排除条件，当b有数据时a设置为无效。但这样一个黄色的无效条件出现出现在价格表中总有点合适。关键这样的话，对a进行必须设置，即当b中没有数据时a必须有数据；但如果b有数据时则a为非必须。">
     
     
     
@@ -69,15 +66,15 @@ for the rest of our live">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/07/26/最近看的一些电影/" title="最近看的一些电影" itemprop="url">最近看的一些电影</a>
+      <a href="/2014/06/29/读取条件记录function(CONDITION_RECORD_READ)/" title="读取条件记录 CONDITION_RECORD_READ" itemprop="url">读取条件记录 CONDITION_RECORD_READ</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
     </p>
   <p class="article-time">
-    <time datetime="2013-07-26T08:58:53.000Z" itemprop="datePublished">7月 26 2013</time>
-    更新日期:<time datetime="2014-03-30T01:06:10.000Z" itemprop="dateModified">3月 30 2014</time>
+    <time datetime="2014-06-29T07:56:03.000Z" itemprop="datePublished">6月 29 2014</time>
+    更新日期:<time datetime="2014-06-29T08:11:42.000Z" itemprop="dateModified">6月 29 2014</time>
     
   </p>
 </header>
@@ -89,38 +86,47 @@ for the rest of our live">
 		
 		</div>
 		
-		<p>最近看的电影，做一下总结：<br><strong>1 . 超脱 Detachment</strong><br><a href="http://movie.douban.com/subject/5322596/" title="Detachment" target="_blank">豆瓣链接</a><br>片子很文艺，台词很动人。<br>其中提到了《1984》的“双重思想”（Doublethink）：</p>
-<blockquote>
-<p>This is a marketing holocaust.24 hours a day,</p>
-<p>for the rest of our lives,the powers that be are hard at work,dumbing us to death.</p>
-<p>So, to defend ourselves and fight against assimilating this dullness into our thought processes,</p>
-<p>we must learn to read to stimulate our own imagination,</p>
-<p>to cultivate our own consciousness,our own belief system.</p>
-<p>We all need these skills to defend to preserve our own minds.<br>这是一种营销大屠杀 在我们余下的生命里，一天24小时都会驱使我们努力工作，让我们在沉默中灭亡</p>
-<p>所以 为了保护我们自己防止苦闷无聊渗入我们的思想 我们必须学会通过阅读 来激发自己的想象力</p>
-<p>来培养我们自己的意识，我们自己的信仰</p>
-<p>我们都需要这些技能来保卫我们自己的思想<br>刘玉玲的台词：<br>it is so easy to be careless. it takes couse and courage to take cares.none of you have any of these qualities.</p>
-</blockquote>
-<p><strong>2 Passion</strong><br><a href="http://movie.douban.com/subject/7046937/" title="Passion" target="_blank">豆瓣链接</a><br>似乎豆瓣上评分不怎么高，不过觉得还是不错的。前半部分看时尚，后半部分看悬念。</p>
-<p><strong>3 怪兽在巴黎 Un monstre à Paris</strong><br><a href="http://movie.douban.com/subject/3005387/" title="Un monstre à Paris" target="_blank">豆瓣链接</a><br>非常好的动画片。音乐很赞，很有节奏感。</p>
-<p><strong>4 朴赞郁的复仇三部曲</strong><br>比较喜欢第一部。<br><a href="http://movie.douban.com/subject/1304026/" title="我要复仇" target="_blank">豆瓣链接</a></p>
-<p><strong>5 新世界 New World</strong><br>韩国版的无间道<br>觉得开头和结尾男主角的沉默的样子很不错，很好刻画了他的内心。话说有那么点《教父》的感觉。</p>
-<p><strong>6 人烟之岛 Обитаемый остров</strong><br><a href="http://movie.douban.com/subject/3091271/" title="人烟之岛" target="_blank">豆瓣链接</a><br>嗯，坦率地纯粹是因为女主角的身材才去看的。不过豆瓣上尽是说男角帅的……<br>男女主角初次相逢的画面挺美。</p>
-  
+		<p>碰到这样的用例：在SO价格计算过程中，当条件b中有条件记录的数据时，条件a无效并且不予显示。<br>原本可以简单些，直接使用排除条件，当b有数据时a设置为无效。但这样一个黄色的无效条件出现出现在价格表中总有点合适。<br>关键这样的话，对a进行必须设置，即当b中没有数据时a必须有数据；但如果b有数据时则a为非必须。</p>
+<p>最好的方式是使用限定条件。在a的限定条件下设置一个routine，代码如下：</p>
+<pre><code>    <span class="built_in">DATA</span> PE_I_VAKE LIKE  VAKEKOND<span class="built_in">.</span>
+    call function <span class="string">'CONDITION_RECORD_READ'</span>
+         exporting
+              pi_kvewe      <span class="subst">=</span> <span class="string">'A'</span>
+              pi_kappl        <span class="subst">=</span> <span class="string">'V'</span>
+              pi_kschl        <span class="subst">=</span> <span class="string">'VAF1'</span>     <span class="string">"判断条件VAF1是否存在数据
+              pi_i_komk       = komk
+              pi_i_komp       = komp
+         importing
+              pe_i_vake       = pe_i_vake
+         exceptions
+              no_record_found = 1
+              others          = 2.
+    IF sy-subrc NE 0 OR pe_i_vake-kbetr EQ 0."</span>当不为<span class="number">0</span>时即有数据
+      komp<span class="attribute">-ztest</span> <span class="subst">=</span> <span class="string">'t'</span><span class="built_in">.</span>
+    ENDIF<span class="built_in">.</span>
+    sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">4.</span>
+      check: komp<span class="attribute">-ztest</span> ne <span class="string">'t'</span><span class="built_in">.</span>
+    sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">0.</span>
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/sap/">sap</a>
+  </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/生活/">生活</a>
+  <a class="article-category-link" href="/categories/SAP/">SAP</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2013/07/26/最近看的一些电影/" data-title="最近看的一些电影 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2014/06/29/读取条件记录function(CONDITION_RECORD_READ)/" data-title="读取条件记录 CONDITION_RECORD_READ | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -129,19 +135,11 @@ for the rest of our live">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2013/07/26/可汗学院公开课：三角学/" title="可汗学院公开课：三角学">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  可汗学院公开课：三角学</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2013/07/21/关于moov-atom/"  title="关于moov atom">
+<a href="/2014/06/28/发票复制时的价格类型/"  title="sap订单(发票)复制时的价格拷贝类型">
  <strong>NEXT:</strong><br/> 
- <span>关于moov atom
+ <span>sap订单(发票)复制时的价格拷贝类型
 </span>
 </a>
 </div>
@@ -270,7 +268,7 @@ for the rest of our live">
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2013/07/26/最近看的一些电影/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/06/29/读取条件记录function(CONDITION_RECORD_READ)/';
   
   (function(){
     var dsq = document.createElement('script');
