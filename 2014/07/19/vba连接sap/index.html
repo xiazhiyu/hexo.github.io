@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>キャラクターデッサン授業ノート（6.3） | Cheney Fan&#39;s Blog</title>
+    <title>VBA连接SAP | Cheney Fan&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Cheney Fan">
     
-    <meta name="description" content="">
+    <meta name="description" content="折腾了好久才搞定。步骤：1.在sap中建立自定义函数，将该函数设置为远程调用    ①建立函数组    ②建立函数，将该函数与建立的函数组关联。设置函数为远程调用函数。    ③设置接受参数。其中ZFYG_CUST_LIST为自定义类型，需要自己建立。    ③在se11中建立自定义类型，并激活。 ">
     
     
     
@@ -66,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/06/05/キャラクターデッサン授業ノート（6-3）/" title="キャラクターデッサン授業ノート（6.3）" itemprop="url">キャラクターデッサン授業ノート（6.3）</a>
+      <a href="/2014/07/19/vba连接sap/" title="VBA连接SAP" itemprop="url">VBA连接SAP</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
     </p>
   <p class="article-time">
-    <time datetime="2013-06-05T05:39:33.000Z" itemprop="datePublished">6月 5 2013</time>
-    更新日期:<time datetime="2014-03-30T08:59:36.000Z" itemprop="dateModified">3月 30 2014</time>
+    <time datetime="2014-07-19T14:37:53.000Z" itemprop="datePublished">7月 19 2014</time>
+    更新日期:<time datetime="2014-07-19T15:24:34.000Z" itemprop="dateModified">7月 20 2014</time>
     
   </p>
 </header>
@@ -86,27 +86,130 @@
 		
 		</div>
 		
-		<p><img src="http://24.media.tumblr.com/8e94f36097d1df780303f017937e9138/tumblr_mnwo5qhRxp1rcvtp3o1_1280.jpg" alt="ノート０００１"><br><img src="http://25.media.tumblr.com/adcd394e4404577cfd6f8a7f6d9e52c6/tumblr_mnwo5qhRxp1rcvtp3o2_1280.jpg" alt="ノート０００２"><br><img src="http://24.media.tumblr.com/f2ae4f6c0fba0438dd94fe223358fbfb/tumblr_mnwo5qhRxp1rcvtp3o3_1280.jpg" alt="ノート０００３"><br><img src="http://24.media.tumblr.com/b6c962d04f0c0963d68034bf7b8b5ec4/tumblr_mnwo5qhRxp1rcvtp3o4_1280.jpg" alt="ノート０００4"><br><img src="http://25.media.tumblr.com/c87f63fa8f01fe738286161b0a903df3/tumblr_mnwo5qhRxp1rcvtp3o5_1280.jpg" alt="ノート０００5"></p>
+		<p>折腾了好久才搞定。<br>步骤：<br>1.在sap中建立自定义函数，将该函数设置为远程调用<br>    ①建立函数组<br><img src="http://picforxyjp.qiniudn.com/%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3.PNG" alt="priceType.sap"><br>    ②建立函数，将该函数与建立的函数组关联。设置函数为远程调用函数。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap2.PNG" alt="priceType.sap"><br>    ③设置接受参数。其中ZFYG_CUST_LIST为自定义类型，需要自己建立。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap3.PNG" alt="priceType.sap"><br>    ③在se11中建立自定义类型，并激活。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap5.PNG" alt="priceType.sap"><br><img src="http://picforxyjp.qiniudn.com/vbaToSap4.PNG" alt="priceType.sap"><br>    ③自定义函数中输入代码。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap6.PNG" alt="priceType.sap"></p>
+<pre><code>FUNCTION ZFYG2_GET_CUSTOMER_DETAILS.
+*"<span class="comment">----------------------------------------------------------------------</span>
+*"*"ローカルインタフェース:
+*"  TABLES
+*"      ET_KUNNR STRUCTURE  SHP_KUNNR_RANGE OPTIONAL
+*"      ET_CUST_LIST STRUCTURE  ZFYG_CUST_LIST OPTIONAL
+*"<span class="comment">----------------------------------------------------------------------</span>
+  IF NOT ET_KUNNR[] IS INITIAL.
+
+    <span class="operator"><span class="keyword">SELECT</span> KUNNR
+                LAND1
+                NAME1
+                ORT01
+                PSTLZ
+                REGIO
+                KTOKD
+                TELF1
+                TELFX
+      <span class="keyword">INTO</span> <span class="keyword">TABLE</span> et_cust_list
+      <span class="keyword">FROM</span> kna1
+      <span class="keyword">WHERE</span> kunnr <span class="keyword">IN</span> et_kunnr.
+
+      <span class="keyword">IF</span> sy-subrc &lt;&gt; <span class="number">0.</span>
+        CLEAR: et_cust_list.
+      ENDIF.
+
+  ENDIF.
+ENDFUNCTION.</span>
+</code></pre><p>⑤激活函数。激活时注意要选择函数组一起激活，否则会出现错误。<br>2.通过VBA调用函数<br>    包括两步，①用户验证，③调用函数。以下是代码：</p>
+<pre><code><span class="keyword">Option</span> <span class="keyword">Explicit</span>
+<span class="keyword">Sub</span> saplogin()
+
+<span class="keyword">Dim</span> oBapiLogon <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="comment">'Dim oBapiCtrl As SAPLogonCtrl.SAPLogonControl</span>
+<span class="keyword">Dim</span> oBapiCtrl <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> objgetaddress <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="comment">'Dim ojbkunnr As SAPTableFactoryCtrl.Table</span>
+<span class="keyword">Dim</span> objkunnr <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> objaddress <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> vcount_add, index_add, vRows <span class="keyword">As</span> <span class="built_in">Integer</span>
+
+<span class="keyword">Set</span> oBapiLogon = CreateObject(<span class="string">"sap.logoncontrol.1"</span>)
+<span class="comment">'Set oBapiCtrl = CreateObject("sap.bapi.1")</span>
+<span class="keyword">Set</span> oBapiCtrl = CreateObject(<span class="string">"SAP.Functions"</span>)
+
+oBapiCtrl.Connection = oBapiLogon.NewConnection
+oBapiCtrl.Connection.ApplicationServer = <span class="string">"10.10.10.11"</span>
+oBapiCtrl.Connection.System = <span class="string">"KMY"</span>
+oBapiCtrl.Connection.Client = <span class="string">"4000"</span>
+oBapiCtrl.Connection.User = <span class="string">"USERID"</span>
+oBapiCtrl.Connection.Password = <span class="string">"PASSWORD"</span>
+oBapiCtrl.Connection.Language = <span class="string">"JA"</span>
+oBapiCtrl.Connection.SystemNumber = <span class="string">"00"</span>
+oBapiCtrl.Connection.SAPRouter = <span class="string">"SAPROUTER"</span>
+
+
+<span class="keyword">If</span> oBapiCtrl.Connection.Logon(<span class="number">0</span>, <span class="literal">True</span>) &lt;&gt; <span class="literal">True</span> <span class="keyword">Then</span>
+    MsgBox <span class="string">"not connected"</span>, vbInformation, <span class="string">"Sap Logon"</span>: <span class="keyword">Exit</span> <span class="keyword">Sub</span>
+<span class="keyword">End</span> <span class="keyword">If</span>
+
+<span class="keyword">Set</span> objgetaddress = oBapiCtrl.Add(<span class="string">"ZFYG2_GET_CUSTOMER_DETAILS"</span>)
+<span class="keyword">Set</span> objkunnr = objgetaddress.Tables(<span class="string">"ET_KUNNR"</span>)
+<span class="keyword">Set</span> objaddress = objgetaddress.Tables(<span class="string">"ET_CUST_LIST"</span>)
+
+
+<span class="keyword">If</span> ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="string">"B"</span>).Value &lt;&gt; <span class="string">""</span> <span class="keyword">Then</span>
+    objkunnr.Rows.Add
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"SIGN"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">2</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"OPTION"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">3</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"LOW"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">4</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"HIGH"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">5</span>).Value
+
+<span class="keyword">End</span> <span class="keyword">If</span>
+
+
+objgetaddress.<span class="keyword">call</span>
+
+  vcount_add = objaddress.Rows.Count
+    <span class="keyword">For</span> index_add = <span class="number">1</span> <span class="keyword">To</span> vcount_add
+      vRows = <span class="number">11</span> + index_add
+      ActiveSheet.Cells(vRows, <span class="number">2</span>) = objaddress.Value(index_add, <span class="string">"KUNNR"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">3</span>) = objaddress.Value(index_add, <span class="string">"LAND1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">4</span>) = objaddress.Value(index_add, <span class="string">"NAME1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">5</span>) = objaddress.Value(index_add, <span class="string">"ORT01"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">6</span>) = objaddress.Value(index_add, <span class="string">"PSTLZ"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">7</span>) = objaddress.Value(index_add, <span class="string">"REGIO"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">8</span>) = objaddress.Value(index_add, <span class="string">"KTOKD"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">9</span>) = objaddress.Value(index_add, <span class="string">"TELF1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">10</span>) = objaddress.Value(index_add, <span class="string">"TELFX"</span>)
+    <span class="keyword">Next</span> index_add
+  <span class="comment">'If address not exist then show error</span>
+  <span class="keyword">If</span> vcount_add = <span class="string">""</span> <span class="keyword">Then</span>
+    ActiveSheet.Cells(<span class="number">10</span>, <span class="number">11</span>) = <span class="string">"Invalid Input"</span>
+  <span class="keyword">Else</span>
+    ActiveSheet.Cells(<span class="number">10</span>, <span class="number">12</span>) = <span class="string">"BAPI Call is successfull"</span>
+    ActiveSheet.Cells(<span class="number">11</span>, <span class="number">12</span>) = vcount_add &amp; <span class="string">" rows are returned"</span>
+  <span class="keyword">End</span> <span class="keyword">If</span>
+
+  oBapiCtrl.Connection.Logoff
+
+
+<span class="keyword">End</span> <span class="keyword">Sub</span>
+</code></pre><p>以下是EXCEL。通过点击执行按钮后获取客户信息。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap7.PNG" alt="priceType.sap"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/デッサン/">デッサン</a>
+  <span></span> <a href="/tags/sap/">sap</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/设计/">设计</a>
+  <a class="article-category-link" href="/categories/SAP/">SAP</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2013/06/05/キャラクターデッサン授業ノート（6-3）/" data-title="キャラクターデッサン授業ノート（6.3） | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2014/07/19/vba连接sap/" data-title="VBA连接SAP | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -115,19 +218,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2013/06/05/人物角色素描（6-3课堂笔记）/" title="人物角色素描（6.3课堂笔记）">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  人物角色素描（6.3课堂笔记）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2013/06/05/キャラクターデッサン課題/"  title="キャラクターデッサン課題（6.3提出）">
+<a href="/2014/07/10/价格计算过程中的小计/"  title="价格计算过程中的小计">
  <strong>NEXT:</strong><br/> 
- <span>キャラクターデッサン課題（6.3提出）
+ <span>价格计算过程中的小计
 </span>
 </a>
 </div>
@@ -256,7 +351,7 @@
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2013/06/05/キャラクターデッサン授業ノート（6-3）/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/07/19/vba连接sap/';
   
   (function(){
     var dsq = document.createElement('script');

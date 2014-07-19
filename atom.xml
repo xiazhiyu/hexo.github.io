@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-07-10T15:23:56.978Z</updated>
+  <updated>2014-07-19T15:36:41.807Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -13,6 +13,125 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[VBA连接SAP]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/07/19/vba%E8%BF%9E%E6%8E%A5sap/"/>
+    <id>http://fyg.xyjp.net/about/2014/07/19/vba连接sap/</id>
+    <published>2014-07-19T14:37:53.000Z</published>
+    <updated>2014-07-19T15:24:34.000Z</updated>
+    <content type="html"><![CDATA[<p>折腾了好久才搞定。<br>步骤：<br>1.在sap中建立自定义函数，将该函数设置为远程调用<br>    ①建立函数组<br><img src="http://picforxyjp.qiniudn.com/%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3.PNG" alt="priceType.sap"><br>    ②建立函数，将该函数与建立的函数组关联。设置函数为远程调用函数。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap2.PNG" alt="priceType.sap"><br>    ③设置接受参数。其中ZFYG_CUST_LIST为自定义类型，需要自己建立。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap3.PNG" alt="priceType.sap"><br>    ③在se11中建立自定义类型，并激活。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap5.PNG" alt="priceType.sap"><br><img src="http://picforxyjp.qiniudn.com/vbaToSap4.PNG" alt="priceType.sap"><br>    ③自定义函数中输入代码。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap6.PNG" alt="priceType.sap"></p>
+<pre><code>FUNCTION ZFYG2_GET_CUSTOMER_DETAILS.
+*"<span class="comment">----------------------------------------------------------------------</span>
+*"*"ローカルインタフェース:
+*"  TABLES
+*"      ET_KUNNR STRUCTURE  SHP_KUNNR_RANGE OPTIONAL
+*"      ET_CUST_LIST STRUCTURE  ZFYG_CUST_LIST OPTIONAL
+*"<span class="comment">----------------------------------------------------------------------</span>
+  IF NOT ET_KUNNR[] IS INITIAL.
+
+    <span class="operator"><span class="keyword">SELECT</span> KUNNR
+                LAND1
+                NAME1
+                ORT01
+                PSTLZ
+                REGIO
+                KTOKD
+                TELF1
+                TELFX
+      <span class="keyword">INTO</span> <span class="keyword">TABLE</span> et_cust_list
+      <span class="keyword">FROM</span> kna1
+      <span class="keyword">WHERE</span> kunnr <span class="keyword">IN</span> et_kunnr.
+
+      <span class="keyword">IF</span> sy-subrc &lt;&gt; <span class="number">0.</span>
+        CLEAR: et_cust_list.
+      ENDIF.
+
+  ENDIF.
+ENDFUNCTION.</span>
+</code></pre><p>⑤激活函数。激活时注意要选择函数组一起激活，否则会出现错误。<br>2.通过VBA调用函数<br>    包括两步，①用户验证，③调用函数。以下是代码：</p>
+<pre><code><span class="keyword">Option</span> <span class="keyword">Explicit</span>
+<span class="keyword">Sub</span> saplogin()
+
+<span class="keyword">Dim</span> oBapiLogon <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="comment">'Dim oBapiCtrl As SAPLogonCtrl.SAPLogonControl</span>
+<span class="keyword">Dim</span> oBapiCtrl <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> objgetaddress <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="comment">'Dim ojbkunnr As SAPTableFactoryCtrl.Table</span>
+<span class="keyword">Dim</span> objkunnr <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> objaddress <span class="keyword">As</span> <span class="built_in">Object</span>
+<span class="keyword">Dim</span> vcount_add, index_add, vRows <span class="keyword">As</span> <span class="built_in">Integer</span>
+
+<span class="keyword">Set</span> oBapiLogon = CreateObject(<span class="string">"sap.logoncontrol.1"</span>)
+<span class="comment">'Set oBapiCtrl = CreateObject("sap.bapi.1")</span>
+<span class="keyword">Set</span> oBapiCtrl = CreateObject(<span class="string">"SAP.Functions"</span>)
+
+oBapiCtrl.Connection = oBapiLogon.NewConnection
+oBapiCtrl.Connection.ApplicationServer = <span class="string">"10.10.10.11"</span>
+oBapiCtrl.Connection.System = <span class="string">"KMY"</span>
+oBapiCtrl.Connection.Client = <span class="string">"4000"</span>
+oBapiCtrl.Connection.User = <span class="string">"USERID"</span>
+oBapiCtrl.Connection.Password = <span class="string">"PASSWORD"</span>
+oBapiCtrl.Connection.Language = <span class="string">"JA"</span>
+oBapiCtrl.Connection.SystemNumber = <span class="string">"00"</span>
+oBapiCtrl.Connection.SAPRouter = <span class="string">"SAPROUTER"</span>
+
+
+<span class="keyword">If</span> oBapiCtrl.Connection.Logon(<span class="number">0</span>, <span class="literal">True</span>) &lt;&gt; <span class="literal">True</span> <span class="keyword">Then</span>
+    MsgBox <span class="string">"not connected"</span>, vbInformation, <span class="string">"Sap Logon"</span>: <span class="keyword">Exit</span> <span class="keyword">Sub</span>
+<span class="keyword">End</span> <span class="keyword">If</span>
+
+<span class="keyword">Set</span> objgetaddress = oBapiCtrl.Add(<span class="string">"ZFYG2_GET_CUSTOMER_DETAILS"</span>)
+<span class="keyword">Set</span> objkunnr = objgetaddress.Tables(<span class="string">"ET_KUNNR"</span>)
+<span class="keyword">Set</span> objaddress = objgetaddress.Tables(<span class="string">"ET_CUST_LIST"</span>)
+
+
+<span class="keyword">If</span> ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="string">"B"</span>).Value &lt;&gt; <span class="string">""</span> <span class="keyword">Then</span>
+    objkunnr.Rows.Add
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"SIGN"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">2</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"OPTION"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">3</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"LOW"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">4</span>).Value
+    objkunnr.Value(<span class="number">1</span>, <span class="string">"HIGH"</span>) = ThisWorkbook.ActiveSheet.Cells(<span class="number">6</span>, <span class="number">5</span>).Value
+
+<span class="keyword">End</span> <span class="keyword">If</span>
+
+
+objgetaddress.<span class="keyword">call</span>
+
+  vcount_add = objaddress.Rows.Count
+    <span class="keyword">For</span> index_add = <span class="number">1</span> <span class="keyword">To</span> vcount_add
+      vRows = <span class="number">11</span> + index_add
+      ActiveSheet.Cells(vRows, <span class="number">2</span>) = objaddress.Value(index_add, <span class="string">"KUNNR"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">3</span>) = objaddress.Value(index_add, <span class="string">"LAND1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">4</span>) = objaddress.Value(index_add, <span class="string">"NAME1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">5</span>) = objaddress.Value(index_add, <span class="string">"ORT01"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">6</span>) = objaddress.Value(index_add, <span class="string">"PSTLZ"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">7</span>) = objaddress.Value(index_add, <span class="string">"REGIO"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">8</span>) = objaddress.Value(index_add, <span class="string">"KTOKD"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">9</span>) = objaddress.Value(index_add, <span class="string">"TELF1"</span>)
+      ActiveSheet.Cells(vRows, <span class="number">10</span>) = objaddress.Value(index_add, <span class="string">"TELFX"</span>)
+    <span class="keyword">Next</span> index_add
+  <span class="comment">'If address not exist then show error</span>
+  <span class="keyword">If</span> vcount_add = <span class="string">""</span> <span class="keyword">Then</span>
+    ActiveSheet.Cells(<span class="number">10</span>, <span class="number">11</span>) = <span class="string">"Invalid Input"</span>
+  <span class="keyword">Else</span>
+    ActiveSheet.Cells(<span class="number">10</span>, <span class="number">12</span>) = <span class="string">"BAPI Call is successfull"</span>
+    ActiveSheet.Cells(<span class="number">11</span>, <span class="number">12</span>) = vcount_add &amp; <span class="string">" rows are returned"</span>
+  <span class="keyword">End</span> <span class="keyword">If</span>
+
+  oBapiCtrl.Connection.Logoff
+
+
+<span class="keyword">End</span> <span class="keyword">Sub</span>
+</code></pre><p>以下是EXCEL。通过点击执行按钮后获取客户信息。<br><img src="http://picforxyjp.qiniudn.com/vbaToSap7.PNG" alt="priceType.sap"></p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[价格计算过程中的小计]]></title>
@@ -314,51 +433,6 @@ endform<span class="built_in">.</span>
   </entry>
   
   <entry>
-    <title><![CDATA[css针对IE浏览器设定]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
-    <published>2014-04-29T14:16:12.000Z</published>
-    <updated>2014-06-27T14:22:32.000Z</updated>
-    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
-      <span class="keyword">var</span> rv = -<span class="number">1</span>;
-      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">return</span> rv;
-  }
-  IEV = getIEVersion();
-  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
-      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
-  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
-      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
-  }
-</code></pre><p>接着在css里面进行设置：</p>
-<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
-    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
-    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
-<span class="rule">}</span></span>
-</code></pre>]]></content>
-    
-    
-      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[javascript导出csv文件]]></title>
     <link href="http://fyg.xyjp.net/about/2014/04/29/javascript%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/</id>
@@ -425,6 +499,51 @@ endform<span class="built_in">.</span>
     
     
       <category term="javascript" scheme="http://fyg.xyjp.net/about/tags/javascript/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:22:32.000Z</updated>
+    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
+      <span class="keyword">var</span> rv = -<span class="number">1</span>;
+      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">return</span> rv;
+  }
+  IEV = getIEVersion();
+  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
+      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
+  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
+      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
+  }
+</code></pre><p>接着在css里面进行设置：</p>
+<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
+    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
+    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
+<span class="rule">}</span></span>
+</code></pre>]]></content>
+    
+    
+      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
@@ -860,21 +979,6 @@ public class DBConnect {
     
     
       <category term="JAVA" scheme="http://fyg.xyjp.net/about/tags/JAVA/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[可汗学院公开课：三角学]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/07/26/%E5%8F%AF%E6%B1%97%E5%AD%A6%E9%99%A2%E5%85%AC%E5%BC%80%E8%AF%BE%EF%BC%9A%E4%B8%89%E8%A7%92%E5%AD%A6/"/>
-    <id>http://fyg.xyjp.net/about/2013/07/26/可汗学院公开课：三角学/</id>
-    <published>2013-07-26T12:04:08.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p>最近学习动画，发现自己数学都忘光了。<br>好多中学数学里的知识都想了半天。</p>
-<p>网易链接：<br><a href="http://v.163.com/special/Khan/trigonometry.html" title="http://v.163.com/special/Khan/trigonometry.html" target="_blank">http://v.163.com/special/Khan/trigonometry.html</a></p>
-]]></content>
-    
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
