@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-07-20T23:17:17.954Z</updated>
+  <updated>2014-07-20T23:21:38.534Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://fyg.xyjp.net/about/2014/07/21/linux%E4%B8%ADat%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A%E5%8F%8A%E7%94%A8%E6%B3%95/"/>
     <id>http://fyg.xyjp.net/about/2014/07/21/linux中at命令解释及用法/</id>
     <published>2014-07-20T23:03:19.000Z</published>
-    <updated>2014-07-20T23:15:56.000Z</updated>
+    <updated>2014-07-20T23:21:28.000Z</updated>
     <content type="html"><![CDATA[<p>名称 : at<br>使用权限 : 所有使用者<br>使用方式 : </p>
 <pre><code>at <span class="attribute">-V</span> <span class="preprocessor">[</span><span class="attribute">-q</span> <span class="built_in">queue</span><span class="preprocessor">]</span><span class="markup"> </span><span class="preprocessor">[</span><span class="attribute">-f</span> file<span class="preprocessor">]</span><span class="markup"> </span><span class="preprocessor">[</span><span class="attribute">-mldbv</span><span class="preprocessor">]</span><span class="markup"> TIME</span>
 </code></pre><p>说明 : at 可以让使用者指定在 TIME 这个特定时刻执行某个程式或指令，TIME 的格式是 HH:MM其中的 HH 为小时，MM 为分钟，甚至你也可以指定 am, pm, midnight, noon, teatime(就是下午 4 点锺)等口语词。<br>如果想要指定超过一天内的时间，则可以用 MMDDYY 或者 MM/DD/YY 的格式，其中 MM 是分钟，DD 是第几日，YY 是指年份。另外，使用者甚至也可以使用像是 now + 时间间隔来弹性指定时间，其中的时间间隔可以是 minutes, hours, days, weeks<br>另外，使用者也可指定 today 或 tomorrow 来表示今天或明天。当指定了时间并按下 enter 之后，at 会进入交谈模式并要求输入指令或程式，当你输入完后按下 ctrl+D 即可完成所有动作，至于执行的结果将会寄回你的帐号中。<br>把计 :<br>-V : 印出版本编号<br>-q : 使用指定的伫列(Queue)来储存，at 的资料是存放在所谓的 queue 中，使用者可以同时使用多个 queue，而 queue 的编号为 a, b, c… z 以及 A, B, … Z 共 52 个<br>-m : 即使程式/指令执行完成后没有输出结果, 也要寄封信给使用者<br>-f file : 读入预先写好的命令档。使用者不一定要使用交谈模式来输入，可以先将所有的指定先写入档案后再一次读入<br>-l : 列出所有的指定 (使用者也可以直接使用 atq 而不用 at -l)<br>-d : 删除指定 (使用者也可以直接使用 atrm 而不用 at -d)<br>-v : 列出所有已经完成但尚未删除的指定</p>
@@ -48,7 +48,7 @@
     
       <category term="linux" scheme="http://fyg.xyjp.net/about/tags/linux/"/>
     
-      <category term="Developer" scheme="http://fyg.xyjp.net/about/categories/Developer/"/>
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   
