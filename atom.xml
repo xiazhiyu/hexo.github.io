@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-07-19T15:36:41.807Z</updated>
+  <updated>2014-07-20T23:17:17.954Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -13,6 +13,44 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[linux at命令解释及用法]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/07/21/linux%E4%B8%ADat%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A%E5%8F%8A%E7%94%A8%E6%B3%95/"/>
+    <id>http://fyg.xyjp.net/about/2014/07/21/linux中at命令解释及用法/</id>
+    <published>2014-07-20T23:03:19.000Z</published>
+    <updated>2014-07-20T23:15:56.000Z</updated>
+    <content type="html"><![CDATA[<p>名称 : at<br>使用权限 : 所有使用者<br>使用方式 : </p>
+<pre><code>at <span class="attribute">-V</span> <span class="preprocessor">[</span><span class="attribute">-q</span> <span class="built_in">queue</span><span class="preprocessor">]</span><span class="markup"> </span><span class="preprocessor">[</span><span class="attribute">-f</span> file<span class="preprocessor">]</span><span class="markup"> </span><span class="preprocessor">[</span><span class="attribute">-mldbv</span><span class="preprocessor">]</span><span class="markup"> TIME</span>
+</code></pre><p>说明 : at 可以让使用者指定在 TIME 这个特定时刻执行某个程式或指令，TIME 的格式是 HH:MM其中的 HH 为小时，MM 为分钟，甚至你也可以指定 am, pm, midnight, noon, teatime(就是下午 4 点锺)等口语词。<br>如果想要指定超过一天内的时间，则可以用 MMDDYY 或者 MM/DD/YY 的格式，其中 MM 是分钟，DD 是第几日，YY 是指年份。另外，使用者甚至也可以使用像是 now + 时间间隔来弹性指定时间，其中的时间间隔可以是 minutes, hours, days, weeks<br>另外，使用者也可指定 today 或 tomorrow 来表示今天或明天。当指定了时间并按下 enter 之后，at 会进入交谈模式并要求输入指令或程式，当你输入完后按下 ctrl+D 即可完成所有动作，至于执行的结果将会寄回你的帐号中。<br>把计 :<br>-V : 印出版本编号<br>-q : 使用指定的伫列(Queue)来储存，at 的资料是存放在所谓的 queue 中，使用者可以同时使用多个 queue，而 queue 的编号为 a, b, c… z 以及 A, B, … Z 共 52 个<br>-m : 即使程式/指令执行完成后没有输出结果, 也要寄封信给使用者<br>-f file : 读入预先写好的命令档。使用者不一定要使用交谈模式来输入，可以先将所有的指定先写入档案后再一次读入<br>-l : 列出所有的指定 (使用者也可以直接使用 atq 而不用 at -l)<br>-d : 删除指定 (使用者也可以直接使用 atrm 而不用 at -d)<br>-v : 列出所有已经完成但尚未删除的指定</p>
+<p>1.例子<br>三天后的下午 5 点锺执行 /bin/ls :</p>
+<pre><code><span class="keyword">at</span> <span class="number">5</span>pm + <span class="number">3</span> days /bin/ls
+</code></pre><p>三个星期后的下午 5 点锺执行 /bin/ls :</p>
+<pre><code><span class="keyword">at</span> <span class="number">5</span>pm + <span class="number">2</span> weeks /bin/ls
+</code></pre><p>明天的 17:20 执行 /bin/date :</p>
+<pre><code><span class="keyword">at</span> <span class="number">17</span>:<span class="number">20</span> tomorrow /bin/<span class="built_in">date</span>
+</code></pre><p>1999 年的最后一天的最后一分钟印出 the end of world !</p>
+<pre><code><span class="keyword">at</span> <span class="number">23</span>:<span class="number">59</span> <span class="number">12</span>/<span class="number">31</span>/<span class="number">1999</span> echo <span class="operator">the</span> <span class="function"><span class="keyword">end</span> <span class="title">of</span> <span class="title">world</span> !</span>
+</code></pre><p>在明天的2：05执行airplane脚本</p>
+<pre><code><span class="comment"># at 2:05 tomorrow </span>
+       at&gt; <span class="regexp">/home/mj</span><span class="regexp">/airplane &gt; /home</span><span class="regexp">/mj/air</span>-safe 
+       at&gt; <span class="constant">Ctrl</span>+<span class="constant">D</span>
+</code></pre><p>2.查看目前在等待执行的任务<br>输入任务后，可以使用atq命令可以看到目前等待执行的任务，输出提供了任务号、用户和任务执行时间等信息。 </p>
+<pre><code><span class="preprocessor"># atq </span>
+<span class="number">8</span> <span class="number">2012</span>-<span class="number">11</span>-<span class="number">15</span> <span class="number">02</span>:<span class="number">05</span> a mj 
+</code></pre><p>里面的a表示是at任务还是batch命令生成的任务。<br>3.删除at任务<br>删除一个at任务比较简单，使用atrm命令就可以轻松解决。<br>比如我知道了任务的队列号，那么就可以删除它： </p>
+<pre><code><span class="preprocessor"># atm 8</span>
+</code></pre><p>就删除了队列号为8的at任务了。 </p>
+<pre><code><span class="keyword">at</span> -l<span class="comment"> //列表 </span>
+<span class="keyword">at</span> -r<span class="comment"> //移除</span>
+</code></pre>]]></content>
+    
+    
+      <category term="linux" scheme="http://fyg.xyjp.net/about/tags/linux/"/>
+    
+      <category term="Developer" scheme="http://fyg.xyjp.net/about/categories/Developer/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[VBA连接SAP]]></title>
@@ -433,6 +471,51 @@ endform<span class="built_in">.</span>
   </entry>
   
   <entry>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:22:32.000Z</updated>
+    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
+      <span class="keyword">var</span> rv = -<span class="number">1</span>;
+      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">return</span> rv;
+  }
+  IEV = getIEVersion();
+  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
+      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
+  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
+      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
+  }
+</code></pre><p>接着在css里面进行设置：</p>
+<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
+    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
+    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
+<span class="rule">}</span></span>
+</code></pre>]]></content>
+    
+    
+      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[javascript导出csv文件]]></title>
     <link href="http://fyg.xyjp.net/about/2014/04/29/javascript%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/</id>
@@ -499,51 +582,6 @@ endform<span class="built_in">.</span>
     
     
       <category term="javascript" scheme="http://fyg.xyjp.net/about/tags/javascript/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[css针对IE浏览器设定]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
-    <published>2014-04-29T14:16:12.000Z</published>
-    <updated>2014-06-27T14:22:32.000Z</updated>
-    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
-      <span class="keyword">var</span> rv = -<span class="number">1</span>;
-      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">return</span> rv;
-  }
-  IEV = getIEVersion();
-  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
-      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
-  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
-      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
-  }
-</code></pre><p>接着在css里面进行设置：</p>
-<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
-    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
-    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
-<span class="rule">}</span></span>
-</code></pre>]]></content>
-    
-    
-      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
@@ -882,103 +920,6 @@ ENDIF<span class="built_in">.</span>
     
     
       <category term="rails" scheme="http://fyg.xyjp.net/about/tags/rails/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[JDBC]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/09/28/jdbc/"/>
-    <id>http://fyg.xyjp.net/about/2013/09/28/jdbc/</id>
-    <published>2013-09-28T01:38:06.000Z</published>
-    <updated>2014-03-30T01:06:10.000Z</updated>
-    <content type="html"><![CDATA[<p>最近开始找工作。好久没用java，都快给忘了。<br>一点点复习吧。</p>
-<pre>
-package util;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public class DBConnect {
-
-    private static DBConnect instance = null;
-
-    // 该url为缺省方式（省略主机跟端口）
-    // 完整为：jdbc:mysql//localhost:3306/test
-    static String url = "jdbc:mysql:///acc"; 
-
-    static String name = "root";
-
-    static String password = "root";
-
-    static Connection conn = null;
-
-    private DBConnect(){
-    }
-
-    public static DBConnect getInitDBConnect(){
-        if(instance==null){
-            synchronized(DBConnect.class){
-                if(instance==null){
-                    instance=new DBConnect();
-                }
-            }
-        }
-        return instance;
-    }
-
-    static{
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-        }catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }    
-    }
-
-    public Connection getConnection(){
-        try{
-            conn = DriverManager.getConnection(url,name,password);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return conn;
-    }
-
-    public void closeConnectino(ResultSet rs, Statement statement, Connection con){
-        try{
-            if(rs!=null){
-                rs.close();
-            }        
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally{
-            try{
-                if(statement !=null){
-                    statement.close();
-                }
-            }catch(Exception e){
-                e.printStackTrace();
-            }finally{
-                try{
-                    if(con != null){
-                        con.close();
-                    }
-                }catch(SQLException e){
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-}
-
-</pre>]]></content>
-    
-    
-      <category term="JAVA" scheme="http://fyg.xyjp.net/about/tags/JAVA/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
