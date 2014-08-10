@@ -69,7 +69,7 @@ Content overview:1. What e">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/12/22/关于价格条件中的小计/" title="关于价格条件中的小计" itemprop="url">关于价格条件中的小计</a>
+      <a href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" title="关于价格条件中的小计" itemprop="url">关于价格条件中的小计</a>
   </h1>
   <p class="article-author">By
     
@@ -77,7 +77,7 @@ Content overview:1. What e">
     </p>
   <p class="article-time">
     <time datetime="2013-12-22T01:13:32.000Z" itemprop="datePublished">12月 22 2013</time>
-    更新日期:<time datetime="2014-06-27T14:48:14.000Z" itemprop="dateModified">6月 27 2014</time>
+    更新日期:<time datetime="2014-03-30T02:11:52.000Z" itemprop="dateModified">3月 30 2014</time>
     
   </p>
 </header>
@@ -108,45 +108,20 @@ Content overview:1. What e">
 <p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
 <p>5. Which program contains the corresponding logic?</p>
 <p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
-<pre><code>L O O P
-LOOP AT xkomv.
-<span class="keyword">...</span>
-
-calculate subtotals <span class="keyword">in</span> KOMP
-IF xkomv-kinak <span class="literal">NA</span> <span class="string">'AKLMXZ'</span>.
-<span class="keyword">...</span>
-
-fill subtotal work fields
-CASE xkomv-kzwiw. &amp;lt;== The setting <span class="keyword">for</span> KZWIW
-WHEN <span class="string">' '</span>. is checked <span class="keyword">in</span> this
-WHEN <span class="string">'A'</span>. CASE statement.
-<span class="keyword">...</span>
-WHEN <span class="string">'B'</span>.
-<span class="keyword">...</span>
-WHEN <span class="keyword">...</span>
-<span class="keyword">...</span>
-ENDCASE.
-<span class="keyword">...</span>
-ENDIF.
-<span class="keyword">...</span>
-
-L O O P
-ENDLOOP.
-</code></pre><p>6. Are the cumulative values stored in the database?</p>
+<p>L O O P<br>LOOP AT xkomv.<br>…</p>
+<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
+<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
+<p>L O O P<br>ENDLOOP.</p>
+<p>6. Are the cumulative values stored in the database?</p>
 <p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
 <p>7. Can inactive conditions also be taken into account?</p>
 <p>This is possible if you use a corresponding condition value formula.</p>
 <p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
-<pre><code><span class="keyword">if</span> condition is active <span class="literal">or</span> inactive <span class="keyword">with</span> <span class="string">'M'</span>
-<span class="keyword">IF</span> xkomv<span class="attribute">-kinak</span> NA <span class="string">'AKLXZ'</span><span class="built_in">.</span>
-xworkj <span class="subst">=</span> xworkj <span class="subst">+</span> xkwert<span class="built_in">.</span> <span class="string">"cumulate condition value in xworkj
-ENDIF.</span>
-</code></pre><p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
+<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
+<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
 <p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
-<pre><code><span class="keyword">IF</span> xkomv<span class="attribute">-kinak</span> <span class="subst">=</span> <span class="string">'M'</span><span class="built_in">.</span> <span class="string">"if condition is inactive with 'M'
-xworkj = xworkj + xkwert."</span>cumulate condition value <span class="keyword">in</span> xworkj
-ENDIF<span class="built_in">.</span>
-</code></pre><p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
+<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
+<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
 <p>8. Examples of how KZWIW is used:</p>
 <p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
 <p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
@@ -184,7 +159,7 @@ ENDIF<span class="built_in">.</span>
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/" data-title="关于价格条件中的小计 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" data-title="关于价格条件中的小计 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -194,18 +169,18 @@ ENDIF<span class="built_in">.</span>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2013/12/22/vofm-routine/" title="VOFM Routine">
+ <a href="/2013/12/22/关于价格条件中的小计/" title="关于价格条件中的小计">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  VOFM Routine</span>
+  关于价格条件中的小计</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/"  title="关于价格条件中的小计">
+<a href="/2013/12/20/sap-定价条件/"  title="sap 定价条件">
  <strong>NEXT:</strong><br/> 
- <span>关于价格条件中的小计
+ <span>sap 定价条件
 </span>
 </a>
 </div>
@@ -334,7 +309,7 @@ ENDIF<span class="built_in">.</span>
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/';
   
   (function(){
     var dsq = document.createElement('script');
