@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-08-10T03:12:18.113Z</updated>
+  <updated>2014-08-10T03:25:58.295Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -99,11 +99,8 @@
 
   ENDIF.
 ENDFUNCTION.</span>
-</code></pre><p>⑤激活函数。激活时注意要选择函数组一起激活，否则会出现错误。<br>2.通过VBA调用函数<br>    包括两步，①用户验证，③调用函数。以下是代码：</p>
-<pre><code><span class="keyword">Option</span> <span class="keyword">Explicit</span>
-<span class="keyword">Sub</span> saplogin()
-
-<span class="keyword">Dim</span> oBapiLogon <span class="keyword">As</span> <span class="built_in">Object</span>
+</code></pre><p>⑤激活函数。激活时注意要选择函数组一起激活，否则会出现错误。<br>2.通过VBA调用函数<br>    包括两步，①用户验证，③调用函数。以下是代码：<br>    Option Explicit<br>    Sub saplogin()</p>
+<pre><code><span class="keyword">Dim</span> oBapiLogon <span class="keyword">As</span> <span class="built_in">Object</span>
 <span class="comment">'Dim oBapiCtrl As SAPLogonCtrl.SAPLogonControl</span>
 <span class="keyword">Dim</span> oBapiCtrl <span class="keyword">As</span> <span class="built_in">Object</span>
 <span class="keyword">Dim</span> objgetaddress <span class="keyword">As</span> <span class="built_in">Object</span>
@@ -199,7 +196,6 @@ LOOP AT xkomv.
         * fill subtotal work fields
         CASE xkomv-kzwiw.        &lt;== The setting <span class="keyword">for</span> KZWIW
             WHEN <span class="string">' '</span>.                  is checked <span class="keyword">in</span> this
-
             WHEN <span class="string">'A'</span>. CASE statement.
             <span class="keyword">...</span>
             WHEN <span class="string">'B'</span>.
@@ -242,7 +238,6 @@ ENDLOOP.
         WHEN <span class="string">' '</span>.
             arbfeld     = zwisu.
           WHEN <span class="string">'A'</span>.
-
         WHEN <span class="string">'B'</span> OR <span class="string">'T'</span>.
           <span class="keyword">...</span>
         WHEN <span class="string">'H'</span>.
@@ -359,10 +354,8 @@ ENDFORM<span class="built_in">.</span>
     <published>2014-06-27T18:28:25.000Z</published>
     <updated>2014-06-27T18:42:28.000Z</updated>
     <content type="html"><![CDATA[<p><em>1)概述</em></p>
-<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; </p>
-<pre><code><span class="subst">*</span><span class="keyword">LOOP</span>: 
-  <span class="keyword">loop</span> at xkomv<span class="built_in">.</span>
-<span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
+<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值;<br>    *LOOP:<br>      loop at xkomv.</p>
+<pre><code><span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
           perform konditionsbasis_ermitteln<span class="built_in">.</span>
 
 <span class="subst">*</span> scale basis changed <span class="literal">or</span> <span class="number">0</span>
@@ -384,11 +377,8 @@ ENDFORM<span class="built_in">.</span>
       endif<span class="built_in">.</span>
 <span class="attribute">...</span><span class="built_in">..</span>
 endloop<span class="built_in">.</span>
-</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。</p>
-<pre><code>FORM xkomv_kwert_ermitteln<span class="built_in">.</span>
-  <span class="built_in">DATA</span>: xkbetr(<span class="number">16</span>) <span class="keyword">TYPE</span> p DECIMALS <span class="number">2.</span>
-  <span class="built_in">DATA</span>: cond_curr_is_euro, doc_curr_is_euro<span class="built_in">.</span>
-<span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
+</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。<br>    FORM xkomv_kwert_ermitteln.<br>      DATA: xkbetr(16) TYPE p DECIMALS 2.<br>      DATA: cond_curr_is_euro, doc_curr_is_euro.</p>
+<pre><code><span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
   <span class="keyword">IF</span> xkomv<span class="attribute">-kschl</span> <span class="subst">=</span> space <span class="literal">AND</span> xkomv<span class="attribute">-stunb</span> NE <span class="number">0.</span>
     CATCH SYSTEM<span class="attribute">-EXCEPTIONS</span> conversion_errors <span class="subst">=</span> <span class="number">1</span>
                             arithmetic_errors <span class="subst">=</span> <span class="number">5.</span>
@@ -405,23 +395,8 @@ endloop<span class="built_in">.</span>
 <span class="subst">*</span> no calculation for KDUPL conditions because condition value is
 <span class="subst">*</span> calculated <span class="keyword">by</span> formula <span class="number">36.</span>
   ELSEIF xkomv<span class="attribute">-kdupl</span> NE <span class="string">'B'</span><span class="built_in">.</span>
-</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。</p>
-<pre><code>form konditionsbasis_ermitteln<span class="built_in">.</span>
-  <span class="built_in">data</span>: da_xxmglme like komp<span class="attribute">-brgew</span>,
-        da_xxmeins like komp<span class="attribute">-gewei</span>,
-        da_fxmsg   like xkomv<span class="attribute">-fxmsg</span><span class="built_in">.</span>
-  <span class="built_in">data</span>: arbfeld_dec(<span class="number">16</span>) <span class="keyword">type</span> p decimals <span class="number">3.</span>
-  xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> <span class="number">0.</span>
-  <span class="keyword">if</span> xkomv<span class="attribute">-krech</span> ca prz_abs <span class="literal">and</span> <span class="literal">not</span> xkomv<span class="attribute">-krech</span> <span class="subst">=</span> <span class="string">'T'</span><span class="built_in">.</span>
-    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-stun2</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-koaid</span> <span class="subst">=</span> <span class="string">'D'</span><span class="built_in">.</span>
-      perform xkomv_kawrt_ermitteln<span class="built_in">.</span>
-      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> xkawrt<span class="built_in">.</span>
-    endif<span class="built_in">.</span>
-    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> <span class="subst">=</span> <span class="number">0</span> <span class="literal">and</span> xkomv<span class="attribute">-stun2</span> <span class="subst">=</span> <span class="number">0.</span>
-      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> zwisu<span class="built_in">.</span>
-    endif<span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-</code></pre><p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
+</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。<br>    form konditionsbasis_ermitteln.<br>      data: da_xxmglme like komp-brgew,<br>            da_xxmeins like komp-gewei,<br>            da_fxmsg   like xkomv-fxmsg.<br>      data: arbfeld_dec(16) type p decimals 3.<br>      xkomv-kawrt = 0.<br>      if xkomv-krech ca prz_abs and not xkomv-krech = ‘T’.<br>        if xkomv-stunb ne 0 or xkomv-stun2 ne 0 or xkomv-koaid = ‘D’.<br>          perform xkomv_kawrt_ermitteln.<br>          xkomv-kawrt = xkawrt.<br>        endif.<br>        if xkomv-stunb = 0 and xkomv-stun2 = 0.<br>          xkomv-kawrt = zwisu.<br>        endif.<br>      endif.</p>
+<p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
 <pre><code>form xkomv_kawrt_ermitteln<span class="built_in">.</span>
 
   <span class="built_in">data</span>:  axkomv like komv<span class="built_in">.</span>
@@ -707,7 +682,7 @@ endform<span class="built_in">.</span>
     <link href="http://fyg.xyjp.net/about/2013/12/26/sap-%E5%AE%9A%E4%BB%B7%E6%8A%80%E6%9C%AF/"/>
     <id>http://fyg.xyjp.net/about/2013/12/26/sap-定价技术/</id>
     <published>2013-12-25T15:32:33.000Z</published>
-    <updated>2014-03-30T02:10:07.000Z</updated>
+    <updated>2014-03-30T02:10:06.000Z</updated>
     <content type="html"><![CDATA[<h1 id="SAP定价技术">SAP定价技术</h1>
 <p>计算类型：<br>A 百分数：定价值KWERT=条件基值KAWRT×金额%KBETR；<br>B 固定金额：定价值KWERT=金额KBETR；条件基值KAWRT不参与计算；<br>C 数量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单数量；<br>D 毛重量：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单毛重；<br>E        净重：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为订单净重；<br>F        体积：定价值KWERT=条件基值KAWRT×金额KBETR；条件基值默认为体积；<br>I 百分数(旅行费用)：定价值KWERT=条件基值KAWRT÷（1－金额%KBETR）×金额%KBETR；<br>H 包括手续费：定价值KWERT=条件基值KAWRT÷（1＋金额%KBETR）×金额%KBETR；<br>G 公式：主要用于自定义定价，金额KBETR一般由手工维护或VK11进行维护，定价值KWERT=条件基值KAWRT×金额KBETR，条件基值KAWRT只能通过例程“基础类型”进行维护；<br>K-U未深入研究，基本上A-G已经够用了，特殊需求可以通过例程进行赋值，后面我会继续介绍定价例程。</p>
 ]]></content>
@@ -724,7 +699,7 @@ endform<span class="built_in">.</span>
     <link href="http://fyg.xyjp.net/about/2013/12/23/sd-%E7%9B%B8%E5%85%B3%E8%A1%A8/"/>
     <id>http://fyg.xyjp.net/about/2013/12/23/sd-相关表/</id>
     <published>2013-12-22T16:44:42.000Z</published>
-    <updated>2014-03-30T02:10:43.000Z</updated>
+    <updated>2014-03-30T02:10:42.000Z</updated>
     <content type="html"><![CDATA[<p>KNA1  客户主数据（一般数据层）<br>KNB1  客户主数据（公司代码层）<br>KNMT  Customer-Material Info Record Data Table<br>KNMTK Customer-Material Info Record Header Table<br>KNVA  Customer 主数据 Loading Points<br>KNVD  Customer 主数据 record sales request form<br>KNVI  Customer 主数据 Tax Indicator<br>KNVK  Customer 主数据 Contact Partner<br>KNVL  Customer 主数据 Licenses<br>KNVP  Customer 主数据 Partner Functions<br>KNVS  Customer 主数据 Shipping Data<br>KNVT  Customer 主数据 Record Texts for Sales<br>KNVV  Customer 主数据 Sales Data<br>KONA  Rebate Agreements<br>KOND  Conditions (Data)<br>KONH  Conditions (Header)<br>KONM  Conditions (1 Dimensional Quantity Scales)<br>KONP  Conditions (Item) field LIKP-WADAT_IST - Actual Goods Issue Date - is populated only after Post Goods Issue<br>KONV  Conditions (Procedure Data)<br>KONW  Conditions (1 Dimensional Value Scales)<br>LIKP  SD Document: Delivery Header Data<br>LIPS  SD document: Delivery: Item data<br>LIPSPO  LIPS Reference Data Purchase Order<br>LIPSRF  LIPS Reference Data<br>NACH  Detailed output data<br>NAST  Message status<br>T179  Materials: Product Heirarchies<br>T179T Materials: Product Heirarchies: Texts<br>VAKGU Sales Index: Quotation Validity<br>VAKPA Sales Index: Orders by Partner Function<br>VAPMA Sales Index: Order Items by Material<br>VBAG  Sales Document: Release Data by Schedule Line in Sch.Agrmt.<br>VBAK  销售订单表头-Sales Document: Header Data<br>VBAP  销售订单明细-Sales Document: Item Data<br>VBBE  Sales Requirements: Individual Records<br>VBBS  Sales Requirement Totals Record<br>VBEP  Sales Document: Schedule Line Data<br>VBFA  Sales Document Flow<br>VBFS  Error Log for Collective Processing<br>VBKA  Sales activities<br>VBKD  Sales Document: Business Data<br>VBKOF SD index: Open sales activities by partner function<br>VBKPA SD index: Sales activities by partner function<br>VBLK  SD Document: Delivery Note Header<br>VBLS  Delivery Notes for Collective Processing<br>VBPA  Sales Document: Partner<br>VBRK  销售发票：抬头表Billing: Header Data<br>VBRP  销售发票：行项目表Billing: Item Data<br>VBSK  Collective Processing for a Sales Document Header<br>VBSS  Collective Processing: Sales Documents<br>VBUK  Sales Document: Header Status and Administrative Data<br>VBUP  Sales Document: Item Status<br>VBUV  Sales Document: Incompletion Log<br>VEPVG Delivery Due Index<br>VETVG Delivery Due Index for Stock Transfer<br>VKAOF Sales Index: Open Sales Activities<br>VKDFS SD Index: Billing Initiator<br>VLKPA SD Index: Deliveries by Partner Functions<br>VLPMA SD Index: Delivery Items by Material<br>VRKPA Sales Index: Bills by Partner Functions<br>VRPMA SD Index: Billing Items per Material<br>VTFA  Shipment Document Flow<br>VTRDI Shipment Planning Index</p>
 ]]></content>
     
@@ -748,6 +723,72 @@ endform<span class="built_in">.</span>
 <p>Condition base value formulas can be used to influence the condition basis to which the pricing condition rate will be applied. In standard pricing, the system will apply the condition rate to the quantity in the sales document. For example, the price determined by the system is $45 per case for Product A. 100 cases of Product A have been ordered. The system would then multiply $45 times<br>the number of cases of Product A ordered. Using a condition base value formula, it is possible to alter the condition base, in our example 100, prior to the calculation taking place. A condition base value formula is commonly used to determine the base for distributing header discounts / surcharges to the sales document line items. A condition base value formula is assigned to a condition type in the pricing procedure.</p>
 <p><strong>Condition value formulas</strong></p>
 <p>Condition value formulas are available to influence the condition value that is displayed for a particular condition type or value line in the pricing procedure. In standard pricing, the system will calculate the condition value by multiplying the condition rate by the quantity. For example, 100 cases times $45 per case equals $4,500. Using a condition value formula, it is possible to alter the<br>condition value, in our example $4,500. Condition value formulas can also be used to compute values that should appear as value lines in the pricing procedure. As an example, standard delivered condition value formulas can be used to compute profit margin and item net value. A condition value formula is assigned to a condition type in the pricing procedure.</p>
+]]></content>
+    
+    
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
+    
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[关于价格条件中的小计]]></title>
+    <link href="http://fyg.xyjp.net/about/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1%20(Libran-Fyg%20%E3%81%AE%E7%AB%B6%E5%90%88%E3%82%B3%E3%83%92%E3%82%9A%E3%83%BC%202014-08-01)/"/>
+    <id>http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/</id>
+    <published>2013-12-22T01:13:32.000Z</published>
+    <updated>2014-03-30T02:11:52.000Z</updated>
+    <content type="html"><![CDATA[<p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank">http://scn.sap.com/thread/1735194</a></p>
+<p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
+<p>Symptom</p>
+<p>Content overview:<br>1. What effect does an entry in the ‘Subto’ column<br>(KZWIW field) have?<br>2. Which settings are possible?<br>3. Which condition/subtotal line is taken into account?<br>4. In which cases is cumulation performed/not performed?<br>5. Which program contains the corresponding logic?<br>6. Are the cumulative values stored in the database?<br>7. Can inactive conditions also be taken into account?<br>8. Examples of how KZWIW is used<br>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient?<br>10. What you can do if the number of internal auxiliary variables<br>(XWORKD -XWORKM) is insufficient?</p>
+<p>1. What effect does an entry in the ‘Subto’ column (KZWIW field) have?</p>
+<p>You can make certain entries in the ‘Subto’ column (KZWIW field) in the Customizing settings for the pricing procedure. These determine that the condition value or the condition rate of the condition or subtotal line is copied into a certain field of the KOMP structure or into certain internal auxiliary variables (XWORKD - XWORKM). For more details, see Point 2 below.</p>
+<p>2. Which settings are possible?</p>
+<p>The following options are provided in R/3 standard pricing:</p>
+<p>1 Value transfer to KOMP-KZWI1<br>2 Value transfer to KOMP-KZWI2<br>3 Value transfer to KOMP-KZWI3<br>4 Value transfer to KOMP-KZWI4<br>5 Value transfer to KOMP-KZWI5<br>6 Value transfer to KOMP-KZWI6<br>7 Value transfer to KOMP-BONBA (Rebate basis)<br>8 Value transfer to KOMP-PREVA (Preference value)<br>9 Value transfer to KOMP-BRTWR (Gross value)<br>A Price transfer to KOMP-CMPRE (Credit price)<br>B Price transfer to KOMP-WAVWR (Cost)<br>C Value transfer to KOMP-GRWRT (Statistical value)<br>D Value transfer to XWORKD<br>E Value transfer to XWORKE<br>F Value transfer to XWORKF<br>G Value transfer to XWORKG<br>H Value transfer to XWORKH<br>I Value transfer to XWORKI<br>J Value transfer to XWORKJ<br>K Price transfer to XWORKK<br>L Price transfer to XWORKL<br>M Price transfer to XWORKM<br>S Value transfer to KOMP-EFFWR (Effective value)<br>Y Value transfer to KOMP-OIIDC (IS-OIL/only JVA CRP Pricing)<br>Z Value transfer to KOMP-OIEBC (IS-OIL/only JVA CRP Pricing)</p>
+<p>The following points apply in this case:<br>Value transfer = transfer of the condition value XKOMV-KWERT<br>Price transfer = transfer of the condition rate XKOMV-KBETR</p>
+<p>3. Which condition/subtotal line is taken into account?</p>
+<p>A condition is only taken into account if it is not inactive with one of the inactive indicators ‘AKLMXZ’.<br>For the settings ‘B’ (Cost), ‘C’ (Statistical value) and ‘9’ (Gross value), inactive conditions are not taken into account, even with ‘Y’.<br>It is of no consequence whether the condition is statistical or not.<br>Subtotal lines are always taken into account in the standard R/3 system because they never have an inactive indicator in R/3 standard pricing.</p>
+<p>4. In which cases is cumulation performed/not performed?</p>
+<p>a) With the ‘A’ setting (credit price), only the last line in the pricing result that has the setting ‘A’ and the satisfies the conditions specified in Point 3 below is taken into account (because multiple use of ‘A’ is permitted).<br>The credit price is always determined in the sales unit (VRKME). The condition price unit is always 1 in this case.</p>
+<p>Example: If the sales unit is KG, the credit price is determined “per 1 KG”.</p>
+<p>b) With all other settings, all lines that satisfy the conditions specified in Point 3 and have the relevant setting are taken into account, that is, the condition values of these lines are cumulated.</p>
+<p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
+<p>5. Which program contains the corresponding logic?</p>
+<p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
+<p>L O O P<br>LOOP AT xkomv.<br>…</p>
+<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
+<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
+<p>L O O P<br>ENDLOOP.</p>
+<p>6. Are the cumulative values stored in the database?</p>
+<p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
+<p>7. Can inactive conditions also be taken into account?</p>
+<p>This is possible if you use a corresponding condition value formula.</p>
+<p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
+<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
+<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
+<p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
+<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
+<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
+<p>8. Examples of how KZWIW is used:</p>
+<p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
+<p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
+<p>use the content of xworkl as condition basis<br>xkwert = xworkl.</p>
+<p>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For more details, see Note 155012.</p>
+<p>Note:<br>With 155012, the imported fields (for example, KOMP-ZZWI11) must be filled in each case using a condition value formula. However, to maintain a corresponding setting for the field name in the ‘Subto’ column of the pricing procedure (‘11’), the modifications in this note are insufficient.<br>Why are further modifications not recommended?</p>
+<p>a) Firstly, the value range of the R/3 standard data element KZWIW would have to be extended with the value ‘11’ (transaction SE11). However, the KZWIW data element has only one character. Therefore, the two-digit value ‘11’ is not possible.<br>You can only assign a vaule other than the values listed under Point 2 above (for example, N, O, P).</p>
+<p>b) In addition, the source code of the R/3 standard routine FORM XKOMV_BEWERTEN (Include LV61AA55) would have to be modified by including a relevant branch in the CASE statement from Question 5, for example:</p>
+<p>WHEN ‘N’. “ modification: ‘N’<br>ADD xkomv-kwert TO komp-zzwi11. “ cumulates in field zzwi11</p>
+<p>10. What you can do if the number of internal auxiliary variables (XWORKD -XWORKM) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For this purpose, a corresponding data declaration must be made in the LV61ATOP Top Include of the SAPLV61A program, for example:</p>
+<p>additional work field for xkomv_bewerten<br>DATA: zwork1 LIKE komv-kwert,</p>
+<p>You must then also fill the zwwork1 auxiliary variable using a condition value formula (see Question 9).</p>
+<p>Other terms</p>
+<p>KZWIW<br>Reason and Prerequisites</p>
+<p>These problems are due to the design of R/3 pricing.<br>Solution</p>
+<p>This is a consulting note. Other inquiries relating to the functions described above do not fall within the scope of ‘Support’, and are instead processed as part of consulting, which is subject to a separate charge.</p>
 ]]></content>
     
     
@@ -849,77 +890,11 @@ ENDIF<span class="built_in">.</span>
   </entry>
   
   <entry>
-    <title><![CDATA[关于价格条件中的小计]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/12/22/%E5%85%B3%E4%BA%8E%E4%BB%B7%E6%A0%BC%E6%9D%A1%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AE%A1%20(Libran-Fyg%20%E3%81%AE%E7%AB%B6%E5%90%88%E3%82%B3%E3%83%94%E3%83%BC%202014-08-01)/"/>
-    <id>http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/</id>
-    <published>2013-12-22T01:13:32.000Z</published>
-    <updated>2014-03-30T02:11:52.000Z</updated>
-    <content type="html"><![CDATA[<p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank">http://scn.sap.com/thread/1735194</a></p>
-<p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
-<p>Symptom</p>
-<p>Content overview:<br>1. What effect does an entry in the ‘Subto’ column<br>(KZWIW field) have?<br>2. Which settings are possible?<br>3. Which condition/subtotal line is taken into account?<br>4. In which cases is cumulation performed/not performed?<br>5. Which program contains the corresponding logic?<br>6. Are the cumulative values stored in the database?<br>7. Can inactive conditions also be taken into account?<br>8. Examples of how KZWIW is used<br>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient?<br>10. What you can do if the number of internal auxiliary variables<br>(XWORKD -XWORKM) is insufficient?</p>
-<p>1. What effect does an entry in the ‘Subto’ column (KZWIW field) have?</p>
-<p>You can make certain entries in the ‘Subto’ column (KZWIW field) in the Customizing settings for the pricing procedure. These determine that the condition value or the condition rate of the condition or subtotal line is copied into a certain field of the KOMP structure or into certain internal auxiliary variables (XWORKD - XWORKM). For more details, see Point 2 below.</p>
-<p>2. Which settings are possible?</p>
-<p>The following options are provided in R/3 standard pricing:</p>
-<p>1 Value transfer to KOMP-KZWI1<br>2 Value transfer to KOMP-KZWI2<br>3 Value transfer to KOMP-KZWI3<br>4 Value transfer to KOMP-KZWI4<br>5 Value transfer to KOMP-KZWI5<br>6 Value transfer to KOMP-KZWI6<br>7 Value transfer to KOMP-BONBA (Rebate basis)<br>8 Value transfer to KOMP-PREVA (Preference value)<br>9 Value transfer to KOMP-BRTWR (Gross value)<br>A Price transfer to KOMP-CMPRE (Credit price)<br>B Price transfer to KOMP-WAVWR (Cost)<br>C Value transfer to KOMP-GRWRT (Statistical value)<br>D Value transfer to XWORKD<br>E Value transfer to XWORKE<br>F Value transfer to XWORKF<br>G Value transfer to XWORKG<br>H Value transfer to XWORKH<br>I Value transfer to XWORKI<br>J Value transfer to XWORKJ<br>K Price transfer to XWORKK<br>L Price transfer to XWORKL<br>M Price transfer to XWORKM<br>S Value transfer to KOMP-EFFWR (Effective value)<br>Y Value transfer to KOMP-OIIDC (IS-OIL/only JVA CRP Pricing)<br>Z Value transfer to KOMP-OIEBC (IS-OIL/only JVA CRP Pricing)</p>
-<p>The following points apply in this case:<br>Value transfer = transfer of the condition value XKOMV-KWERT<br>Price transfer = transfer of the condition rate XKOMV-KBETR</p>
-<p>3. Which condition/subtotal line is taken into account?</p>
-<p>A condition is only taken into account if it is not inactive with one of the inactive indicators ‘AKLMXZ’.<br>For the settings ‘B’ (Cost), ‘C’ (Statistical value) and ‘9’ (Gross value), inactive conditions are not taken into account, even with ‘Y’.<br>It is of no consequence whether the condition is statistical or not.<br>Subtotal lines are always taken into account in the standard R/3 system because they never have an inactive indicator in R/3 standard pricing.</p>
-<p>4. In which cases is cumulation performed/not performed?</p>
-<p>a) With the ‘A’ setting (credit price), only the last line in the pricing result that has the setting ‘A’ and the satisfies the conditions specified in Point 3 below is taken into account (because multiple use of ‘A’ is permitted).<br>The credit price is always determined in the sales unit (VRKME). The condition price unit is always 1 in this case.</p>
-<p>Example: If the sales unit is KG, the credit price is determined “per 1 KG”.</p>
-<p>b) With all other settings, all lines that satisfy the conditions specified in Point 3 and have the relevant setting are taken into account, that is, the condition values of these lines are cumulated.</p>
-<p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
-<p>5. Which program contains the corresponding logic?</p>
-<p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
-<p>L O O P<br>LOOP AT xkomv.<br>…</p>
-<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
-<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
-<p>L O O P<br>ENDLOOP.</p>
-<p>6. Are the cumulative values stored in the database?</p>
-<p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
-<p>7. Can inactive conditions also be taken into account?</p>
-<p>This is possible if you use a corresponding condition value formula.</p>
-<p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
-<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
-<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
-<p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
-<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
-<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
-<p>8. Examples of how KZWIW is used:</p>
-<p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
-<p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
-<p>use the content of xworkl as condition basis<br>xkwert = xworkl.</p>
-<p>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient</p>
-<p>An enhancement is possible as part of a modification. For more details, see Note 155012.</p>
-<p>Note:<br>With 155012, the imported fields (for example, KOMP-ZZWI11) must be filled in each case using a condition value formula. However, to maintain a corresponding setting for the field name in the ‘Subto’ column of the pricing procedure (‘11’), the modifications in this note are insufficient.<br>Why are further modifications not recommended?</p>
-<p>a) Firstly, the value range of the R/3 standard data element KZWIW would have to be extended with the value ‘11’ (transaction SE11). However, the KZWIW data element has only one character. Therefore, the two-digit value ‘11’ is not possible.<br>You can only assign a vaule other than the values listed under Point 2 above (for example, N, O, P).</p>
-<p>b) In addition, the source code of the R/3 standard routine FORM XKOMV_BEWERTEN (Include LV61AA55) would have to be modified by including a relevant branch in the CASE statement from Question 5, for example:</p>
-<p>WHEN ‘N’. “ modification: ‘N’<br>ADD xkomv-kwert TO komp-zzwi11. “ cumulates in field zzwi11</p>
-<p>10. What you can do if the number of internal auxiliary variables (XWORKD -XWORKM) is insufficient</p>
-<p>An enhancement is possible as part of a modification. For this purpose, a corresponding data declaration must be made in the LV61ATOP Top Include of the SAPLV61A program, for example:</p>
-<p>additional work field for xkomv_bewerten<br>DATA: zwork1 LIKE komv-kwert,</p>
-<p>You must then also fill the zwwork1 auxiliary variable using a condition value formula (see Question 9).</p>
-<p>Other terms</p>
-<p>KZWIW<br>Reason and Prerequisites</p>
-<p>These problems are due to the design of R/3 pricing.<br>Solution</p>
-<p>This is a consulting note. Other inquiries relating to the functions described above do not fall within the scope of ‘Support’, and are instead processed as part of consulting, which is subject to a separate charge.</p>
-]]></content>
-    
-    
-      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
-    
-      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[sap 定价条件]]></title>
     <link href="http://fyg.xyjp.net/about/2013/12/20/sap-%E5%AE%9A%E4%BB%B7%E6%9D%A1%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2013/12/20/sap-定价条件/</id>
     <published>2013-12-20T12:23:08.000Z</published>
-    <updated>2014-03-30T02:12:15.000Z</updated>
+    <updated>2014-03-30T02:12:14.000Z</updated>
     <content type="html"><![CDATA[<p>这里简要解释一下:</p>
 <p>Counter：系统用它来显示计算方案中一个阶段内的存取编号。例如，你可以把所有运输附加费分配给步骤100，然而，可能有三个条件类型，每一个代表一个不同的运输附加费，因此你可以把步骤100分配一个运输条件类型，计数1；另一个分配给步骤100，计数2，另一个分配给步骤100，计数3。</p>
 <p>小计：是计算求和的字段，这些小计字段可以在订单/开票的用户出口中使用，其中小计1到小计6将更新VBAP和VBRP，以及SIS，所以经常用于各种报表。</p>
