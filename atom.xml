@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-08-10T03:02:57.580Z</updated>
+  <updated>2014-08-10T03:12:18.113Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -13,6 +13,18 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[test]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/08/10/test/"/>
+    <id>http://fyg.xyjp.net/about/2014/08/10/test/</id>
+    <published>2014-08-10T03:11:10.000Z</published>
+    <updated>2014-08-10T03:11:40.000Z</updated>
+    <content type="html"><![CDATA[<p>记得以前查过的，今天添加一个博客，又忘了。<br>备注一下吧。</p>
+]]></content>
+    
+    
+  </entry>
   
   <entry>
     <title><![CDATA[linux at命令解释及用法]]></title>
@@ -471,51 +483,6 @@ endform<span class="built_in">.</span>
   </entry>
   
   <entry>
-    <title><![CDATA[css针对IE浏览器设定]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
-    <published>2014-04-29T14:16:12.000Z</published>
-    <updated>2014-06-27T14:22:32.000Z</updated>
-    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
-      <span class="keyword">var</span> rv = -<span class="number">1</span>;
-      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">return</span> rv;
-  }
-  IEV = getIEVersion();
-  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
-      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
-  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
-      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
-  }
-</code></pre><p>接着在css里面进行设置：</p>
-<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
-    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
-    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
-<span class="rule">}</span></span>
-</code></pre>]]></content>
-    
-    
-      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[javascript导出csv文件]]></title>
     <link href="http://fyg.xyjp.net/about/2014/04/29/javascript%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/</id>
@@ -582,6 +549,51 @@ endform<span class="built_in">.</span>
     
     
       <category term="javascript" scheme="http://fyg.xyjp.net/about/tags/javascript/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:22:32.000Z</updated>
+    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
+      <span class="keyword">var</span> rv = -<span class="number">1</span>;
+      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">return</span> rv;
+  }
+  IEV = getIEVersion();
+  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
+      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
+  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
+      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
+  }
+</code></pre><p>接着在css里面进行设置：</p>
+<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
+    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
+    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
+<span class="rule">}</span></span>
+</code></pre>]]></content>
+    
+    
+      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
@@ -950,22 +962,6 @@ ENDIF<span class="built_in">.</span>
 <p>则开票时无法生成会计凭证。</p>
 <p>应计项：用于确定返利预提”accruals”科目（的“记帐码”）.</p>
 <p><img src="http://erphome.net/wdb/upload/forum5_f_2127.jpg" alt="pic"></p>
-]]></content>
-    
-    
-      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
-    
-      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[SAP操作（SD）]]></title>
-    <link href="http://fyg.xyjp.net/about/2013/11/28/sap%E6%93%8D%E4%BD%9C%EF%BC%88sd%EF%BC%89/"/>
-    <id>http://fyg.xyjp.net/about/2013/11/28/sap操作（sd）/</id>
-    <published>2013-11-27T18:05:12.000Z</published>
-    <updated>2014-03-30T02:12:39.000Z</updated>
-    <content type="html"><![CDATA[<p>1 定义销售组织：<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：販売組織</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at205423_zps68cc79b9.png" alt="salse setting"><br>输入销售<em>组织代码：FYG1 名称： FYG販売組織 货币：JPY</em> 保存。<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at210758_zps5b9c511e.png" alt="salse2"><br>2 定义分销渠道<br><em>企業構造➡販売管理➡定義、コピー、削除、チェック：流通チャンネル</em><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at211343_zps96a89d88.png" alt="salse chanel"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at230004_zpsc25ffaab.png" alt="２"><br>３　定义产品组<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at231725_zpsfcd942a9.png" alt="3"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at232918_zps3192e2c6.png" alt="32"><br>4 将销售组织分配至公司<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234630_zpsad7320e8.png" alt="33"><br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at234610_zps25f22eee.png" alt="333"><br>４　将分销渠道分配至销售组织<br><img src="http://i1066.photobucket.com/albums/u414/xiazhiyu/ScreenShot2013-11-27at235923_zps0e9f0035.png" alt="sss"></p>
 ]]></content>
     
     
