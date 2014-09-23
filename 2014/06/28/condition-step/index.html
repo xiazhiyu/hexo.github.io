@@ -88,10 +88,8 @@
 		</div>
 		
 		<p><em>1)概述</em></p>
-<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; </p>
-<pre><code><span class="subst">*</span><span class="keyword">LOOP</span>: 
-  <span class="keyword">loop</span> at xkomv<span class="built_in">.</span>
-<span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
+<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值;<br>    *LOOP:<br>      loop at xkomv.</p>
+<pre><code><span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
           perform konditionsbasis_ermitteln<span class="built_in">.</span>
 
 <span class="subst">*</span> scale basis changed <span class="literal">or</span> <span class="number">0</span>
@@ -113,11 +111,8 @@
       endif<span class="built_in">.</span>
 <span class="attribute">...</span><span class="built_in">..</span>
 endloop<span class="built_in">.</span>
-</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。</p>
-<pre><code>FORM xkomv_kwert_ermitteln<span class="built_in">.</span>
-  <span class="built_in">DATA</span>: xkbetr(<span class="number">16</span>) <span class="keyword">TYPE</span> p DECIMALS <span class="number">2.</span>
-  <span class="built_in">DATA</span>: cond_curr_is_euro, doc_curr_is_euro<span class="built_in">.</span>
-<span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
+</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。<br>    FORM xkomv_kwert_ermitteln.<br>      DATA: xkbetr(16) TYPE p DECIMALS 2.<br>      DATA: cond_curr_is_euro, doc_curr_is_euro.</p>
+<pre><code><span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
   <span class="keyword">IF</span> xkomv<span class="attribute">-kschl</span> <span class="subst">=</span> space <span class="literal">AND</span> xkomv<span class="attribute">-stunb</span> NE <span class="number">0.</span>
     CATCH SYSTEM<span class="attribute">-EXCEPTIONS</span> conversion_errors <span class="subst">=</span> <span class="number">1</span>
                             arithmetic_errors <span class="subst">=</span> <span class="number">5.</span>
@@ -134,23 +129,8 @@ endloop<span class="built_in">.</span>
 <span class="subst">*</span> no calculation for KDUPL conditions because condition value is
 <span class="subst">*</span> calculated <span class="keyword">by</span> formula <span class="number">36.</span>
   ELSEIF xkomv<span class="attribute">-kdupl</span> NE <span class="string">'B'</span><span class="built_in">.</span>
-</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。</p>
-<pre><code>form konditionsbasis_ermitteln<span class="built_in">.</span>
-  <span class="built_in">data</span>: da_xxmglme like komp<span class="attribute">-brgew</span>,
-        da_xxmeins like komp<span class="attribute">-gewei</span>,
-        da_fxmsg   like xkomv<span class="attribute">-fxmsg</span><span class="built_in">.</span>
-  <span class="built_in">data</span>: arbfeld_dec(<span class="number">16</span>) <span class="keyword">type</span> p decimals <span class="number">3.</span>
-  xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> <span class="number">0.</span>
-  <span class="keyword">if</span> xkomv<span class="attribute">-krech</span> ca prz_abs <span class="literal">and</span> <span class="literal">not</span> xkomv<span class="attribute">-krech</span> <span class="subst">=</span> <span class="string">'T'</span><span class="built_in">.</span>
-    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-stun2</span> ne <span class="number">0</span> <span class="literal">or</span> xkomv<span class="attribute">-koaid</span> <span class="subst">=</span> <span class="string">'D'</span><span class="built_in">.</span>
-      perform xkomv_kawrt_ermitteln<span class="built_in">.</span>
-      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> xkawrt<span class="built_in">.</span>
-    endif<span class="built_in">.</span>
-    <span class="keyword">if</span> xkomv<span class="attribute">-stunb</span> <span class="subst">=</span> <span class="number">0</span> <span class="literal">and</span> xkomv<span class="attribute">-stun2</span> <span class="subst">=</span> <span class="number">0.</span>
-      xkomv<span class="attribute">-kawrt</span> <span class="subst">=</span> zwisu<span class="built_in">.</span>
-    endif<span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-</code></pre><p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
+</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。<br>    form konditionsbasis_ermitteln.<br>      data: da_xxmglme like komp-brgew,<br>            da_xxmeins like komp-gewei,<br>            da_fxmsg   like xkomv-fxmsg.<br>      data: arbfeld_dec(16) type p decimals 3.<br>      xkomv-kawrt = 0.<br>      if xkomv-krech ca prz_abs and not xkomv-krech = ‘T’.<br>        if xkomv-stunb ne 0 or xkomv-stun2 ne 0 or xkomv-koaid = ‘D’.<br>          perform xkomv_kawrt_ermitteln.<br>          xkomv-kawrt = xkawrt.<br>        endif.<br>        if xkomv-stunb = 0 and xkomv-stun2 = 0.<br>          xkomv-kawrt = zwisu.<br>        endif.<br>      endif.</p>
+<p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
 <pre><code>form xkomv_kawrt_ermitteln<span class="built_in">.</span>
 
   <span class="built_in">data</span>:  axkomv like komv<span class="built_in">.</span>
@@ -279,7 +259,7 @@ endform<span class="built_in">.</span>
 		
 			<li><a href="/categories/Tips/" title="Tips">Tips<sup>2</sup></a></li>
 		
-			<li><a href="/categories/生活/" title="生活">生活<sup>11</sup></a></li>
+			<li><a href="/categories/生活/" title="生活">生活<sup>16</sup></a></li>
 		
 			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
 		
@@ -299,6 +279,8 @@ endform<span class="built_in">.</span>
 			<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
 		
 			<li><a href="/tags/JAVA/" title="JAVA">JAVA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Lamy/" title="Lamy">Lamy<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Melancholia/" title="Melancholia">Melancholia<sup>1</sup></a></li>
 		
@@ -331,8 +313,6 @@ endform<span class="built_in">.</span>
 			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
 		
 			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
-		
-			<li><a href="/tags/摄影/" title="摄影">摄影<sup>1</sup></a></li>
 		
 		</ul>
 </div>
