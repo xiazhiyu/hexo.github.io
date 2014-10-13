@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://fyg.xyjp.net/about/"/>
-  <updated>2014-09-23T11:15:16.070Z</updated>
+  <updated>2014-10-13T03:47:27.036Z</updated>
   <id>http://fyg.xyjp.net/about/</id>
   
   <author>
@@ -15,44 +15,57 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[社員旅行：韓国①]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip/"/>
-    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip/</id>
-    <published>2014-09-23T05:19:59.000Z</published>
-    <updated>2014-09-23T07:55:31.000Z</updated>
-    <content type="html"><![CDATA[<p>行程：<br>周五晚：羽田空港➡Gimpo(金浦)机场➡hotel<br>周六：南大门➡梨花女子大学➡江南区一个公园<br>周日：明洞附近<br>这是hotel：<br><img src="http://picforxyjp.qiniudn.com/hotel2014-09-21%209%2059%2001.jpg" alt="hotel1"><br><img src="http://picforxyjp.qiniudn.com/%E5%86%99%E7%9C%9F%202014-09-20%200%2028%2023.jpg" alt="hotel2"><br>所谓大汉门。里面没什么看头，只有定时的表演还可看看。<br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2033%2005.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2045%2035.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2046%2012.jpg" alt="uni2"><br><img src="http://picforxyjp.qiniudn.com/biaoyan12014-09-20%2011%2005%2053.jpg" alt="biaoyan1"><br><img src="http://picforxyjp.qiniudn.com/biaoyan22014-09-20%2011%2005%2032.jpg" alt="biaoyan2"><br><img src="http://picforxyjp.qiniudn.com/guzhuang2014-09-20%2010%2059%2057.jpg" alt="guzhuang1"><br><img src="http://picforxyjp.qiniudn.com/guzhuang22014-09-20%2011%2000%2037.jpg" alt="guzhuang2"></p>
-]]></content>
+    <title><![CDATA[va01/02创建临时表]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/10/13/va01.02%E5%88%9B%E5%BB%BA%E4%B8%B4%E6%97%B6%E8%A1%A8/"/>
+    <id>http://fyg.xyjp.net/about/2014/10/13/va01.02创建临时表/</id>
+    <published>2014-10-13T03:10:04.000Z</published>
+    <updated>2014-10-13T03:46:27.000Z</updated>
+    <content type="html"><![CDATA[<p>想在订单中品目被更改时从材料主数据中获取制品的代表机种号（扩展项目）等其他信息，并将该信息在其他exit中获取使用。<br>原本考虑是在subroutine：MV45AI0V_VBAP-MATNR_PRUEFEN中根据品目号从主数据中select取得，放入内表，再将内表EXPORT到内存。接着在其他exit中从内存中import使用。<br>但这种放入内存的方式不太保险，因此日本人说还是将销售明细vbap扩展放到扩展项目里面吧。<br>当然这种方法导致增加订单明细许多无用的项目也不太好。<br>因此考虑为什么不在更高级别定义内表呢，这样在MV45AI0V_VBAP-MATNR_PRUEFEN添加或者修改，在其他exit中使用。<br>因为觉得和komp相似。因此就跟这些内表定义在一起。<br>位置： SAPMV45A  KONVDATA</p>
+<pre><code>TYPES: <span class="operator"><span class="keyword">BEGIN</span> <span class="keyword">OF</span> TEST,
+        MATNR <span class="keyword">LIKE</span> VBAP-MATNR,
+        DAIHYOUKISYU <span class="keyword">LIKE</span> VBAP-MATNR,   //*代表機種
+        <span class="keyword">END</span> <span class="keyword">OF</span> TEST.
+DATA itable_test_sorted TYPE SORTED <span class="keyword">TABLE</span> <span class="keyword">OF</span> TEST <span class="keyword">WITH</span> <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> MATNR.</span>
+</code></pre><p>接着在MV45AI0V_VBAP-MATNR_PRUEFEN（末尾，标准程序下大约80行左右）添加和修改数据：</p>
+<pre><code><span class="keyword">IF</span> VBAP<span class="attribute">-MATNR</span> NE <span class="subst">*</span>VBAP<span class="attribute">-MATNR</span> <span class="literal">OR</span>
+   <span class="literal">NOT</span> MATNR_CHANGED IS INITIAL <span class="literal">OR</span>
+   SVBAP<span class="attribute">-TABIX</span> <span class="subst">=</span> <span class="number">0.</span>
+  <span class="comment">//*********当品目被修改时执行以下代码</span>
+  TYPES: BEGIN OF T_TEST,
+    MATNR LIKE VBAP<span class="attribute">-MATNR</span>,
+    DAIHYOUKISYU LIKE VBAP<span class="attribute">-MATNR</span>,   <span class="comment">//*代表機種</span>
+  END OF T_TEST<span class="built_in">.</span>
+
+  <span class="built_in">DATA</span>: TEST <span class="keyword">TYPE</span> T_TEST,
+        ITABLE_TEST<span class="built_in">.</span>
+
+  TEST<span class="attribute">-MATNR</span> <span class="subst">=</span> VBAP<span class="attribute">-MATNR</span><span class="built_in">.</span>
+  TEST<span class="attribute">-DAIHYOUKISYU</span> <span class="subst">=</span> <span class="string">'TEST_KISYU'</span><span class="built_in">.</span>  <span class="comment">//*测试用随便写的数据，实际是从主数据中select后赋值</span>
+
+  READ TABLE itable_test_sorted <span class="keyword">INTO</span> ITABLE_TEST <span class="keyword">WITH</span> KEY MATNR <span class="subst">=</span> TEST<span class="attribute">-MATNR</span><span class="built_in">.</span>
+  <span class="keyword">IF</span> SY<span class="attribute">-SUBRC</span> <span class="literal">EQ</span> <span class="number">0.</span>
+    MODIFY itable_test_sorted FROM TEST INDEX SY<span class="attribute">-TABIX</span><span class="built_in">.</span>
+  <span class="keyword">ELSE</span><span class="built_in">.</span>
+    APPEND TEST <span class="keyword">TO</span> itable_test_sorted<span class="built_in">.</span>
+  ENDIF<span class="built_in">.</span>
+  <span class="comment">//*************</span>
+ENDIF<span class="built_in">.</span>
+</code></pre>]]></content>
     
     
-      <category term="旅游" scheme="http://fyg.xyjp.net/about/tags/%E6%97%85%E6%B8%B8/"/>
+      <category term="sap" scheme="http://fyg.xyjp.net/about/tags/sap/"/>
     
-      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="SAP" scheme="http://fyg.xyjp.net/about/categories/SAP/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[社員旅行：韓国②]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip2/"/>
-    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip2/</id>
+    <title><![CDATA[奈良:東大寺]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/09/23/nara-trip/"/>
+    <id>http://fyg.xyjp.net/about/2014/09/23/nara-trip/</id>
     <published>2014-09-23T05:19:59.000Z</published>
-    <updated>2014-09-23T06:42:59.000Z</updated>
-    <content type="html"><![CDATA[<p>南大门<br><img src="http://picforxyjp.qiniudn.com/nandamen32014-09-20%2011%2036%2022.jpg" alt="nandamen"><br><img src="http://picforxyjp.qiniudn.com/nandamen42014-09-20%2011%2036%2019.jpg" alt="nandamen2"><br>梨花女子大学<br><img src="http://picforxyjp.qiniudn.com/uni32014-09-20%2013%2033%2046.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/uni22014-09-20%2013%2034%2027.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/uni2014-09-20%2013%2035%2059.jpg" alt="uni2"></p>
-]]></content>
-    
-    
-      <category term="旅游" scheme="http://fyg.xyjp.net/about/tags/%E6%97%85%E6%B8%B8/"/>
-    
-      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[社員旅行：韓国③]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip3/"/>
-    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip3/</id>
-    <published>2014-09-23T05:19:59.000Z</published>
-    <updated>2014-09-23T08:03:19.000Z</updated>
-    <content type="html"><![CDATA[<p>什么广场（忘了名了）<br><img src="http://picforxyjp.qiniudn.com/guangchang22014-09-20%2011%2014%2050.jpg" alt="nandamen"><br><img src="http://picforxyjp.qiniudn.com/guangchang2014-09-20%2011%2014%2053.jpg" alt="nandamen2"><br>街景<br><img src="http://picforxyjp.qiniudn.com/street2014-09-20%2011%2058%2032.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/metro2014-09-20%2015%2044%2020.jpg" alt="metro"><br><img src="http://picforxyjp.qiniudn.com/renxiang2014-09-20%2016%2008%2059.jpg" alt="renxiang"><br>广场上的演讲（不知道在讲什么）<br><img src="http://picforxyjp.qiniudn.com/yanjiang22014-09-20%2011%2026%2000.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/yanjiang2014-09-20%2011%2026%2002.jpg" alt="uni2"></p>
+    <updated>2014-09-23T09:22:35.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://picforxyjp.qiniudn.com/nara_todaiji2014-09-15%2016%2049%2051.jpg" alt="toudaji"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2001%2059.jpg" alt="toudaji3"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2003%2046.jpg" alt="toudaji4"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2016%2006.jpg" alt="toudaji6"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2024%2034.jpg" alt="toudaji7"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2027%2019.jpg" alt="toudaji8"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2053%2010.jpg" alt="toudaji9"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2057%2018.jpg" alt="toudaji10"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2058%2032.jpg" alt="toudaji11"><br><img src="http://picforxyjp.qiniudn.com/toudaji2014-09-15%2017%2011%2046.jpg" alt="toudaji12"></p>
 ]]></content>
     
     
@@ -79,12 +92,44 @@
   </entry>
   
   <entry>
-    <title><![CDATA[奈良:東大寺]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/09/23/nara-trip/"/>
-    <id>http://fyg.xyjp.net/about/2014/09/23/nara-trip/</id>
+    <title><![CDATA[社員旅行：韓国③]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip3/"/>
+    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip3/</id>
     <published>2014-09-23T05:19:59.000Z</published>
-    <updated>2014-09-23T09:22:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://picforxyjp.qiniudn.com/nara_todaiji2014-09-15%2016%2049%2051.jpg" alt="toudaji"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2001%2059.jpg" alt="toudaji3"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2003%2046.jpg" alt="toudaji4"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2016%2006.jpg" alt="toudaji6"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2024%2034.jpg" alt="toudaji7"><br><img src="http://picforxyjp.qiniudn.com/nara_todaji2014-09-15%2017%2027%2019.jpg" alt="toudaji8"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2053%2010.jpg" alt="toudaji9"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2057%2018.jpg" alt="toudaji10"><br><img src="http://picforxyjp.qiniudn.com/todaji2014-09-15%2016%2058%2032.jpg" alt="toudaji11"><br><img src="http://picforxyjp.qiniudn.com/toudaji2014-09-15%2017%2011%2046.jpg" alt="toudaji12"></p>
+    <updated>2014-09-23T08:03:19.000Z</updated>
+    <content type="html"><![CDATA[<p>什么广场（忘了名了）<br><img src="http://picforxyjp.qiniudn.com/guangchang22014-09-20%2011%2014%2050.jpg" alt="nandamen"><br><img src="http://picforxyjp.qiniudn.com/guangchang2014-09-20%2011%2014%2053.jpg" alt="nandamen2"><br>街景<br><img src="http://picforxyjp.qiniudn.com/street2014-09-20%2011%2058%2032.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/metro2014-09-20%2015%2044%2020.jpg" alt="metro"><br><img src="http://picforxyjp.qiniudn.com/renxiang2014-09-20%2016%2008%2059.jpg" alt="renxiang"><br>广场上的演讲（不知道在讲什么）<br><img src="http://picforxyjp.qiniudn.com/yanjiang22014-09-20%2011%2026%2000.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/yanjiang2014-09-20%2011%2026%2002.jpg" alt="uni2"></p>
+]]></content>
+    
+    
+      <category term="旅游" scheme="http://fyg.xyjp.net/about/tags/%E6%97%85%E6%B8%B8/"/>
+    
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[社員旅行：韓国②]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip2/"/>
+    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip2/</id>
+    <published>2014-09-23T05:19:59.000Z</published>
+    <updated>2014-09-23T06:42:59.000Z</updated>
+    <content type="html"><![CDATA[<p>南大门<br><img src="http://picforxyjp.qiniudn.com/nandamen32014-09-20%2011%2036%2022.jpg" alt="nandamen"><br><img src="http://picforxyjp.qiniudn.com/nandamen42014-09-20%2011%2036%2019.jpg" alt="nandamen2"><br>梨花女子大学<br><img src="http://picforxyjp.qiniudn.com/uni32014-09-20%2013%2033%2046.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/uni22014-09-20%2013%2034%2027.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/uni2014-09-20%2013%2035%2059.jpg" alt="uni2"></p>
+]]></content>
+    
+    
+      <category term="旅游" scheme="http://fyg.xyjp.net/about/tags/%E6%97%85%E6%B8%B8/"/>
+    
+      <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[社員旅行：韓国①]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/09/23/korean-trip/"/>
+    <id>http://fyg.xyjp.net/about/2014/09/23/korean-trip/</id>
+    <published>2014-09-23T05:19:59.000Z</published>
+    <updated>2014-09-23T07:55:31.000Z</updated>
+    <content type="html"><![CDATA[<p>行程：<br>周五晚：羽田空港➡Gimpo(金浦)机场➡hotel<br>周六：南大门➡梨花女子大学➡江南区一个公园<br>周日：明洞附近<br>这是hotel：<br><img src="http://picforxyjp.qiniudn.com/hotel2014-09-21%209%2059%2001.jpg" alt="hotel1"><br><img src="http://picforxyjp.qiniudn.com/%E5%86%99%E7%9C%9F%202014-09-20%200%2028%2023.jpg" alt="hotel2"><br>所谓大汉门。里面没什么看头，只有定时的表演还可看看。<br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2033%2005.jpg" alt="uni0"><br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2045%2035.jpg" alt="uni1"><br><img src="http://picforxyjp.qiniudn.com/dahanmen2014-09-20%2010%2046%2012.jpg" alt="uni2"><br><img src="http://picforxyjp.qiniudn.com/biaoyan12014-09-20%2011%2005%2053.jpg" alt="biaoyan1"><br><img src="http://picforxyjp.qiniudn.com/biaoyan22014-09-20%2011%2005%2032.jpg" alt="biaoyan2"><br><img src="http://picforxyjp.qiniudn.com/guzhuang2014-09-20%2010%2059%2057.jpg" alt="guzhuang1"><br><img src="http://picforxyjp.qiniudn.com/guzhuang22014-09-20%2011%2000%2037.jpg" alt="guzhuang2"></p>
 ]]></content>
     
     
@@ -99,8 +144,8 @@
     <link href="http://fyg.xyjp.net/about/2014/09/23/sap%20gui%20730%20java%E7%89%88%E6%9C%AC%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5/"/>
     <id>http://fyg.xyjp.net/about/2014/09/23/sap gui 730 java版本配置连接/</id>
     <published>2014-09-22T18:05:12.000Z</published>
-    <updated>2014-09-23T11:15:03.000Z</updated>
-    <content type="html"><![CDATA[<p>最新的sap gui 730 java（mac适用）版本。<br>百度网盘：<br>新建连接，然后切到 advance 页，将 expert mode 勾选上。<br>对于直接连sap服务器按如下格式编写连接串:<br>    conn=/H/192.168.1.2/S/3200<br>对于要用 router 远程连接:<br>    conn=/H/<router_addrress>/S/<router_port>/H/192.168.1.2/S/3200</p>
+    <updated>2014-10-13T03:37:18.000Z</updated>
+    <content type="html"><![CDATA[<p>最新的sap gui 730 java（mac适用）版本。<br>百度网盘：<br>链接: <a href="http://pan.baidu.com/s/1qWkD2MC" target="_blank">http://pan.baidu.com/s/1qWkD2MC</a> 密码: 7uh1<br>新建连接，然后切到 advance 页，将 expert mode 勾选上。<br>对于直接连sap服务器按如下格式编写连接串:<br>    conn=/H/192.168.1.2/S/3200<br>对于要用 router 远程连接:<br>    conn=/H/<router_addrress>/S/<router_port>/H/192.168.1.2/S/3200</p>
 <p>感觉页面还是挺清新的。<br><img src="http://picforxyjp.qiniudn.com/sap%20gui%20java2014-09-23%2020.12.42.png" alt="sap_java_gui"></p>
 ]]></content>
     
@@ -559,51 +604,6 @@ endform<span class="built_in">.</span>
   </entry>
   
   <entry>
-    <title><![CDATA[css针对IE浏览器设定]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
-    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
-    <published>2014-04-29T14:16:12.000Z</published>
-    <updated>2014-06-27T14:22:32.000Z</updated>
-    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
-      <span class="keyword">var</span> rv = -<span class="number">1</span>;
-      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
-          <span class="keyword">var</span> ua = navigator.userAgent;
-          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
-          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
-          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
-      }
-      <span class="keyword">return</span> rv;
-  }
-  IEV = getIEVersion();
-  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
-      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
-  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
-      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
-  }
-</code></pre><p>接着在css里面进行设置：</p>
-<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
-    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
-<span class="rule">}</span></span>
-<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
-    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
-<span class="rule">}</span></span>
-</code></pre>]]></content>
-    
-    
-      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[javascript导出csv文件]]></title>
     <link href="http://fyg.xyjp.net/about/2014/04/29/javascript%E5%AF%BC%E5%87%BAcsv%E6%96%87%E4%BB%B6/"/>
     <id>http://fyg.xyjp.net/about/2014/04/29/javascript导出csv文件/</id>
@@ -670,6 +670,51 @@ endform<span class="built_in">.</span>
     
     
       <category term="javascript" scheme="http://fyg.xyjp.net/about/tags/javascript/"/>
+    
+      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[css针对IE浏览器设定]]></title>
+    <link href="http://fyg.xyjp.net/about/2014/04/29/css%E9%92%88%E5%AF%B9ie%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BE%E5%AE%9A/"/>
+    <id>http://fyg.xyjp.net/about/2014/04/29/css针对ie浏览器设定/</id>
+    <published>2014-04-29T14:16:12.000Z</published>
+    <updated>2014-06-27T14:22:32.000Z</updated>
+    <content type="html"><![CDATA[<p>以前没怎么关心过这个问题。看到一个比较好的解决方案是：先在javascript中判断IE版本，然后将版本信息加入html元素的class中。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">getIEVersion</span><span class="params">()</span> {</span>
+      <span class="keyword">var</span> rv = -<span class="number">1</span>;
+      <span class="keyword">if</span> (navigator.appName == <span class="string">'Microsoft Internet Explorer'</span>) {
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"MSIE ([0-9]{1,}[\.0-9]{0,})"</span>);
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Netscape'</span>){
+          <span class="keyword">var</span> ua = navigator.userAgent;
+          <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"Trident/.*rv:([0-9]{1,}[\.0-9]{0,})"</span>); <span class="comment">//for IE 11</span>
+          <span class="keyword">if</span> (re.exec(ua) != <span class="literal">null</span>)
+          rv = <span class="built_in">parseFloat</span>(<span class="built_in">RegExp</span>.$<span class="number">1</span>);
+      }
+      <span class="keyword">return</span> rv;
+  }
+  IEV = getIEVersion();
+  <span class="keyword">if</span>(IEV&gt;=<span class="number">6</span>&amp;&amp;IEV&lt;<span class="number">9</span>){
+      window.location.href=<span class="string">"http://no-surport.***.com"</span>; <span class="comment">//IE6~8就不支持了  </span>
+  }<span class="keyword">else</span> <span class="keyword">if</span>(IEV&gt;=<span class="number">9</span>){
+      document.documentElement.className+=<span class="string">' ie ie'</span>+IEV; <span class="comment">//将ie及版本信息加入html的class中。</span>
+  }
+</code></pre><p>接着在css里面进行设置：</p>
+<pre><code><span class="class">.ie9</span> <span class="class">.fiterMask</span><span class="rules">{
+    <span class="rule"><span class="attribute">filter</span>:<span class="value"> progid:DXImageTransform.Microsoft.<span class="function">Blur(PixelRadius=<span class="number">10</span>, MakeShadow=false)</span></span></span>;
+<span class="rule">}</span></span>
+<span class="class">.ie</span> <span class="class">.loginDiv</span><span class="rules">{
+    <span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">50</span>em</span></span>;
+<span class="rule">}</span></span>
+</code></pre>]]></content>
+    
+    
+      <category term="CSS" scheme="http://fyg.xyjp.net/about/tags/CSS/"/>
     
       <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
@@ -754,27 +799,6 @@ endform<span class="built_in">.</span>
       <category term="情感" scheme="http://fyg.xyjp.net/about/tags/%E6%83%85%E6%84%9F/"/>
     
       <category term="生活" scheme="http://fyg.xyjp.net/about/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[将博客迁移至Github]]></title>
-    <link href="http://fyg.xyjp.net/about/2014/03/29/blog-move/"/>
-    <id>http://fyg.xyjp.net/about/2014/03/29/blog-move/</id>
-    <published>2014-03-29T01:58:33.000Z</published>
-    <updated>2014-03-30T10:25:36.000Z</updated>
-    <content type="html"><![CDATA[<p>终于决定要使用Github pages了。使用的hexo。<br>做下记录：</p>
-<ol>
-<li>wordpress 迁移至 hexo 可以使用插件 hexo-migrator-wordpress</li>
-<li>有时明明已经安装hexo会出现无法识别hexo命令的问题，往往出在 nodejs 版本原因上，在nvm上指定版本即可</li>
-<li>Github上新建Respository时，名称应为:「账户名称.github.io」。自己起初只输入账户名，没有输入后缀，折腾了好久。</li>
-</ol>
-]]></content>
-    
-    
-      <category term="Github" scheme="http://fyg.xyjp.net/about/tags/Github/"/>
-    
-      <category term="Develop" scheme="http://fyg.xyjp.net/about/categories/Develop/"/>
     
   </entry>
   

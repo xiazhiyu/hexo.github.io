@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>IE各バージョンを判断す簡潔な方法 | Cheney Fan&#39;s Blog</title>
+    <title>va01/02创建临时表 | Cheney Fan&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Cheney Fan">
     
-    <meta name="description" content="/*@cc_on alert(document.documentMode||( document.compatMode == &quot;CSS1Compat&quot; ? &quot;XMLHttpRequest&quot; in window ? @_jscript_version*10-50">
+    <meta name="description" content="想在订单中品目被更改时从材料主数据中获取制品的代表机种号（扩展项目）等其他信息，并将该信息在其他exit中获取使用。原本考虑是在subroutine：MV45AI0V_VBAP-MATNR_PRUEFEN中根据品目号从主数据中select取得，放入内表，再将内表EXPORT到内存。接着在其他exit">
     
     
     
@@ -66,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2013/06/14/ie各バージョンを判断す簡潔な方法/" title="IE各バージョンを判断す簡潔な方法" itemprop="url">IE各バージョンを判断す簡潔な方法</a>
+      <a href="/2014/10/13/va01.02创建临时表/" title="va01/02创建临时表" itemprop="url">va01/02创建临时表</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
     </p>
   <p class="article-time">
-    <time datetime="2013-06-14T13:43:03.000Z" itemprop="datePublished">6月 14 2013</time>
-    更新日期:<time datetime="2014-03-30T01:06:10.000Z" itemprop="dateModified">3月 30 2014</time>
+    <time datetime="2014-10-13T03:10:04.000Z" itemprop="datePublished">10月 13 2014</time>
+    更新日期:<time datetime="2014-10-13T03:46:27.000Z" itemprop="dateModified">10月 13 2014</time>
     
   </p>
 </header>
@@ -86,27 +86,56 @@
 		
 		</div>
 		
-		<pre class="prettyprint linenums">/*@cc_on alert(document.documentMode||( document.compatMode == &quot;CSS1Compat&quot; ? &quot;XMLHttpRequest&quot; in window ? @_jscript_version*10-50 : 6 : 5)) @*/
-// コメント：/*@cc_on …. @*/　を必要</pre>  
+		<p>想在订单中品目被更改时从材料主数据中获取制品的代表机种号（扩展项目）等其他信息，并将该信息在其他exit中获取使用。<br>原本考虑是在subroutine：MV45AI0V_VBAP-MATNR_PRUEFEN中根据品目号从主数据中select取得，放入内表，再将内表EXPORT到内存。接着在其他exit中从内存中import使用。<br>但这种放入内存的方式不太保险，因此日本人说还是将销售明细vbap扩展放到扩展项目里面吧。<br>当然这种方法导致增加订单明细许多无用的项目也不太好。<br>因此考虑为什么不在更高级别定义内表呢，这样在MV45AI0V_VBAP-MATNR_PRUEFEN添加或者修改，在其他exit中使用。<br>因为觉得和komp相似。因此就跟这些内表定义在一起。<br>位置： SAPMV45A  KONVDATA</p>
+<pre><code>TYPES: <span class="operator"><span class="keyword">BEGIN</span> <span class="keyword">OF</span> TEST,
+        MATNR <span class="keyword">LIKE</span> VBAP-MATNR,
+        DAIHYOUKISYU <span class="keyword">LIKE</span> VBAP-MATNR,   //*代表機種
+        <span class="keyword">END</span> <span class="keyword">OF</span> TEST.
+DATA itable_test_sorted TYPE SORTED <span class="keyword">TABLE</span> <span class="keyword">OF</span> TEST <span class="keyword">WITH</span> <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> MATNR.</span>
+</code></pre><p>接着在MV45AI0V_VBAP-MATNR_PRUEFEN（末尾，标准程序下大约80行左右）添加和修改数据：</p>
+<pre><code><span class="keyword">IF</span> VBAP<span class="attribute">-MATNR</span> NE <span class="subst">*</span>VBAP<span class="attribute">-MATNR</span> <span class="literal">OR</span>
+   <span class="literal">NOT</span> MATNR_CHANGED IS INITIAL <span class="literal">OR</span>
+   SVBAP<span class="attribute">-TABIX</span> <span class="subst">=</span> <span class="number">0.</span>
+  <span class="comment">//*********当品目被修改时执行以下代码</span>
+  TYPES: BEGIN OF T_TEST,
+    MATNR LIKE VBAP<span class="attribute">-MATNR</span>,
+    DAIHYOUKISYU LIKE VBAP<span class="attribute">-MATNR</span>,   <span class="comment">//*代表機種</span>
+  END OF T_TEST<span class="built_in">.</span>
+
+  <span class="built_in">DATA</span>: TEST <span class="keyword">TYPE</span> T_TEST,
+        ITABLE_TEST<span class="built_in">.</span>
+
+  TEST<span class="attribute">-MATNR</span> <span class="subst">=</span> VBAP<span class="attribute">-MATNR</span><span class="built_in">.</span>
+  TEST<span class="attribute">-DAIHYOUKISYU</span> <span class="subst">=</span> <span class="string">'TEST_KISYU'</span><span class="built_in">.</span>  <span class="comment">//*测试用随便写的数据，实际是从主数据中select后赋值</span>
+
+  READ TABLE itable_test_sorted <span class="keyword">INTO</span> ITABLE_TEST <span class="keyword">WITH</span> KEY MATNR <span class="subst">=</span> TEST<span class="attribute">-MATNR</span><span class="built_in">.</span>
+  <span class="keyword">IF</span> SY<span class="attribute">-SUBRC</span> <span class="literal">EQ</span> <span class="number">0.</span>
+    MODIFY itable_test_sorted FROM TEST INDEX SY<span class="attribute">-TABIX</span><span class="built_in">.</span>
+  <span class="keyword">ELSE</span><span class="built_in">.</span>
+    APPEND TEST <span class="keyword">TO</span> itable_test_sorted<span class="built_in">.</span>
+  ENDIF<span class="built_in">.</span>
+  <span class="comment">//*************</span>
+ENDIF<span class="built_in">.</span>
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/javascript/">javascript</a>
+  <span></span> <a href="/tags/sap/">sap</a>
   </div>
 
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  <a class="article-category-link" href="/categories/SAP/">SAP</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://fyg.xyjp.net/about/2013/06/14/ie各バージョンを判断す簡潔な方法/" data-title="IE各バージョンを判断す簡潔な方法 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://fyg.xyjp.net/about/2014/10/13/va01.02创建临时表/" data-title="va01/02创建临时表 | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -115,19 +144,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2013/06/14/判断ie各版本的简洁办法/" title="判断IE各版本的简洁办法">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  判断IE各版本的简洁办法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2013/06/07/lamy-钢笔/"  title="Lamy 钢笔">
+<a href="/2014/09/23/nara-trip/"  title="奈良:東大寺">
  <strong>NEXT:</strong><br/> 
- <span>Lamy 钢笔
+ <span>奈良:東大寺
 </span>
 </a>
 </div>
@@ -256,7 +277,7 @@
 <script>
   var disqus_shortname = 'xyjp';
   
-  var disqus_url = 'http://fyg.xyjp.net/about/2013/06/14/ie各バージョンを判断す簡潔な方法/';
+  var disqus_url = 'http://fyg.xyjp.net/about/2014/10/13/va01.02创建临时表/';
   
   (function(){
     var dsq = document.createElement('script');
