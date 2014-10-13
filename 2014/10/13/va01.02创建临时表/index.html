@@ -74,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-10-13T03:10:04.000Z" itemprop="datePublished">10月 13 2014</time>
-    更新日期:<time datetime="2014-10-13T03:46:27.000Z" itemprop="dateModified">10月 13 2014</time>
+    更新日期:<time datetime="2014-10-13T03:51:34.000Z" itemprop="dateModified">10月 13 2014</time>
     
   </p>
 </header>
@@ -86,7 +86,7 @@
 		
 		</div>
 		
-		<p>想在订单中品目被更改时从材料主数据中获取制品的代表机种号（扩展项目）等其他信息，并将该信息在其他exit中获取使用。<br>原本考虑是在subroutine：MV45AI0V_VBAP-MATNR_PRUEFEN中根据品目号从主数据中select取得，放入内表，再将内表EXPORT到内存。接着在其他exit中从内存中import使用。<br>但这种放入内存的方式不太保险，因此日本人说还是将销售明细vbap扩展放到扩展项目里面吧。<br>当然这种方法导致增加订单明细许多无用的项目也不太好。<br>因此考虑为什么不在更高级别定义内表呢，这样在MV45AI0V_VBAP-MATNR_PRUEFEN添加或者修改，在其他exit中使用。<br>因为觉得和komp相似。因此就跟这些内表定义在一起。<br>位置： SAPMV45A  KONVDATA</p>
+		<p>想在订单中品目被更改时从材料主数据中获取制品的代表机种号（扩展项目）等其他信息，并将该信息在其他exit中获取使用。<br>原本考虑是在subroutine：MV45AI0V_VBAP-MATNR_PRUEFEN中根据品目号从主数据中select取得，放入内表，再将内表EXPORT到内存。接着在其他exit中从内存中import使用。<br>但这种放入内存的方式不太保险，因此日本人说还是将销售明细vbap扩展放到扩展项目里面吧。<br>不过这样会导致增加订单明细许多无用的项目也不太好。<br>因此考虑为什么不在更高级别定义内表呢，这样在MV45AI0V_VBAP-MATNR_PRUEFEN添加或者修改，在其他exit中使用。<br>因为觉得和komp相似，就和那些内表定义在一起。<br>位置： SAPMV45A  KONVDATA</p>
 <pre><code>TYPES: <span class="operator"><span class="keyword">BEGIN</span> <span class="keyword">OF</span> TEST,
         MATNR <span class="keyword">LIKE</span> VBAP-MATNR,
         DAIHYOUKISYU <span class="keyword">LIKE</span> VBAP-MATNR,   //*代表機種
@@ -146,9 +146,9 @@ ENDIF<span class="built_in">.</span>
  
 
 <div class="next">
-<a href="/2014/09/23/nara-trip/"  title="奈良:東大寺">
+<a href="/2014/09/23/korean-trip/"  title="社員旅行：韓国①">
  <strong>NEXT:</strong><br/> 
- <span>奈良:東大寺
+ <span>社員旅行：韓国①
 </span>
 </a>
 </div>
