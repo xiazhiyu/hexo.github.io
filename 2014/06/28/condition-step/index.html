@@ -1,353 +1,382 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-TW">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2) | Cheney Fan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="Cheney Fan">
-    
-    <meta name="description" content="1)概述
-对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。在LV61AA55单元会">
-    
-    
-    
-    
-    <link rel="alternative" href="/atom.xml" title="Cheney Fan&#39;s Blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2) | 光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1)概述
+对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; 
+*LOOP: 
+  loop at xkomv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)">
+<meta property="og:url" content="http://fyg.xyjp.net/about/2014/06/28/condition-step/">
+<meta property="og:site_name" content="光">
+<meta property="og:description" content="1)概述
+对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; 
+*LOOP: 
+  loop at xkomv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)">
+<meta name="twitter:description" content="1)概述
+对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; 
+*LOOP: 
+  loop at xkomv">
+
+  
+    <link rel="alternative" href="/atom.xml" title="光" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
 </head>
-
-  <body>
-    <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Cheney Fan&#39;s Blog">Cheney Fan&#39;s Blog</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-						<li><a href="/about">About</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:fyg.xyjp.net/about">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/06/28/condition-step/" title="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)" itemprop="url">SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://fyg.xyjp.net/about" title="Cheney Fan">Cheney Fan</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2014-06-27T18:28:25.000Z" itemprop="datePublished">6月 28 2014</time>
-    更新日期:<time datetime="2014-06-27T18:42:28.000Z" itemprop="dateModified">6月 28 2014</time>
-    
-  </p>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">光</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">向世界证明你的存在</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="fyg.xyjp.net/about">
+        </form>
+      </div>
+    </div>
+  </div>
 </header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		
-		</div>
-		
-		<p><em>1)概述</em></p>
-<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值;<br>    *LOOP:<br>      loop at xkomv.</p>
-<pre><code><span class="subst">*</span> calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
-          perform konditionsbasis_ermitteln<span class="built_in">.</span>
+      <div class="outer">
+        <section id="main"><article id="post-condition-step" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/28/condition-step/" class="article-date">
+  <time datetime="2014-06-27T18:28:25.000Z" itemprop="datePublished">6月 28 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SAP/">SAP</a>
+  </div>
 
-<span class="subst">*</span> scale basis changed <span class="literal">or</span> <span class="number">0</span>
-<span class="subst">*</span> KON<span class="attribute">-KBETR</span> should <span class="literal">not</span> be there <span class="keyword">if</span> scale basis is <span class="number">0</span>
-             ( ( xkstbs ne ykstbs ) <span class="literal">or</span> xkstbs <span class="literal">eq</span> <span class="number">0</span> ) <span class="literal">and</span>
-             xkomv<span class="attribute">-kmprs</span> is initial   <span class="literal">and</span>
-             xkomv<span class="attribute">-ksteu</span> <span class="literal">eq</span> <span class="string">'A'</span><span class="built_in">.</span>
-            perform xkomv_kbetr_aus_staffel<span class="built_in">.</span>
-          endif<span class="built_in">.</span>
-          <span class="keyword">if</span> xkomv<span class="attribute">-krech</span> na absolute <span class="literal">or</span> xkomv<span class="attribute">-kgrpe</span> ne <span class="string">'X'</span><span class="built_in">.</span>
-            perform xkomv_kwert_ermitteln<span class="built_in">.</span>
-          endif<span class="built_in">.</span>
-        endif<span class="built_in">.</span>
-      <span class="keyword">else</span><span class="built_in">.</span>
-        <span class="keyword">if</span> xkomv<span class="attribute">-kschl</span> <span class="literal">eq</span> space<span class="built_in">.</span>
-<span class="subst">*</span>(无条件类型的小计项目),调用xkomv_kwert_ermitteln子过程直接将汇总填写到小计项目的kwert字段
-          perform xkomv_kwert_ermitteln<span class="built_in">.</span>
-        endif<span class="built_in">.</span>
-      endif<span class="built_in">.</span>
-<span class="attribute">...</span><span class="built_in">..</span>
-endloop<span class="built_in">.</span>
-</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。<br>    FORM xkomv_kwert_ermitteln.<br>      DATA: xkbetr(16) TYPE p DECIMALS 2.<br>      DATA: cond_curr_is_euro, doc_curr_is_euro.</p>
-<pre><code><span class="subst">*</span> <span class="keyword">sum</span> line owning reference step
-  <span class="keyword">IF</span> xkomv<span class="attribute">-kschl</span> <span class="subst">=</span> space <span class="literal">AND</span> xkomv<span class="attribute">-stunb</span> NE <span class="number">0.</span>
-    CATCH SYSTEM<span class="attribute">-EXCEPTIONS</span> conversion_errors <span class="subst">=</span> <span class="number">1</span>
-                            arithmetic_errors <span class="subst">=</span> <span class="number">5.</span>
-      PERFORM xkomv_kawrt_ermitteln<span class="built_in">.</span>
-      xkomv<span class="attribute">-kwert</span> <span class="subst">=</span> xkawrt<span class="built_in">.</span>
-    ENDCATCH<span class="built_in">.</span>
-    <span class="keyword">IF</span> sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">1</span> <span class="literal">OR</span> sy<span class="attribute">-subrc</span> <span class="subst">=</span> <span class="number">5.</span>
-      MESSAGE s802<span class="built_in">.</span>
-      xkomv<span class="attribute">-kinak</span> <span class="subst">=</span> <span class="string">'X'</span><span class="built_in">.</span>
-      xkomv<span class="attribute">-kwert</span> <span class="subst">=</span> <span class="number">0.</span>
-      xkomv<span class="attribute">-fxmsg</span> <span class="subst">=</span> <span class="string">'802'</span><span class="built_in">.</span>
-      komp<span class="attribute">-fxmsg</span>  <span class="subst">=</span> <span class="string">'802'</span><span class="built_in">.</span>
-    ENDIF<span class="built_in">.</span>
-<span class="subst">*</span> no calculation for KDUPL conditions because condition value is
-<span class="subst">*</span> calculated <span class="keyword">by</span> formula <span class="number">36.</span>
-  ELSEIF xkomv<span class="attribute">-kdupl</span> NE <span class="string">'B'</span><span class="built_in">.</span>
-</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。<br>    form konditionsbasis_ermitteln.<br>      data: da_xxmglme like komp-brgew,<br>            da_xxmeins like komp-gewei,<br>            da_fxmsg   like xkomv-fxmsg.<br>      data: arbfeld_dec(16) type p decimals 3.<br>      xkomv-kawrt = 0.<br>      if xkomv-krech ca prz_abs and not xkomv-krech = ‘T’.<br>        if xkomv-stunb ne 0 or xkomv-stun2 ne 0 or xkomv-koaid = ‘D’.<br>          perform xkomv_kawrt_ermitteln.<br>          xkomv-kawrt = xkawrt.<br>        endif.<br>        if xkomv-stunb = 0 and xkomv-stun2 = 0.<br>          xkomv-kawrt = zwisu.<br>        endif.<br>      endif.</p>
-<p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
-<pre><code>form xkomv_kawrt_ermitteln<span class="built_in">.</span>
-
-  <span class="built_in">data</span>:  axkomv like komv<span class="built_in">.</span>
-
-<span class="subst">*</span> assign <span class="subst">&amp;</span> initialize
-  axkomv <span class="subst">=</span> xkomv<span class="built_in">.</span>
-  xkawrt <span class="subst">=</span> <span class="number">0.</span>
-
-<span class="subst">*</span> <span class="built_in">set</span> from <span class="subst">-</span> <span class="keyword">to</span> step number comming form pricing procedure<span class="subst">!</span>
-  xstunr <span class="subst">=</span> xkomv<span class="attribute">-stunb</span><span class="built_in">.</span>
-  xstun2 <span class="subst">=</span> xkomv<span class="attribute">-stun2</span><span class="built_in">.</span>
-  <span class="keyword">if</span> xstun2 <span class="literal">lt</span> xstunr<span class="built_in">.</span>
-    xstun2 <span class="subst">=</span> xstunr<span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-  <span class="keyword">if</span> xstun2 <span class="subst">=</span> <span class="number">0.7</span>
-    xstun2 <span class="subst">=</span> xkomv<span class="attribute">-stunr</span><span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-
-<span class="subst">*</span> build up key <span class="keyword">to</span> read XKOMV table
-  komv_key<span class="attribute">-mandt</span> <span class="subst">=</span> komk<span class="attribute">-mandt</span><span class="built_in">.</span>
-  komv_key<span class="attribute">-knumv</span> <span class="subst">=</span> komk<span class="attribute">-knumv</span><span class="built_in">.</span>
-  komv_key<span class="attribute">-kposn</span> <span class="subst">=</span> komp<span class="attribute">-kposn</span><span class="built_in">.</span>
-  komv_key<span class="attribute">-stunr</span> <span class="subst">=</span> xstunr<span class="built_in">.</span>
-  komv_key<span class="attribute">-zaehk</span> <span class="subst">=</span> <span class="number">0.</span>
-  read table xkomv <span class="keyword">with</span> key komv_key binary search<span class="built_in">.</span>
-  <span class="keyword">if</span> sy<span class="attribute">-subrc</span> <span class="literal">lt</span> <span class="number">8.</span>
-    read table xkomv index sy<span class="attribute">-tabix</span><span class="built_in">.</span>
-    <span class="keyword">if</span> xkomv<span class="attribute">-stunr</span> <span class="literal">gt</span> xstun2<span class="built_in">.</span>
-      read table xkomv index xkomv_tabix<span class="built_in">.</span>
-      xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
-      exit<span class="built_in">.</span>
-    <span class="keyword">else</span><span class="built_in">.</span>
-      <span class="keyword">loop</span> at xkomv<span class="built_in">.</span>
-        <span class="keyword">if</span> xkomv<span class="attribute">-stunr</span> <span class="literal">gt</span> xstun2 <span class="literal">or</span> sy<span class="attribute">-tabix</span> <span class="subst">=</span> xkomv_tabix<span class="built_in">.</span>
-          read table xkomv index xkomv_tabix<span class="built_in">.</span>
-          xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
-          exit<span class="built_in">.</span>
-        endif<span class="built_in">.</span>
-        <span class="keyword">if</span> ( xkomv<span class="attribute">-stunr</span> ge xstunr <span class="literal">and</span> xkomv<span class="attribute">-stunr</span> le xstun2 )  <span class="literal">and</span>
-             xkomv<span class="attribute">-kinak</span> na <span class="string">'AKLMX'</span><span class="built_in">.</span>
-          add xkomv<span class="attribute">-kwert</span> <span class="keyword">to</span> xkawrt<span class="built_in">.</span>
-        endif<span class="built_in">.</span>
-      endloop<span class="built_in">.</span>
-    endif<span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-
-  <span class="keyword">if</span> xkomv_tabix ne <span class="number">0.</span>
-    read table xkomv index xkomv_tabix<span class="built_in">.</span>
-  endif<span class="built_in">.</span>
-  xkomv <span class="subst">=</span> axkomv<span class="built_in">.</span>
-endform<span class="built_in">.</span>
-</code></pre>  
-	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-  <span></span> <a href="/tags/sap/">sap</a>
+    <h1 class="article-title" itemprop="name">
+      SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>1)概述</em></p>
+<p>对于参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2)的使用代码分析<br>SAP对定价过程中的从参考步骤(T683S-STUNB)和到参考步骤T683S-STUN2)的使用分两种情况：无条件类型的小计项目和有条件计算项目。<br>在LV61AA55单元会根据定价过程生成的xkomv内表来循环计算各项值; </p>
+<pre><code>*<span class="variable">LOOP</span>: 
+  loop at xkomv.
+* calculate condition basis(有条件计算项目)，(<span class="number">162</span>行),调用konditionsbasis_ermitteln子过程填写kawrt(条件基值),供后续项目计算使用
+          perform konditionsbasis_ermitteln.
+
+* scale basis changed or <span class="number">0</span>
+* <span class="variable">KON</span>-<span class="variable">KBETR</span> should <span class="keyword">not</span> be there if scale basis is <span class="number">0</span>
+             ( ( xkstbs ne ykstbs ) or xkstbs eq <span class="number">0</span> ) <span class="keyword">and</span>
+             xkomv-kmprs is initial   <span class="keyword">and</span>
+             xkomv-ksteu eq '<span class="variable">A</span>'.
+            perform xkomv_kbetr_aus_staffel.
+          endif.
+          if xkomv-krech na absolute or xkomv-kgrpe ne '<span class="variable">X</span>'.
+            perform xkomv_kwert_ermitteln.
+          endif.
+        endif.
+      else.
+        if xkomv-kschl eq space.
+*(无条件类型的小计项目),调用xkomv_kwert_ermitteln子过程直接将汇总填写到小计项目的kwert字段
+          perform xkomv_kwert_ermitteln.
+        endif.
+      endif.
+.....
+endloop.
+</code></pre><p><em>2)无条件类型的小计项目计算代码分析</em><br>xkomv_kwert_ermitteln代码参见单元LV61AA43的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kwert字段，参见红色部分。</p>
+<pre><code><span class="variable">FORM</span> xkomv_kwert_ermitteln.
+  <span class="variable">DATA</span>: xkbetr(<span class="number">16</span>) <span class="variable">TYPE</span> p <span class="variable">DECIMALS</span> <span class="number">2</span>.
+  <span class="variable">DATA</span>: cond_curr_is_euro, doc_curr_is_euro.
+* sum line owning reference step
+  <span class="variable">IF</span> xkomv-kschl = space <span class="variable">AND</span> xkomv-stunb <span class="variable">NE</span> <span class="number">0</span>.
+    <span class="variable">CATCH</span> <span class="variable">SYSTEM</span>-<span class="variable">EXCEPTIONS</span> conversion_errors = <span class="number">1</span>
+                            arithmetic_errors = <span class="number">5</span>.
+      <span class="variable">PERFORM</span> xkomv_kawrt_ermitteln.
+      xkomv-kwert = xkawrt.
+    <span class="variable">ENDCATCH</span>.
+    <span class="variable">IF</span> sy-subrc = <span class="number">1</span> <span class="variable">OR</span> sy-subrc = <span class="number">5</span>.
+      <span class="variable">MESSAGE</span> s802.
+      xkomv-kinak = '<span class="variable">X</span>'.
+      xkomv-kwert = <span class="number">0</span>.
+      xkomv-fxmsg = '<span class="number">802</span>'.
+      komp-fxmsg  = '<span class="number">802</span>'.
+    <span class="variable">ENDIF</span>.
+* no calculation for <span class="variable">KDUPL</span> conditions because condition value is
+* calculated by formula <span class="number">36</span>.
+  <span class="variable">ELSEIF</span> xkomv-kdupl <span class="variable">NE</span> '<span class="variable">B</span>'.
+</code></pre><p><em>3)有条件计算项目代码分析</em><br>konditionsbasis_ermitteln代码参见单元LV61AA74的下列代码，这段代码会调用子过程xkomv_kawrt_ermitteln将相应定价项目的字段(kwert)汇总填写到小计项目的kawrt(条件基值),参见红色部分。</p>
+<pre><code>form konditionsbasis_ermitteln.
+  data: da_xxmglme like komp-brgew,
+        da_xxmeins like komp-gewei,
+        da_fxmsg   like xkomv-fxmsg.
+  data: arbfeld_dec(<span class="number">16</span>) type p decimals <span class="number">3</span>.
+  xkomv-kawrt = <span class="number">0</span>.
+  if xkomv-krech ca prz_abs <span class="keyword">and</span> <span class="keyword">not</span> xkomv-krech = '<span class="variable">T</span>'.
+    if xkomv-stunb ne <span class="number">0</span> or xkomv-stun2 ne <span class="number">0</span> or xkomv-koaid = '<span class="variable">D</span>'.
+      perform xkomv_kawrt_ermitteln.
+      xkomv-kawrt = xkawrt.
+    endif.
+    if xkomv-stunb = <span class="number">0</span> <span class="keyword">and</span> xkomv-stun2 = <span class="number">0</span>.
+      xkomv-kawrt = zwisu.
+    endif.
+  endif.
+</code></pre><p><em>4)循环合计子过程代码的摘抄，参见红色部分</em></p>
+<pre><code>form xkomv_kawrt_ermitteln.
+
+  dat<span class="variable">a:</span>  axkomv like komv.
+
+* assign &amp; initialize
+  axkomv = xkomv.
+  xkawrt = <span class="number">0</span>.
+
+* <span class="keyword">set</span> from - <span class="keyword">to</span> step <span class="keyword">number</span> comming form pricing procedure!
+  xstunr = xkomv-stunb.
+  xstun2 = xkomv-stun2.
+  <span class="keyword">if</span> xstun2 <span class="keyword">lt</span> xstunr.
+    xstun2 = xstunr.
+  <span class="keyword">endif</span>.
+  <span class="keyword">if</span> xstun2 = <span class="number">0.7</span>
+    xstun2 = xkomv-stunr.
+  <span class="keyword">endif</span>.
+
+* build <span class="keyword">up</span> key <span class="keyword">to</span> <span class="keyword">read</span> XKOMV table
+  komv_key-mandt = komk-mandt.
+  komv_key-knumv = komk-knumv.
+  komv_key-kposn = komp-kposn.
+  komv_key-stunr = xstunr.
+  komv_key-zaehk = <span class="number">0</span>.
+  <span class="keyword">read</span> table xkomv with key komv_key binary <span class="built_in">search</span>.
+  <span class="keyword">if</span> <span class="keyword">sy</span>-subrc <span class="keyword">lt</span> <span class="number">8</span>.
+    <span class="keyword">read</span> table xkomv <span class="built_in">index</span> <span class="keyword">sy</span>-tabix.
+    <span class="keyword">if</span> xkomv-stunr gt xstun2.
+      <span class="keyword">read</span> table xkomv <span class="built_in">index</span> xkomv_tabix.
+      xkomv = axkomv.
+      <span class="keyword">exit</span>.
+    <span class="keyword">else</span>.
+      loop at xkomv.
+        <span class="keyword">if</span> xkomv-stunr gt xstun2 <span class="built_in">or</span> <span class="keyword">sy</span>-tabix = xkomv_tabix.
+          <span class="keyword">read</span> table xkomv <span class="built_in">index</span> xkomv_tabix.
+          xkomv = axkomv.
+          <span class="keyword">exit</span>.
+        <span class="keyword">endif</span>.
+        <span class="keyword">if</span> ( xkomv-stunr ge xstunr <span class="built_in">and</span> xkomv-stunr <span class="keyword">le</span> xstun2 )  <span class="built_in">and</span>
+             xkomv-kinak na <span class="string">'AKLMX'</span>.
+          <span class="built_in">add</span> xkomv-kwert <span class="keyword">to</span> xkawrt.
+        <span class="keyword">endif</span>.
+      endloop.
+    <span class="keyword">endif</span>.
+  <span class="keyword">endif</span>.
+
+  <span class="keyword">if</span> xkomv_tabix ne <span class="number">0</span>.
+    <span class="keyword">read</span> table xkomv <span class="built_in">index</span> xkomv_tabix.
+  <span class="keyword">endif</span>.
+  xkomv = axkomv.
+endform.
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2014/06/28/condition-step/" data-id="wlkai698yuofqs0d" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2014/06/28/condition-step/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sap/">sap</a></li></ul>
+
+    </footer>
   </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/SAP/">SAP</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://fyg.xyjp.net/about/2014/06/28/condition-step/" data-title="SD--对于定价过程参考步骤 (Condition Step)(T683S-STUNB and T683S-STUN2) | Cheney Fan&#39;s Blog" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2014/06/28/发票复制时的价格类型/" title="sap订单(发票)复制时的价格拷贝类型">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  sap订单(发票)复制时的价格拷贝类型</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2014/04/29/css针对ie浏览器设定/"  title="css针对IE浏览器设定">
- <strong>NEXT:</strong><br/> 
- <span>css针对IE浏览器设定
-</span>
-</a>
-</div>
-
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/06/28/发票复制时的价格类型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          sap订单(发票)复制时的价格拷贝类型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/29/javascript导出csv文件/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">javascript导出csv文件</div>
+    </a>
+  
 </nav>
 
-	
-<section id="comments" style="padding:35px;">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
   
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分類</p>
-		<ul>
-		
-			<li><a href="/categories/Develop/" title="Develop">Develop<sup>19</sup></a></li>
-		
-			<li><a href="/categories/SAP/" title="SAP">SAP<sup>16</sup></a></li>
-		
-			<li><a href="/categories/Tips/" title="Tips">Tips<sup>2</sup></a></li>
-		
-			<li><a href="/categories/生活/" title="生活">生活<sup>16</sup></a></li>
-		
-			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
-		
-			<li><a href="/categories/设计/" title="设计">设计<sup>12</sup></a></li>
-		
-		</ul>
-</div>
+</article>
 
 
-  
-<div class="tagslist">
-	<p class="asidetitle">標簽</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-		
-			<li><a href="/tags/JAVA/" title="JAVA">JAVA<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Lamy/" title="Lamy">Lamy<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Melancholia/" title="Melancholia">Melancholia<sup>1</sup></a></li>
-		
-			<li><a href="/tags/RSS/" title="RSS">RSS<sup>1</sup></a></li>
-		
-			<li><a href="/tags/angularjs/" title="angularjs">angularjs<sup>2</sup></a></li>
-		
-			<li><a href="/tags/chrome开发/" title="chrome开发">chrome开发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/designing/" title="designing">designing<sup>5</sup></a></li>
-		
-			<li><a href="/tags/ffmpeg/" title="ffmpeg">ffmpeg<sup>2</sup></a></li>
-		
-			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
-		
-			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
-		
-			<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
-		
-			<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
-		
-			<li><a href="/tags/rails/" title="rails">rails<sup>1</sup></a></li>
-		
-			<li><a href="/tags/sap/" title="sap">sap<sup>16</sup></a></li>
-		
-			<li><a href="/tags/wordpress/" title="wordpress">wordpress<sup>1</sup></a></li>
-		
-			<li><a href="/tags/デッサン/" title="デッサン">デッサン<sup>2</sup></a></li>
-		
-			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
-		
-			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
-</div>
-
-</aside>
-</div>
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
-		
-		<a href="http://fyg.xyjp.net/about" target="_blank" title="Cheney Fan">Cheney Fan</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SAP/">SAP</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/社会/">社会</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">12</span></li></ul>
+    </div>
+  </div>
 
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lamy/">Lamy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Melancholia/">Melancholia</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSS/">RSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome开发/">chrome开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/designing/">designing</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sap/">sap</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/デッサン/">デッサン</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感/">情感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/摄影/">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/撮影/">撮影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅游/">旅游</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电影/">电影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/素描/">素描</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音楽/">音楽</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/Github/" style="font-size: 12.00px;">Github</a><a href="/tags/JAVA/" style="font-size: 10.00px;">JAVA</a><a href="/tags/Lamy/" style="font-size: 10.00px;">Lamy</a><a href="/tags/Melancholia/" style="font-size: 10.00px;">Melancholia</a><a href="/tags/RSS/" style="font-size: 10.00px;">RSS</a><a href="/tags/angularjs/" style="font-size: 12.00px;">angularjs</a><a href="/tags/chrome开发/" style="font-size: 10.00px;">chrome开发</a><a href="/tags/designing/" style="font-size: 18.00px;">designing</a><a href="/tags/ffmpeg/" style="font-size: 12.00px;">ffmpeg</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/linux/" style="font-size: 12.00px;">linux</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/rails/" style="font-size: 10.00px;">rails</a><a href="/tags/sap/" style="font-size: 20.00px;">sap</a><a href="/tags/wordpress/" style="font-size: 10.00px;">wordpress</a><a href="/tags/デッサン/" style="font-size: 12.00px;">デッサン</a><a href="/tags/动画/" style="font-size: 10.00px;">动画</a><a href="/tags/情感/" style="font-size: 10.00px;">情感</a><a href="/tags/摄影/" style="font-size: 10.00px;">摄影</a><a href="/tags/撮影/" style="font-size: 10.00px;">撮影</a><a href="/tags/文学/" style="font-size: 10.00px;">文学</a><a href="/tags/旅游/" style="font-size: 18.00px;">旅游</a><a href="/tags/电影/" style="font-size: 10.00px;">电影</a><a href="/tags/素描/" style="font-size: 14.00px;">素描</a><a href="/tags/音楽/" style="font-size: 10.00px;">音楽</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/10/18/about-badi/">关于badi</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/13/va01.02创建临时表/">va01/02创建临时表</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/korean-trip2/">社員旅行：韓国②</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/kyoto-trip/">家族旅行：京都</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/korean-trip3/">社員旅行：韓国③</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://websmp201.sap-ag.de/home" target="_blank">SAP market</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Cheney Fan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 <script>
   var disqus_shortname = 'xyjp';
   
@@ -357,124 +386,33 @@ endform<span class="built_in">.</span>
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
+<!-- 百度分享 start -->
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
 
+<!-- 百度分享 end -->
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 
+<script src="/js/script.js" type="text/javascript"></script>
 
-
-
-  </body>
+  </div>
+</body>
 </html>

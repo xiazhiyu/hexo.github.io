@@ -1,333 +1,784 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-TW">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>Cheney Fan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="Cheney Fan">
-    
-    <meta name="description" content="description">
-    
-    
-    
-    
-    <link rel="alternative" href="/atom.xml" title="Cheney Fan&#39;s Blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="光">
+<meta property="og:url" content="http://fyg.xyjp.net/about/page/4/">
+<meta property="og:site_name" content="光">
+<meta property="og:description" content="description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="光">
+<meta name="twitter:description" content="description">
+
+  
+    <link rel="alternative" href="/atom.xml" title="光" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
 </head>
-
-  <body>
-    <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Cheney Fan&#39;s Blog">Cheney Fan&#39;s Blog</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-						<li><a href="/about">About</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:fyg.xyjp.net/about">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-
-    </header>
-    <div id="container">
-      <div id="main">
-
-  <section class="post" itemscope itemprop="blogPost">
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">光</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">向世界证明你的存在</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="fyg.xyjp.net/about">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
   
-    <a href="/2013/09/28/jdbc/" title="JDBC" itemprop="url">
-  
-    <h1 itemprop="name">JDBC</h1>
+    <article id="post-jdbc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/28/jdbc/" class="article-date">
+  <time datetime="2013-09-28T01:38:06.000Z" itemprop="datePublished">9月 28 2013</time>
+</a>
     
-     
-           <p itemprop="description" >最近开始找工作。好久没用java，都快给忘了。一点点复习吧。
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/09/28/jdbc/">JDBC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近开始找工作。好久没用java，都快给忘了。<br>一点点复习吧。</p>
+<pre>
 package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import </p>
-        
-    
-    <time datetime="2013-09-28T01:38:06.000Z" itemprop="datePublished">9月 28 2013</time>
-  </a>
-</section>
+import java.sql.SQLException;
+import java.sql.Statement;
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/26/可汗学院公开课：三角学/" title="可汗学院公开课：三角学" itemprop="url">
-  
-    <h1 itemprop="name">可汗学院公开课：三角学</h1>
-    
-     
-           <p itemprop="description" >最近学习动画，发现自己数学都忘光了。好多中学数学里的知识都想了半天。
-网易链接：http://v.163.com/special/Khan/trigonometry.html</p>
-        
-    
-    <time datetime="2013-07-26T12:04:08.000Z" itemprop="datePublished">7月 26 2013</time>
-  </a>
-</section>
+public class DBConnect {
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/26/最近看的一些电影/" title="最近看的一些电影" itemprop="url">
-  
-    <h1 itemprop="name">最近看的一些电影</h1>
-    
-     
-           <p itemprop="description" >最近看的电影，做一下总结：1 . 超脱 Detachment豆瓣链接片子很文艺，台词很动人。其中提到了《1984》的“双重思想”（Doublethink）：
+    private static DBConnect instance = null;
 
-This is a marketing holocaust.24 hours a day,
-for the rest o</p>
-        
-    
-    <time datetime="2013-07-26T08:58:53.000Z" itemprop="datePublished">7月 26 2013</time>
-  </a>
-</section>
+    // 该url为缺省方式（省略主机跟端口）
+    // 完整为：jdbc:mysql//localhost:3306/test
+    static String url = "jdbc:mysql:///acc"; 
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/21/关于moov-atom/" title="关于moov atom" itemprop="url">
-  
-    <h1 itemprop="name">关于moov atom</h1>
-    
-     
-           <p itemprop="description" >moov atom是mp4中索引文件。ffmpeg在转化完成后，默认是放在末尾的。这样上传到网站时播放时会出现问题。flash在播放时，必须将文件下载完毕才能进行播放。要想实现类似流播放的边下载边播放的效果，需要将moov atom调到文件前面。ffmpeg中自带的qt-fast</p>
-        
-    
-    <time datetime="2013-07-20T23:04:46.000Z" itemprop="datePublished">7月 21 2013</time>
-  </a>
-</section>
+    static String name = "root";
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/19/朝日新闻微博被和谐/" title="朝日新闻微博被和谐" itemprop="url">
-  
-    <h1 itemprop="name">朝日新闻微博被和谐</h1>
-    
-     
-           <p itemprop="description" >朝日新闻微博帐号被和谐。微博评论：@那个野和尚 ：@朝日新闻中文网 已被和谐，这是我D在抗日战争正面战场的首次大捷。
-朝日新闻其实一直以来被称为日本媒体中的“亲中派”。甚至被称为“反日”媒体。下面是朝日新闻网站上的截屏：</p>
-        
-    
-    <time datetime="2013-07-18T15:05:25.000Z" itemprop="datePublished">7月 19 2013</time>
-  </a>
-</section>
+    static String password = "root";
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/17/其实是我自己不愿见家属/" title="其实是我自己不愿见家属" itemprop="url">
-  
-    <h1 itemprop="name">其实是我自己不愿见家属</h1>
-    
-     
-           <p itemprop="description" >注：本画作者是“胸是小”，微博链接：http://weibo.com/u/1002282395</p>
-        
-    
-    <time datetime="2013-07-16T15:21:05.000Z" itemprop="datePublished">7月 17 2013</time>
-  </a>
-</section>
+    static Connection conn = null;
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/16/素描一幅/" title="素描一幅" itemprop="url">
-  
-    <h1 itemprop="name">素描一幅</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2013-07-16T00:52:18.000Z" itemprop="datePublished">7月 16 2013</time>
-  </a>
-</section>
+    private DBConnect(){
+    }
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/15/mac-显示隐藏文件/" title="mac 显示隐藏文件" itemprop="url">
-  
-    <h1 itemprop="name">mac 显示隐藏文件</h1>
-    
-     
-           <p itemprop="description" >输入以下命令后，重启finder后可显示隐藏文件：
-defaults write com.apple.finder AppleShowAllFiles -bool true将文件重新隐藏则将后面参数改为false即可。</p>
-        
-    
-    <time datetime="2013-07-15T09:42:51.000Z" itemprop="datePublished">7月 15 2013</time>
-  </a>
-</section>
+    public static DBConnect getInitDBConnect(){
+        if(instance==null){
+            synchronized(DBConnect.class){
+                if(instance==null){
+                    instance=new DBConnect();
+                }
+            }
+        }
+        return instance;
+    }
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/15/艾特熊和赛娜鼠/" title="艾特熊和赛娜鼠" itemprop="url">
-  
-    <h1 itemprop="name">艾特熊和赛娜鼠</h1>
-    
-     
-           <p itemprop="description" >最近看的动画片。超有意思。豆瓣链接：http://movie.douban.com/subject/6518638/</p>
-        
-    
-    <time datetime="2013-07-15T05:51:12.000Z" itemprop="datePublished">7月 15 2013</time>
-  </a>
-</section>
+    static{
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }    
+    }
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/08/秋夢　ーー二胡演奏/" title="秋夢　ーー二胡演奏" itemprop="url">
-  
-    <h1 itemprop="name">秋夢　ーー二胡演奏</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2013-07-08T09:37:58.000Z" itemprop="datePublished">7月 8 2013</time>
-  </a>
-</section>
+    public Connection getConnection(){
+        try{
+            conn = DriverManager.getConnection(url,name,password);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return conn;
+    }
 
+    public void closeConnectino(ResultSet rs, Statement statement, Connection con){
+        try{
+            if(rs!=null){
+                rs.close();
+            }        
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(statement !=null){
+                    statement.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                try{
+                    if(con != null){
+                        con.close();
+                    }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
 
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" href="/page/5/">Next &raquo;</a>
-  </nav>
-
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分類</p>
-		<ul>
-		
-			<li><a href="/categories/Develop/" title="Develop">Develop<sup>19</sup></a></li>
-		
-			<li><a href="/categories/SAP/" title="SAP">SAP<sup>16</sup></a></li>
-		
-			<li><a href="/categories/Tips/" title="Tips">Tips<sup>2</sup></a></li>
-		
-			<li><a href="/categories/生活/" title="生活">生活<sup>16</sup></a></li>
-		
-			<li><a href="/categories/社会/" title="社会">社会<sup>2</sup></a></li>
-		
-			<li><a href="/categories/设计/" title="设计">设计<sup>12</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">標簽</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Github/" title="Github">Github<sup>2</sup></a></li>
-		
-			<li><a href="/tags/JAVA/" title="JAVA">JAVA<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Lamy/" title="Lamy">Lamy<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Melancholia/" title="Melancholia">Melancholia<sup>1</sup></a></li>
-		
-			<li><a href="/tags/RSS/" title="RSS">RSS<sup>1</sup></a></li>
-		
-			<li><a href="/tags/angularjs/" title="angularjs">angularjs<sup>2</sup></a></li>
-		
-			<li><a href="/tags/chrome开发/" title="chrome开发">chrome开发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/designing/" title="designing">designing<sup>5</sup></a></li>
-		
-			<li><a href="/tags/ffmpeg/" title="ffmpeg">ffmpeg<sup>2</sup></a></li>
-		
-			<li><a href="/tags/html5/" title="html5">html5<sup>1</sup></a></li>
-		
-			<li><a href="/tags/javascript/" title="javascript">javascript<sup>4</sup></a></li>
-		
-			<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
-		
-			<li><a href="/tags/mac/" title="mac">mac<sup>1</sup></a></li>
-		
-			<li><a href="/tags/rails/" title="rails">rails<sup>1</sup></a></li>
-		
-			<li><a href="/tags/sap/" title="sap">sap<sup>16</sup></a></li>
-		
-			<li><a href="/tags/wordpress/" title="wordpress">wordpress<sup>1</sup></a></li>
-		
-			<li><a href="/tags/デッサン/" title="デッサン">デッサン<sup>2</sup></a></li>
-		
-			<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
-		
-			<li><a href="/tags/情感/" title="情感">情感<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
-</div>
-
-</aside>
-</div>
+</pre>
+      
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2014 
-		
-		<a href="http://fyg.xyjp.net/about" target="_blank" title="Cheney Fan">Cheney Fan</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/09/28/jdbc/" data-id="qra3xdgew89hjgy6" class="article-share-link" data-share="baidu">分享到</a>
+      
 
+      
+        <a href="http://fyg.xyjp.net/about/2013/09/28/jdbc/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-可汗学院公开课：三角学" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/26/可汗学院公开课：三角学/" class="article-date">
+  <time datetime="2013-07-26T12:04:08.000Z" itemprop="datePublished">7月 26 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/26/可汗学院公开课：三角学/">可汗学院公开课：三角学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近学习动画，发现自己数学都忘光了。<br>好多中学数学里的知识都想了半天。</p>
+<p>网易链接：<br><a href="http://v.163.com/special/Khan/trigonometry.html" title="http://v.163.com/special/Khan/trigonometry.html" target="_blank" rel="external">http://v.163.com/special/Khan/trigonometry.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/26/可汗学院公开课：三角学/" data-id="rvy05nlob7xpik7v" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/26/可汗学院公开课：三角学/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-最近看的一些电影" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/26/最近看的一些电影/" class="article-date">
+  <time datetime="2013-07-26T08:58:53.000Z" itemprop="datePublished">7月 26 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/生活/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/26/最近看的一些电影/">最近看的一些电影</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近看的电影，做一下总结：<br><strong>1 . 超脱 Detachment</strong><br><a href="http://movie.douban.com/subject/5322596/" title="Detachment" target="_blank" rel="external">豆瓣链接</a><br>片子很文艺，台词很动人。<br>其中提到了《1984》的“双重思想”（Doublethink）：</p>
+<blockquote>
+<p>This is a marketing holocaust.24 hours a day,</p>
+<p>for the rest of our lives,the powers that be are hard at work,dumbing us to death.</p>
+<p>So, to defend ourselves and fight against assimilating this dullness into our thought processes,</p>
+<p>we must learn to read to stimulate our own imagination,</p>
+<p>to cultivate our own consciousness,our own belief system.</p>
+<p>We all need these skills to defend to preserve our own minds.<br>这是一种营销大屠杀 在我们余下的生命里，一天24小时都会驱使我们努力工作，让我们在沉默中灭亡</p>
+<p>所以 为了保护我们自己防止苦闷无聊渗入我们的思想 我们必须学会通过阅读 来激发自己的想象力</p>
+<p>来培养我们自己的意识，我们自己的信仰</p>
+<p>我们都需要这些技能来保卫我们自己的思想<br>刘玉玲的台词：<br>it is so easy to be careless. it takes couse and courage to take cares.none of you have any of these qualities.</p>
+</blockquote>
+<p><strong>2 Passion</strong><br><a href="http://movie.douban.com/subject/7046937/" title="Passion" target="_blank" rel="external">豆瓣链接</a><br>似乎豆瓣上评分不怎么高，不过觉得还是不错的。前半部分看时尚，后半部分看悬念。</p>
+<p><strong>3 怪兽在巴黎 Un monstre à Paris</strong><br><a href="http://movie.douban.com/subject/3005387/" title="Un monstre à Paris" target="_blank" rel="external">豆瓣链接</a><br>非常好的动画片。音乐很赞，很有节奏感。</p>
+<p><strong>4 朴赞郁的复仇三部曲</strong><br>比较喜欢第一部。<br><a href="http://movie.douban.com/subject/1304026/" title="我要复仇" target="_blank" rel="external">豆瓣链接</a></p>
+<p><strong>5 新世界 New World</strong><br>韩国版的无间道<br>觉得开头和结尾男主角的沉默的样子很不错，很好刻画了他的内心。话说有那么点《教父》的感觉。</p>
+<p><strong>6 人烟之岛 Обитаемый остров</strong><br><a href="http://movie.douban.com/subject/3091271/" title="人烟之岛" target="_blank" rel="external">豆瓣链接</a><br>嗯，坦率地纯粹是因为女主角的身材才去看的。不过豆瓣上尽是说男角帅的……<br>男女主角初次相逢的画面挺美。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/26/最近看的一些电影/" data-id="n1htj1htypv4mbnc" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/26/最近看的一些电影/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于moov-atom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/21/关于moov-atom/" class="article-date">
+  <time datetime="2013-07-20T23:04:46.000Z" itemprop="datePublished">7月 21 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/21/关于moov-atom/">关于moov atom</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>moov atom是mp4中索引文件。ffmpeg在转化完成后，默认是放在末尾的。<br>这样上传到网站时播放时会出现问题。<br>flash在播放时，必须将文件下载完毕才能进行播放。<br>要想实现类似流播放的边下载边播放的效果，需要将moov atom调到文件前面。<br>ffmpeg中自带的qt-faststart可进行此操作。<br>安装办法，进入ffmpeg文件夹。</p>
+<pre>
+make tools/qt-faststart
+cp -a tools/qt-faststart /usr/bin/
+</pre>
+转换命令：
+<pre>
+qt-faststart append.mp4 out.mp4
+</pre>
+
+<p>参考链接：<a href="http://blog.eryue.me/?p=138" title="http://blog.eryue.me/?p=138" target="_blank" rel="external">http://blog.eryue.me/?p=138</a></p>
+<p>不过话说回来，chrome的html5播放的话，不用转换也没问题。应该时chrome内部已经进行了相关处理了吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/21/关于moov-atom/" data-id="lffd1r1t88w21epm" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/21/关于moov-atom/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ffmpeg/">ffmpeg</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-朝日新闻微博被和谐" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/19/朝日新闻微博被和谐/" class="article-date">
+  <time datetime="2013-07-18T15:05:25.000Z" itemprop="datePublished">7月 19 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/社会/">社会</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/19/朝日新闻微博被和谐/">朝日新闻微博被和谐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>朝日新闻微博帐号被和谐。<br>微博评论：<br>@那个野和尚 ：@朝日新闻中文网 已被和谐，这是我D在抗日战争正面战场的首次大捷。</p>
+<p>朝日新闻其实一直以来被称为日本媒体中的“亲中派”。甚至被称为“反日”媒体。<br>下面是朝日新闻网站上的截屏：<br><img src="/images/asahi.png" alt="asahi"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/19/朝日新闻微博被和谐/" data-id="mzihy74zr8ulox7y" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/19/朝日新闻微博被和谐/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-其实是我自己不愿见家属" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/17/其实是我自己不愿见家属/" class="article-date">
+  <time datetime="2013-07-16T15:21:05.000Z" itemprop="datePublished">7月 17 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/社会/">社会</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/17/其实是我自己不愿见家属/">其实是我自己不愿见家属</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/7o2zI.jpg" alt="我自己不愿见家属"><br>注：本画作者是“胸是小”，微博链接：<a href="http://weibo.com/u/1002282395" title="http://weibo.com/u/1002282395" target="_blank" rel="external">http://weibo.com/u/1002282395</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/17/其实是我自己不愿见家属/" data-id="5d8uu2z1m215de7p" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/17/其实是我自己不愿见家属/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-素描一幅" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/16/素描一幅/" class="article-date">
+  <time datetime="2013-07-16T00:52:18.000Z" itemprop="datePublished">7月 16 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/设计/">设计</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/16/素描一幅/">素描一幅</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg" alt="http://25.media.tumblr.com/5fb77099f016130828a4c1eacbf7f166/tumblr_mq07ovQi7O1rcvtp3o1_500.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/16/素描一幅/" data-id="z6ylgcbl4lwaotfk" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/16/素描一幅/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/素描/">素描</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac-显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/15/mac-显示隐藏文件/" class="article-date">
+  <time datetime="2013-07-15T09:42:51.000Z" itemprop="datePublished">7月 15 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/15/mac-显示隐藏文件/">mac 显示隐藏文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输入以下命令后，重启finder后可显示隐藏文件：</p>
+<p><pre><br>defaults write com.apple.finder AppleShowAllFiles -bool true<br></pre><br>将文件重新隐藏则将后面参数改为false即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/15/mac-显示隐藏文件/" data-id="3kk8sxxohb91akov" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/15/mac-显示隐藏文件/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-艾特熊和赛娜鼠" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/15/艾特熊和赛娜鼠/" class="article-date">
+  <time datetime="2013-07-15T05:51:12.000Z" itemprop="datePublished">7月 15 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/生活/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/15/艾特熊和赛娜鼠/">艾特熊和赛娜鼠</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://24.media.tumblr.com/2f8ee02abffaf1ea60d36de9896fadde/tumblr_mpyqodNeso1rcvtp3o1_500.png" alt="Ernest.ET.Celestine"><br>最近看的动画片。超有意思。<br>豆瓣链接：<a href="http://movie.douban.com/subject/6518638/" title="http://movie.douban.com/subject/6518638/" target="_blank" rel="external">http://movie.douban.com/subject/6518638/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/15/艾特熊和赛娜鼠/" data-id="uodjujj7f0k5iqn2" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/15/艾特熊和赛娜鼠/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-秋夢　ーー二胡演奏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/07/08/秋夢　ーー二胡演奏/" class="article-date">
+  <time datetime="2013-07-08T09:37:58.000Z" itemprop="datePublished">7月 8 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/生活/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/07/08/秋夢　ーー二胡演奏/">秋夢　ーー二胡演奏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe width="420" height="315" src="//www.youtube.com/embed/zDGAGE-hl44" frameborder="0" allowfullscreen></iframe>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/07/08/秋夢　ーー二胡演奏/" data-id="1znf983n7hftz0z6" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/07/08/秋夢　ーー二胡演奏/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/音楽/">音楽</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SAP/">SAP</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/社会/">社会</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lamy/">Lamy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Melancholia/">Melancholia</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSS/">RSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angularjs/">angularjs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome开发/">chrome开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/designing/">designing</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/">html5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rails/">rails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sap/">sap</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/デッサン/">デッサン</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感/">情感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/摄影/">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/撮影/">撮影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅游/">旅游</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/电影/">电影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/素描/">素描</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/音楽/">音楽</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10.00px;">CSS</a><a href="/tags/Github/" style="font-size: 12.00px;">Github</a><a href="/tags/JAVA/" style="font-size: 10.00px;">JAVA</a><a href="/tags/Lamy/" style="font-size: 10.00px;">Lamy</a><a href="/tags/Melancholia/" style="font-size: 10.00px;">Melancholia</a><a href="/tags/RSS/" style="font-size: 10.00px;">RSS</a><a href="/tags/angularjs/" style="font-size: 12.00px;">angularjs</a><a href="/tags/chrome开发/" style="font-size: 10.00px;">chrome开发</a><a href="/tags/designing/" style="font-size: 18.00px;">designing</a><a href="/tags/ffmpeg/" style="font-size: 12.00px;">ffmpeg</a><a href="/tags/html5/" style="font-size: 10.00px;">html5</a><a href="/tags/javascript/" style="font-size: 16.00px;">javascript</a><a href="/tags/linux/" style="font-size: 12.00px;">linux</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/rails/" style="font-size: 10.00px;">rails</a><a href="/tags/sap/" style="font-size: 20.00px;">sap</a><a href="/tags/wordpress/" style="font-size: 10.00px;">wordpress</a><a href="/tags/デッサン/" style="font-size: 12.00px;">デッサン</a><a href="/tags/动画/" style="font-size: 10.00px;">动画</a><a href="/tags/情感/" style="font-size: 10.00px;">情感</a><a href="/tags/摄影/" style="font-size: 10.00px;">摄影</a><a href="/tags/撮影/" style="font-size: 10.00px;">撮影</a><a href="/tags/文学/" style="font-size: 10.00px;">文学</a><a href="/tags/旅游/" style="font-size: 18.00px;">旅游</a><a href="/tags/电影/" style="font-size: 10.00px;">电影</a><a href="/tags/素描/" style="font-size: 14.00px;">素描</a><a href="/tags/音楽/" style="font-size: 10.00px;">音楽</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/10/18/about-badi/">关于badi</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/13/va01.02创建临时表/">va01/02创建临时表</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/korean-trip2/">社員旅行：韓国②</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/kyoto-trip/">家族旅行：京都</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/korean-trip3/">社員旅行：韓国③</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://websmp201.sap-ag.de/home" target="_blank">SAP market</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Cheney Fan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 <script>
   var disqus_shortname = 'xyjp';
   
@@ -335,62 +786,33 @@ defaults write com.apple.finder AppleShowAllFiles -bool true将文件重新隐�
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"nocss.css"}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 
+<script src="/js/script.js" type="text/javascript"></script>
 
-
-
-
-  </body>
- </html>
+  </div>
+</body>
+</html>
