@@ -106,7 +106,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://fyg.xyjp.net/about/2013/12/26/sap-定价技术/" data-id="sryeuv08bmnq7f6x" class="article-share-link">分享到</a>
+        <a data-url="http://fyg.xyjp.net/about/2013/12/26/sap-定价技术/" data-id="5tci1unrh7m4xjtu" class="article-share-link">分享到</a>
       
 
       
@@ -155,7 +155,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://fyg.xyjp.net/about/2013/12/23/sd-相关表/" data-id="zvic4deh7g1y1hs0" class="article-share-link">分享到</a>
+        <a data-url="http://fyg.xyjp.net/about/2013/12/23/sd-相关表/" data-id="qv2fdq1h4yu7lp3m" class="article-share-link">分享到</a>
       
 
       
@@ -210,110 +210,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://fyg.xyjp.net/about/2013/12/22/vofm-routine/" data-id="90ye54b30a2tkl97" class="article-share-link">分享到</a>
+        <a data-url="http://fyg.xyjp.net/about/2013/12/22/vofm-routine/" data-id="r6br9edhwuovm654" class="article-share-link">分享到</a>
       
 
       
         <a href="http://fyg.xyjp.net/about/2013/12/22/vofm-routine/#disqus_thread" class="article-comment-link">Comments</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sap/">sap</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" class="article-date">
-  <time datetime="2013-12-22T01:13:32.000Z" itemprop="datePublished">12月 22 2013</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SAP/">SAP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/">关于价格条件中的小计</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank" rel="external">http://scn.sap.com/thread/1735194</a></p>
-<p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
-<p>Symptom</p>
-<p>Content overview:<br>1. What effect does an entry in the ‘Subto’ column<br>(KZWIW field) have?<br>2. Which settings are possible?<br>3. Which condition/subtotal line is taken into account?<br>4. In which cases is cumulation performed/not performed?<br>5. Which program contains the corresponding logic?<br>6. Are the cumulative values stored in the database?<br>7. Can inactive conditions also be taken into account?<br>8. Examples of how KZWIW is used<br>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient?<br>10. What you can do if the number of internal auxiliary variables<br>(XWORKD -XWORKM) is insufficient?</p>
-<p>1. What effect does an entry in the ‘Subto’ column (KZWIW field) have?</p>
-<p>You can make certain entries in the ‘Subto’ column (KZWIW field) in the Customizing settings for the pricing procedure. These determine that the condition value or the condition rate of the condition or subtotal line is copied into a certain field of the KOMP structure or into certain internal auxiliary variables (XWORKD - XWORKM). For more details, see Point 2 below.</p>
-<p>2. Which settings are possible?</p>
-<p>The following options are provided in R/3 standard pricing:</p>
-<p>1 Value transfer to KOMP-KZWI1<br>2 Value transfer to KOMP-KZWI2<br>3 Value transfer to KOMP-KZWI3<br>4 Value transfer to KOMP-KZWI4<br>5 Value transfer to KOMP-KZWI5<br>6 Value transfer to KOMP-KZWI6<br>7 Value transfer to KOMP-BONBA (Rebate basis)<br>8 Value transfer to KOMP-PREVA (Preference value)<br>9 Value transfer to KOMP-BRTWR (Gross value)<br>A Price transfer to KOMP-CMPRE (Credit price)<br>B Price transfer to KOMP-WAVWR (Cost)<br>C Value transfer to KOMP-GRWRT (Statistical value)<br>D Value transfer to XWORKD<br>E Value transfer to XWORKE<br>F Value transfer to XWORKF<br>G Value transfer to XWORKG<br>H Value transfer to XWORKH<br>I Value transfer to XWORKI<br>J Value transfer to XWORKJ<br>K Price transfer to XWORKK<br>L Price transfer to XWORKL<br>M Price transfer to XWORKM<br>S Value transfer to KOMP-EFFWR (Effective value)<br>Y Value transfer to KOMP-OIIDC (IS-OIL/only JVA CRP Pricing)<br>Z Value transfer to KOMP-OIEBC (IS-OIL/only JVA CRP Pricing)</p>
-<p>The following points apply in this case:<br>Value transfer = transfer of the condition value XKOMV-KWERT<br>Price transfer = transfer of the condition rate XKOMV-KBETR</p>
-<p>3. Which condition/subtotal line is taken into account?</p>
-<p>A condition is only taken into account if it is not inactive with one of the inactive indicators ‘AKLMXZ’.<br>For the settings ‘B’ (Cost), ‘C’ (Statistical value) and ‘9’ (Gross value), inactive conditions are not taken into account, even with ‘Y’.<br>It is of no consequence whether the condition is statistical or not.<br>Subtotal lines are always taken into account in the standard R/3 system because they never have an inactive indicator in R/3 standard pricing.</p>
-<p>4. In which cases is cumulation performed/not performed?</p>
-<p>a) With the ‘A’ setting (credit price), only the last line in the pricing result that has the setting ‘A’ and the satisfies the conditions specified in Point 3 below is taken into account (because multiple use of ‘A’ is permitted).<br>The credit price is always determined in the sales unit (VRKME). The condition price unit is always 1 in this case.</p>
-<p>Example: If the sales unit is KG, the credit price is determined “per 1 KG”.</p>
-<p>b) With all other settings, all lines that satisfy the conditions specified in Point 3 and have the relevant setting are taken into account, that is, the condition values of these lines are cumulated.</p>
-<p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
-<p>5. Which program contains the corresponding logic?</p>
-<p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
-<p>L O O P<br>LOOP AT xkomv.<br>…</p>
-<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
-<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
-<p>L O O P<br>ENDLOOP.</p>
-<p>6. Are the cumulative values stored in the database?</p>
-<p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
-<p>7. Can inactive conditions also be taken into account?</p>
-<p>This is possible if you use a corresponding condition value formula.</p>
-<p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
-<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
-<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
-<p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
-<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
-<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
-<p>8. Examples of how KZWIW is used:</p>
-<p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
-<p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
-<p>use the content of xworkl as condition basis<br>xkwert = xworkl.</p>
-<p>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient</p>
-<p>An enhancement is possible as part of a modification. For more details, see Note 155012.</p>
-<p>Note:<br>With 155012, the imported fields (for example, KOMP-ZZWI11) must be filled in each case using a condition value formula. However, to maintain a corresponding setting for the field name in the ‘Subto’ column of the pricing procedure (‘11’), the modifications in this note are insufficient.<br>Why are further modifications not recommended?</p>
-<p>a) Firstly, the value range of the R/3 standard data element KZWIW would have to be extended with the value ‘11’ (transaction SE11). However, the KZWIW data element has only one character. Therefore, the two-digit value ‘11’ is not possible.<br>You can only assign a vaule other than the values listed under Point 2 above (for example, N, O, P).</p>
-<p>b) In addition, the source code of the R/3 standard routine FORM XKOMV_BEWERTEN (Include LV61AA55) would have to be modified by including a relevant branch in the CASE statement from Question 5, for example:</p>
-<p>WHEN ‘N’. “ modification: ‘N’<br>ADD xkomv-kwert TO komp-zzwi11. “ cumulates in field zzwi11</p>
-<p>10. What you can do if the number of internal auxiliary variables (XWORKD -XWORKM) is insufficient</p>
-<p>An enhancement is possible as part of a modification. For this purpose, a corresponding data declaration must be made in the LV61ATOP Top Include of the SAPLV61A program, for example:</p>
-<p>additional work field for xkomv_bewerten<br>DATA: zwork1 LIKE komv-kwert,</p>
-<p>You must then also fill the zwwork1 auxiliary variable using a condition value formula (see Question 9).</p>
-<p>Other terms</p>
-<p>KZWIW<br>Reason and Prerequisites</p>
-<p>These problems are due to the design of R/3 pricing.<br>Solution</p>
-<p>This is a consulting note. Other inquiries relating to the functions described above do not fall within the scope of ‘Support’, and are instead processed as part of consulting, which is subject to a separate charge.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" data-id="40rq58egv6jujov8" class="article-share-link">分享到</a>
-      
-
-      
-        <a href="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -433,11 +334,110 @@ xworkj = xworkj + xkwert."</span>cumulate condition value in xworkj
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/" data-id="of8xv4t9w102ykry" class="article-share-link">分享到</a>
+        <a data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/" data-id="4oami1wa5calb8g4" class="article-share-link">分享到</a>
       
 
       
         <a href="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计/#disqus_thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sap/">sap</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" class="article-date">
+  <time datetime="2013-12-22T01:13:32.000Z" itemprop="datePublished">12月 22 2013</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SAP/">SAP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/">关于价格条件中的小计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>link : <a href="http://scn.sap.com/thread/1735194" title="scn" target="_blank" rel="external">http://scn.sap.com/thread/1735194</a></p>
+<p>Note 1022966 - FAQ for the ‘Subto’ column (KZWIW) in the pricing procedure</p>
+<p>Symptom</p>
+<p>Content overview:<br>1. What effect does an entry in the ‘Subto’ column<br>(KZWIW field) have?<br>2. Which settings are possible?<br>3. Which condition/subtotal line is taken into account?<br>4. In which cases is cumulation performed/not performed?<br>5. Which program contains the corresponding logic?<br>6. Are the cumulative values stored in the database?<br>7. Can inactive conditions also be taken into account?<br>8. Examples of how KZWIW is used<br>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient?<br>10. What you can do if the number of internal auxiliary variables<br>(XWORKD -XWORKM) is insufficient?</p>
+<p>1. What effect does an entry in the ‘Subto’ column (KZWIW field) have?</p>
+<p>You can make certain entries in the ‘Subto’ column (KZWIW field) in the Customizing settings for the pricing procedure. These determine that the condition value or the condition rate of the condition or subtotal line is copied into a certain field of the KOMP structure or into certain internal auxiliary variables (XWORKD - XWORKM). For more details, see Point 2 below.</p>
+<p>2. Which settings are possible?</p>
+<p>The following options are provided in R/3 standard pricing:</p>
+<p>1 Value transfer to KOMP-KZWI1<br>2 Value transfer to KOMP-KZWI2<br>3 Value transfer to KOMP-KZWI3<br>4 Value transfer to KOMP-KZWI4<br>5 Value transfer to KOMP-KZWI5<br>6 Value transfer to KOMP-KZWI6<br>7 Value transfer to KOMP-BONBA (Rebate basis)<br>8 Value transfer to KOMP-PREVA (Preference value)<br>9 Value transfer to KOMP-BRTWR (Gross value)<br>A Price transfer to KOMP-CMPRE (Credit price)<br>B Price transfer to KOMP-WAVWR (Cost)<br>C Value transfer to KOMP-GRWRT (Statistical value)<br>D Value transfer to XWORKD<br>E Value transfer to XWORKE<br>F Value transfer to XWORKF<br>G Value transfer to XWORKG<br>H Value transfer to XWORKH<br>I Value transfer to XWORKI<br>J Value transfer to XWORKJ<br>K Price transfer to XWORKK<br>L Price transfer to XWORKL<br>M Price transfer to XWORKM<br>S Value transfer to KOMP-EFFWR (Effective value)<br>Y Value transfer to KOMP-OIIDC (IS-OIL/only JVA CRP Pricing)<br>Z Value transfer to KOMP-OIEBC (IS-OIL/only JVA CRP Pricing)</p>
+<p>The following points apply in this case:<br>Value transfer = transfer of the condition value XKOMV-KWERT<br>Price transfer = transfer of the condition rate XKOMV-KBETR</p>
+<p>3. Which condition/subtotal line is taken into account?</p>
+<p>A condition is only taken into account if it is not inactive with one of the inactive indicators ‘AKLMXZ’.<br>For the settings ‘B’ (Cost), ‘C’ (Statistical value) and ‘9’ (Gross value), inactive conditions are not taken into account, even with ‘Y’.<br>It is of no consequence whether the condition is statistical or not.<br>Subtotal lines are always taken into account in the standard R/3 system because they never have an inactive indicator in R/3 standard pricing.</p>
+<p>4. In which cases is cumulation performed/not performed?</p>
+<p>a) With the ‘A’ setting (credit price), only the last line in the pricing result that has the setting ‘A’ and the satisfies the conditions specified in Point 3 below is taken into account (because multiple use of ‘A’ is permitted).<br>The credit price is always determined in the sales unit (VRKME). The condition price unit is always 1 in this case.</p>
+<p>Example: If the sales unit is KG, the credit price is determined “per 1 KG”.</p>
+<p>b) With all other settings, all lines that satisfy the conditions specified in Point 3 and have the relevant setting are taken into account, that is, the condition values of these lines are cumulated.</p>
+<p>Note: With the settings ‘K’ and a ‘L’ (transfer of the condition rate), multiple use (= cumulation) is not useful in most cases.</p>
+<p>5. Which program contains the corresponding logic?</p>
+<p>The corresponding logic is contained in the SAPLV61A program in the FORM XKOMV_BEWERTEN (Include LV61AA55):</p>
+<p>L O O P<br>LOOP AT xkomv.<br>…</p>
+<p>calculate subtotals in KOMP<br>IF xkomv-kinak NA ‘AKLMXZ’.<br>…</p>
+<p>fill subtotal work fields<br>CASE xkomv-kzwiw. &lt;== The setting for KZWIW<br>WHEN ‘ ‘. is checked in this<br>WHEN ‘A’. CASE statement.<br>…<br>WHEN ‘B’.<br>…<br>WHEN …<br>…<br>ENDCASE.<br>…<br>ENDIF.<br>…</p>
+<p>L O O P<br>ENDLOOP.</p>
+<p>6. Are the cumulative values stored in the database?</p>
+<p>The values, that are included in the fields of the KOMP structure are returned from pricing (program SAPLV61A) to the calling program. The specific application determines whether the values are then stored in a database table with corresponding fields. This is the case in sales (table VBAP) and in the customer invoice (table VBRP), for example.<br>The XWORKD - XWORM fields are auxiliary variables. They are initialized at the start of a pricing evaluation (FORM XKOMV_BEWERTEN, Include LV61AA55) and their contents are lost at the latest on completion of the pricing call (exit of program SAPLV61A).</p>
+<p>7. Can inactive conditions also be taken into account?</p>
+<p>This is possible if you use a corresponding condition value formula.</p>
+<p>Example: You want to cumulate all condition values of a condition ZZZZ in XWORKJ, even if they could be inactive due to a manual entry (KINAK = ‘M’).<br>You must create a condition value formula with the following source code:</p>
+<p>if condition is active or inactive with ‘M’<br>IF xkomv-kinak NA ‘AKLXZ’.<br>xworkj = xworkj + xkwert. “cumulate condition value in xworkj<br>ENDIF.</p>
+<p>The formula must be assigned to the condition ZZZZ in the pricing procedure.<br>In addition, the ‘J’ setting must be removed from the ‘Subto’ column to prevent the standard R/3 source code for cumulation (see Question 5) from being executed also. This is necessary so that active ZZZZ conditions are not cumulated twice by mistake.</p>
+<p>Variant: If the formula contains the following source code, the setting ‘J’ must be retained in the ‘Subto’ column in the pricing procedure:</p>
+<p>IF xkomv-kinak = ‘M’. “if condition is inactive with ‘M’<br>xworkj = xworkj + xkwert.”cumulate condition value in xworkj<br>ENDIF.</p>
+<p>In this case, the inactive conditions with the setting ‘M’ are cumulated in the formula and the active conditions are cumulated in the R/3 standard source code.</p>
+<p>8. Examples of how KZWIW is used:</p>
+<p>a) In purchase price calculation schema RM0000, the condition value of the statistical condition EDI1 is copied to XWORKD. For the next condition EDI2, the condition value is calculated with the condition value formula 040 (Include FV64A040) as the difference between XWORKD and the accured net value.</p>
+<p>b) A percentage condition ZZ13 refers to three previous conditions ZZ02, ZZ04 and ZZ07, which do not appear in a direct sequence in the pricing procedure. In this case, it is not possible to cumulate the condition values of these three conditions using from-to steps (see Note 834174). However, you can cumulate the condition values of the three conditions ZZ02, ZZ04 and ZZ07 in XWORKL, for example, by setting ‘L’ in the pricing procedure for all three conditions. In addition, you must create a condition base formula for the ZZ13 condition, which copies the content of XWORKL as a condition basis:</p>
+<p>use the content of xworkl as condition basis<br>xkwert = xworkl.</p>
+<p>9. What you can do if the number of freely available subtotal fields in the KOMP (KZWI1 - KZWI6) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For more details, see Note 155012.</p>
+<p>Note:<br>With 155012, the imported fields (for example, KOMP-ZZWI11) must be filled in each case using a condition value formula. However, to maintain a corresponding setting for the field name in the ‘Subto’ column of the pricing procedure (‘11’), the modifications in this note are insufficient.<br>Why are further modifications not recommended?</p>
+<p>a) Firstly, the value range of the R/3 standard data element KZWIW would have to be extended with the value ‘11’ (transaction SE11). However, the KZWIW data element has only one character. Therefore, the two-digit value ‘11’ is not possible.<br>You can only assign a vaule other than the values listed under Point 2 above (for example, N, O, P).</p>
+<p>b) In addition, the source code of the R/3 standard routine FORM XKOMV_BEWERTEN (Include LV61AA55) would have to be modified by including a relevant branch in the CASE statement from Question 5, for example:</p>
+<p>WHEN ‘N’. “ modification: ‘N’<br>ADD xkomv-kwert TO komp-zzwi11. “ cumulates in field zzwi11</p>
+<p>10. What you can do if the number of internal auxiliary variables (XWORKD -XWORKM) is insufficient</p>
+<p>An enhancement is possible as part of a modification. For this purpose, a corresponding data declaration must be made in the LV61ATOP Top Include of the SAPLV61A program, for example:</p>
+<p>additional work field for xkomv_bewerten<br>DATA: zwork1 LIKE komv-kwert,</p>
+<p>You must then also fill the zwwork1 auxiliary variable using a condition value formula (see Question 9).</p>
+<p>Other terms</p>
+<p>KZWIW<br>Reason and Prerequisites</p>
+<p>These problems are due to the design of R/3 pricing.<br>Solution</p>
+<p>This is a consulting note. Other inquiries relating to the functions described above do not fall within the scope of ‘Support’, and are instead processed as part of consulting, which is subject to a separate charge.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/" data-id="svuqjuuc6a3f9z49" class="article-share-link">分享到</a>
+      
+
+      
+        <a href="http://fyg.xyjp.net/about/2013/12/22/关于价格条件中的小计 (Libran-Fyg の競合コピー 2014-08-01)/#disqus_thread" class="article-comment-link">Comments</a>
       
 
       
@@ -523,7 +523,7 @@ xworkj = xworkj + xkwert."</span>cumulate condition value in xworkj
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://fyg.xyjp.net/about/2013/12/20/sap-定价条件/" data-id="1bz3z2dml91zoy1j" class="article-share-link">分享到</a>
+        <a data-url="http://fyg.xyjp.net/about/2013/12/20/sap-定价条件/" data-id="x8w9ed4e2slo8tog" class="article-share-link">分享到</a>
       
 
       
@@ -596,15 +596,15 @@ xworkj = xworkj + xkwert."</span>cumulate condition value in xworkj
           </li>
         
           <li>
-            <a href="/2014/09/23/korean-trip2/">社員旅行：韓国②</a>
+            <a href="/2014/09/23/korean-trip3/">社員旅行：韓国③</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/23/nara-trip/">奈良:東大寺</a>
           </li>
         
           <li>
             <a href="/2014/09/23/kyoto-trip/">家族旅行：京都</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/23/korean-trip3/">社員旅行：韓国③</a>
           </li>
         
       </ul>
